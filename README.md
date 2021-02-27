@@ -91,5 +91,3 @@ To clone the project and set it up make sure the dependencies is met then run th
 - php artisan migrate:fresh --seed
 > the command above migrate data into your database
 - php artisan serve
-
-``
