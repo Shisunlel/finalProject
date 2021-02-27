@@ -69,6 +69,15 @@ Dependencies
 >
 > git install on machine or github desktop
 
+Verify if requirement is met
+> run in console
+>
+> php -version
+>
+> composer --version
+>
+> git --version
+
 To clone the project and set it up make sure the dependencies is met then run these code in order:
 ``
 - git clone https://github.com/Shisunlel/finalProject.git
@@ -78,5 +87,7 @@ To clone the project and set it up make sure the dependencies is met then run th
 >
 - composer update / composer install
 - php artisan key:generate
+- php artisan migrate:fresh --seed
+> the command above migrate data into your database
 - php artisan serve
 ``
