@@ -89,7 +89,7 @@ cp .env.bak .env
 ```
 composer update / composer install
 php artisan key:generate
-** php artisan migrate:fresh --seed **
+php artisan migrate:fresh --seed
 ```
 
 > the command above migrate data into your database
