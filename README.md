@@ -79,21 +79,21 @@ Verify if requirement is met
 > git --version
 
 To clone the project and set it up make sure the dependencies is met then run these code in order:
-``
+`
 git clone https://github.com/Shisunlel/finalProject.git
 cp .env.bak .env
-``
+`
 
 > You might need to set up your own database / modified config file
 
-``
+`
 composer update / composer install
 php artisan key:generate
 **php artisan migrate:fresh --seed**
 
-``
+`
 > the command above migrate data into your database
 
-``
+`
 php artisan serve
-``
+`
