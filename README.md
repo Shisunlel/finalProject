@@ -74,7 +74,7 @@ To clone the project and set it up make sure the dependencies is met then run th
 - git clone https://github.com/Shisunlel/finalProject.git
 - cp .env.bak .env
 >
-    > You might need to set up your own database / modified config file
+> You might need to set up your own database / modified config file
 >
 - composer update / composer install
 - php artisan key:generate

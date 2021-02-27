@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,10 +15,19 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $primaryKey = 'id';
+
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
+        'username',
         'email',
         'password',
+        'id_card',
+        'phone_number',
+        'dob',
+        'profile',
     ];
 
     /**
@@ -40,4 +48,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $attributes = ['id_card' => null, 'phone_number' => null, 'dob' => null, 'profile' => 'default.svg'];
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function detail_rents()
+    {
+        return $this->hasMany(RentDetail::class);
+    }
+
 }
