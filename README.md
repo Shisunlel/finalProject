@@ -80,6 +80,7 @@ Verify if requirement is met
 
 To clone the project and set it up make sure the dependencies is met then run these code in order:
 ``
+
 - git clone https://github.com/Shisunlel/finalProject.git
 - cp .env.bak .env
 >
@@ -90,4 +91,5 @@ To clone the project and set it up make sure the dependencies is met then run th
 - php artisan migrate:fresh --seed
 > the command above migrate data into your database
 - php artisan serve
+
 ``
