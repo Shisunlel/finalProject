@@ -81,7 +81,7 @@ Verify if requirement is met
 To clone the project and set it up make sure the dependencies is met then run these code in order:
 ```
 git clone https://github.com/Shisunlel/finalProject.git
-cp .env.bak .env
+cp .env.example .env
 ```
 
 > You might need to set up your own database / modified config file in .env and config/database
