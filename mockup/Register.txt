@@ -1,0 +1,8 @@
+Register same design but different field
+REQUIRE FIELD
+-> FirstName
+-> LastName
+-> Email
+-> Username
+-> Password
+-> Reenter
