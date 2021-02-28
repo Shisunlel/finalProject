@@ -84,7 +84,7 @@ git clone https://github.com/Shisunlel/finalProject.git
 cp .env.bak .env
 ```
 
-> You might need to set up your own database / modified config file
+> You might need to set up your own database / modified config file in .env and config/database
 
 ```
 composer update / composer install
