@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DetailRent extends Model
+class ItemList extends Model
 {
     use HasFactory;
 
-    protected $table = 'detail_rent';
+    protected $table = 'item_list';
 
     protected $fillable = [
-        'duration',
         'room_id',
-        'user_id',
+        'wishlist_id',
+        'qty',
     ];
 }

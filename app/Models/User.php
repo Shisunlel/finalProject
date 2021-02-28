@@ -61,9 +61,9 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    public function detail_rents()
+    public function rents()
     {
-        return $this->hasMany(RentDetail::class);
+        return $this->hasMany(Rent::class);
     }
 
 }

@@ -19,9 +19,12 @@ class DatabaseSeeder extends Seeder
             RoomSeeder::class,
             ReviewSeeder::class,
             ImageSeeder::class,
+            RentSeeder::class,
             DetailRentSeeder::class,
             FacilitySeeder::class,
             RoomFacilitySeeder::class,
+            WishlistSeeder::class,
+            ItemListSeeder::class,
         ]);
         // $user = \App\Models\User::factory(5)->create();
         // $room = $user->each(function ($user) {

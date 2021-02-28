@@ -17,6 +17,6 @@ class Facility extends Model
 
     public function rooms()
     {
-        $this->belongsToMany(Room::class, 'room_facilities', 'facility_id', 'room_id');
+        $this->belongsToMany(Room::class);
     }
 }

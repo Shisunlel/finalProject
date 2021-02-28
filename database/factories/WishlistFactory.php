@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\DetailRent;
+use App\Models\Wishlist;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DetailRentFactory extends Factory
+class WishlistFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = DetailRent::class;
+    protected $model = Wishlist::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class DetailRentFactory extends Factory
     public function definition()
     {
         return [
-            'duration' => rand(1, 5),
-            'room_id' => rand(1, 25),
-            'rent_id' => rand(1, 5),
+            'user_id' => rand(1, 5),
         ];
     }
 }

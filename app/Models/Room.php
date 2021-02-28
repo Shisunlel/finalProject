@@ -28,26 +28,31 @@ class Room extends Model
 
     public function users()
     {
-        $this->belongsTo(User::class, 'user_id', 'id');
+        $this->belongsTo(User::class);
     }
 
     public function reviews()
     {
-        $this->hasMany(Review::class, 'room_id', 'id');
+        return $this->hasMany(Review::class);
     }
 
-    public function rent_details()
+    public function rents()
     {
-        $this->hasMany(RentDetail::class, 'room_id', 'id');
+        return $this->belongsToMany(Rent::class);
+    }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(Wishlist::class);
     }
 
     public function images()
     {
-        $this->hasMany(Image::class, 'room_id', 'id');
+        return $this->hasMany(Image::class);
     }
 
     public function facilities()
     {
-        $this->belongsToMany(Facility::class, 'room_facilities', 'room_id', 'facility_id');
+        return $this->belongsToMany(Facility::class);
     }
 }

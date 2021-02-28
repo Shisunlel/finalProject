@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoomFacilitiesTable extends Migration
+class CreateRentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateRoomFacilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('facility_room', function (Blueprint $table) {
-            $table->foreignId('room_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('facility_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+        Schema::create('rents', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateRoomFacilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('facility_room');
+        Schema::dropIfExists('rents');
     }
 }
