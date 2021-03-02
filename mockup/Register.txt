@@ -1,8 +1,8 @@
 Register same design but different field
 REQUIRE FIELD
--> FirstName
--> LastName
--> Email
--> Username
--> Password
+-> FirstName (no number)
+-> LastName (no number)
+-> Email (valid email address)
+-> Username (at least 6 characters, unique)
+-> Password (8 characters long, with at least one capital letter and match)
 -> Reenter
