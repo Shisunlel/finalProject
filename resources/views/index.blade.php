@@ -64,11 +64,7 @@
                  @endauth
                  @guest
                   <li class="nav-item mt-2 mt-md-0">
-                    <form action="/login" method="POST">
-                    <button style="color:#eee" class="btn" type="submit"
-                      >Login</button
-                    >
-                  </form>
+                    <a href="/login" class="nav-link">Login</a>
                   </li>
                   <li class="nav-item mt-3 mt-md-0">
                     <a
