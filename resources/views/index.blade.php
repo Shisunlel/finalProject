@@ -57,21 +57,28 @@
                   <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
                   </li>
-                 
+                 @auth
+                 <span style="color:#64a432">
+                     {{ auth()->user()->username }}
+                    </span>
+                 @endauth
+                 @guest
                   <li class="nav-item mt-2 mt-md-0">
-                    <a class="nav-link" href="/login"
-                      >Login</a
+                    <form action="/login" method="POST">
+                    <button style="color:#eee" class="btn" type="submit"
+                      >Login</button
                     >
+                  </form>
                   </li>
                   <li class="nav-item mt-3 mt-md-0">
                     <a
                       class="btn btn-dark-shade"
                       id="registerbtn"
-                      href="/register"
+                      href="{{ route('register') }}"
                       >Register</a
                     >
                   </li>
-                 
+                  @endguest
                 </ul>
               </div>
             </div>

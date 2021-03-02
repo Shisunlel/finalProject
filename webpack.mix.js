@@ -16,4 +16,6 @@ const mix = require('laravel-mix');
 //         //
 //     ]);
 
-mix.sass('resources/sass/index.scss', 'public/css');
+mix.sass('resources/sass/color.scss', 'public/css')
+    .sass('resources/sass/index.scss', 'public/css')
+    .sass('resources/sass/register.scss', 'public/css/auth');

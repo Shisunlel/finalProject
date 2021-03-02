@@ -1,3 +1,5 @@
 {
-    "/css/index.css": "/css/index.css"
+    "/css/auth/register.css": "/css/auth/register.css",
+    "/css/index.css": "/css/index.css",
+    "/css/color.css": "/css/color.css"
 }
