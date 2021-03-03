@@ -27,14 +27,13 @@ class LoginController extends Controller
 
         ]);
 
-        $login = $request->only('email', 'password');
-
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if (Auth::attempt(array($fieldType => $request->username, 'password' => $request->password), $request->remember)) {
+        $login = array($fieldType => $request->username, 'password' => $request->password);
+
+        if (Auth::attempt($login, $request->remember)) {
             return redirect('/');
-        } else {
-            return back()->with("error", "Email or Password doesn't matched");
         }
 
+        return back()->with("error", "Email or Password doesn't matched");
     }
 }
