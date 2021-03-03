@@ -87,6 +87,10 @@ a:hover {
 .navbar-brand img {
   transition: transform 1s ease-out;
 }
+.navbar-brand img:hover {
+  transform: scale(1.5);
+  transition: transform 1s ease-in;
+}
 
 .navbar-collapse {
   width: 100%;

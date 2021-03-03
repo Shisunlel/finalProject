@@ -112,6 +112,17 @@ a {
         -o-transition: transform 1s ease-out;
         transition: transform 1s ease-out;
         transition: transform 1s ease-out, -webkit-transform 1s ease-out;
+
+        &:hover {
+            -webkit-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            transform: scale(1.5);
+            -webkit-transition: -webkit-transform 1s ease-in;
+            transition: -webkit-transform 1s ease-in;
+            -o-transition: transform 1s ease-in;
+            transition: transform 1s ease-in;
+            transition: transform 1s ease-in, -webkit-transform 1s ease-in;
+        }
     }
 }
 

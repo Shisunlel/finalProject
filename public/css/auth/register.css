@@ -37,11 +37,17 @@ img {
   background-position: center center;
   width: 100%;
   height: 25%;
-  padding-top: 7em;
+  padding-top: 8em;
 }
 
 #register__form {
   position: relative;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .image__placeholder {

@@ -84,11 +84,11 @@
           </nav>
           <!-- END OF NAV -->
           <!-- HEAD -->
-          <header>
+          <header class="mt-5 mt-md-2 mt-xxl-5">
             <div class="row">
               <section
                 id="header"
-                class="d-flex flex-column align-items-center justify-content-md-center mt-md-2 mt-5 col-12"
+                class="d-flex flex-column align-items-center justify-content-md-center col-12"
               >
                 <h1 class="text-center text-md-left font-weight-bolder">
                   Find Your <span>Perfect Place. </span>
