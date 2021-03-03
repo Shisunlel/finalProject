@@ -17,9 +17,9 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
+
     public function store(HttpRequest $request)
     {
-
         $this->validate($request, [
             'email' => 'required:App\Models\User|email',
             'password' => 'required|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
@@ -28,12 +28,10 @@ class LoginController extends Controller
 
         $login = $request->only('email', 'password');
 
-        if (Auth::attempt($login)) {
-            Auth::attempt($request->only('email', 'password'), $request->remember);
-            return redirect('/');
-        } else {
+        if (!Auth::attempt($login, $request->remember)) {
             return back()->with("error", "Email or Password doesn't matched");
         }
-        //Auth::logout();
+
+        return redirect('/');
     }
 }
