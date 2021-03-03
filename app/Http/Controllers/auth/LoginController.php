@@ -28,10 +28,11 @@ class LoginController extends Controller
 
         $login = $request->only('email', 'password');
 
-        if (!Auth::attempt($login, $request->remember)) {
+        if (Auth::attempt($login, $request->remember)) {
+            return redirect('/');
+        } else {
             return back()->with("error", "Email or Password doesn't matched");
         }
 
-        return redirect('/');
     }
 }
