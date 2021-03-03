@@ -29,12 +29,12 @@
             <div class="holder">
                 <div class="form-floating">
                     <input
-                        type="email"
-                        class="form-control @error('email') border-danger @enderror"
-                        id="email"
-                        name="email"
-                        placeholder="name@example.com"
-                        value="{{ old('email') }}"
+                        type="username"
+                        class="form-control @error('username') border-danger @enderror"
+                        id="username"
+                        name="username"
+                        placeholder="johndoe"
+                        value="{{ old('username') }}"
                     />
                     <label for="email">Email address or Username</label>
                 </div>
@@ -65,9 +65,18 @@
                 @enderror
             </div>
             
-            
-            <div class="form-text text-end">
-                <a id="login__link" href="/login">Forgot Password?</a>
+            <div class="row mb-2">
+                <div class="col-6">
+                    <div class="form-text text-start">
+                        <a id="login__link" href="/register">New here?</a>
+                    </div>
+                </div>
+                
+                <div class="col-6">
+                    <div class="form-text text-end">
+                        <a id="login__link" href="#">Forgot Password?</a>
+                    </div>
+                </div>
             </div>
 
             <div class="form-check">
