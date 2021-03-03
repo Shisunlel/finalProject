@@ -140,3 +140,6 @@
     </div>
 </div>
 @endsection
+@section('script')
+<script src="/js/auth/app.js"></script>
+@endsection

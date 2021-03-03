@@ -4,5 +4,6 @@
  <!-- 
 <script src="https://kit.fontawesome.com/7686e548c6.js" crossorigin="anonymous"></script>
  -->
+ @yield('script')
 </body>
 </html>

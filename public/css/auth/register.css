@@ -64,7 +64,7 @@ img {
   width: 100%;
   height: 100%;
   opacity: 0.05;
-  z-index: 99;
+  z-index: 1;
   background: url("https://img.pngio.com/transparent-fishnet-pattern-background-by-lovestrongartfan90-on-fishnet-pattern-transparent-894_894.png");
 }
 
@@ -119,6 +119,10 @@ img {
   color: #eee;
 }
 
+#remember {
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 700px) {
   body {
     background: white;
@@ -137,7 +141,8 @@ img {
     height: 100px;
     top: 1em;
     left: 1em;
-    z-index: 1;
+    z-index: 2;
+    cursor: pointer;
   }
 
   #register-header {
