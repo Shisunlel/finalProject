@@ -24,6 +24,10 @@ img {
   flex: 1 1 0%;
 }
 
+#login__main {
+  height: 100%;
+}
+
 #register-header {
   background: url("/img/profile.svg");
   position: relative;
@@ -114,6 +118,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .logo__md {

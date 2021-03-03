@@ -1,7 +1,13 @@
 @extends('layouts/default') @section('style')
 <link rel="stylesheet" href="/css/auth/register.css" />
 @endsection @section('content')
-<div class="main">
+@if (session('error'))
+  <div class="alert alert-danger alert-dismissible fade show w-100 m-0" role="alert">
+    {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+@endif
+<div class="main" id="login__main">
     <div class="logo__md d-none d-md-block"></div>
     <div class="image__placeholder d-none d-md-block"></div>
     <div class="register-form p-3 p-md-5">
@@ -65,8 +71,8 @@
             </div>
 
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="remember" name="remeberme">
-                <label class="form-check-label" for="remeberme">Remember me</label>
+                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                <label class="form-check-label" for="remember">Remember me</label>
             </div>
 
             <div class="m-5"></div>

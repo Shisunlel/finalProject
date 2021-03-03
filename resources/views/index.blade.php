@@ -58,13 +58,16 @@
                     <a class="nav-link" href="#about">About</a>
                   </li>
                  @auth
-                 <span style="color:#64a432">
-                     {{ auth()->user()->username }}
-                    </span>
+                 <li class="nav-item">
+                  <form id="logoutForm" action="{{ route('logout')}}" method="post">
+                    @csrf
+                    <a class="nav-link" href="javascript:{}" onclick="document.getElementById('logoutForm').submit();">Logout</a>
+                  </form>
+                </li>
                  @endauth
                  @guest
                   <li class="nav-item mt-2 mt-md-0">
-                    <a href="/login" class="nav-link">Login</a>
+                    <a href="{{ route('login') }}" class="nav-link">Login</a>
                   </li>
                   <li class="nav-item mt-3 mt-md-0">
                     <a
