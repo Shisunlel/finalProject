@@ -1,17 +1,4 @@
-$main: #64a432;
-$dark-accent: #5c4a3f;
-$dark-shade: #3a283d;
-$light-shade: #f4f0f0;
-$light-accent: #6c655c;
-$info: #39283d;
-$success: #53ac47;
-$warning: #d19c0f;
-$danger: #f44336;
-$white: #eee;
-$black: #111;
-$facebook: #3b5998;
-$twitter: #00acee;
-$github: #211f1f;
+@use 'color.scss';
 
 /* DEFAULT */
 
@@ -29,7 +16,7 @@ ul {
 
 body {
     font-family: "Nunito", "Poppins", sans-serif;
-    background: $light-shade;
+    background: color.$light-shade;
     width: 100%;
 }
 
@@ -40,16 +27,16 @@ body {
 
 .btn-dark-shade,
 .bg-dark-shade {
-    background: $dark-shade;
-    color: $light-shade;
+    background: color.$dark-shade;
+    color: color.$light-shade;
     opacity: 0.95;
 }
 
 a {
-    color: $light-shade;
+    color: color.$light-shade;
 
     &:hover {
-        color: $light-accent;
+        color: color.$light-accent;
         -o-transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
         transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
         -moz-transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -58,27 +45,27 @@ a {
 }
 
 .bg-dark-accent {
-    background: $dark-accent;
+    background: color.$dark-accent;
 }
 
 .text-info {
-    color: $info;
+    color: color.$info;
 }
 
 .text-warning {
-    color: $warning !important;
+    color: color.$warning !important;
 }
 
 .text-success {
-    color: $success !important;
+    color: color.$success !important;
 }
 
 .text-danger {
-    color: $danger !important;
+    color: color.$danger !important;
 }
 
 .text-info {
-    color: $info !important;
+    color: color.$info !important;
 }
 
 .text-skin {
@@ -142,7 +129,7 @@ a {
 }
 
 .nav-link {
-    color: $white !important;
+    color: color.$white !important;
 }
 
 #registerbtn {
@@ -156,9 +143,9 @@ a {
         -webkit-transform: scaleY(1.2) scaleX(1.1);
         -ms-transform: scaleY(1.2) scaleX(1.1);
         transform: scaleY(1.2) scaleX(1.1);
-        -webkit-box-shadow: 0 2px 0.125px $light-accent;
-        box-shadow: 0 2px 0.125px $light-accent;
-        color: $light-shade;
+        -webkit-box-shadow: 0 2px 0.125px color.$light-accent;
+        box-shadow: 0 2px 0.125px color.$light-accent;
+        color: color.$light-shade;
         -webkit-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         -o-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
@@ -187,7 +174,7 @@ a {
 }
 
 #header {
-    color: $white;
+    color: color.$white;
     & h1 {
         line-height: 1;
 
@@ -346,7 +333,7 @@ form {
 /* FOOTER */
 
 footer {
-    color: $light-shade;
+    color: color.$light-shade;
 }
 
 #footer-cp,
@@ -384,15 +371,15 @@ footer {
 }
 
 #facebook:hover {
-    color: $facebook;
+    color: color.$facebook;
 }
 
 #twitter:hover {
-    color: $twitter;
+    color: color.$twitter;
 }
 
 #github:hover {
-    color: $github;
+    color: color.$github;
 }
 
 /* END FOOTER */
@@ -502,7 +489,7 @@ footer {
 
     #features::before {
         content: "";
-        background: $dark-shade;
+        background: color.$dark-shade;
         position: absolute;
         top: -150px;
         width: 100vw;

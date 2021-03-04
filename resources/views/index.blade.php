@@ -18,7 +18,7 @@
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="/css/index.css" />
 
-    <title>Rentahouse</title>
+    <title>Rentahouse | SETEC INSTITUTE</title>
   </head>
   <body>
     <noscript>
@@ -98,15 +98,17 @@
                   mind of booking with our app
                 </p>
                 <div class="form-group">
-                  <form action="/house" method="GET">
+                  <form class="searchForm" action="{{ route('room') }}" method="GET">
                     <span id="search"
-                      ><a type="submit" class="text-dark" href="/"
+                      ><a type="submit" class="text-dark" href="{{ route('room') }}"
                         ><i class="fas fa-search"></i></a
                     ></span>
                     <input
                       type="text"
                       class="searchInput"
                       placeholder="Search for a location ..."
+                      name="q"
+                      required
                     />
                     <button class="btn btn-light ml-1">
                       <i class="fas fa-sliders-h"></i>
@@ -428,7 +430,7 @@
               class="col-12 d-md-flex justify-content-between align-items-center text-left"
             >
               <span>
-                  &copy; 2021 Rentahouse, Inc. All right
+                  &copy; {{ date('Y')}} Rentahouse, Inc. All right
                   reserved
               </span>
               <span>

@@ -26,7 +26,7 @@ class ImageFactory extends Factory
             //     return \App\Models\Room::factory()->create();
             // },
             'link' => $this->faker->imageUrl(1920, 1080, 'room', true),
-            'room_id' => rand(1, 25),
+            'room_id' => $this->faker->unique(true)->numberBetween(1, 25),
         ];
     }
 }

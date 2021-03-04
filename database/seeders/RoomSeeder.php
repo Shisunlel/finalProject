@@ -28,6 +28,6 @@ class RoomSeeder extends Seeder
         // $image = $room->each(function ($room) {
         //     \App\Models\Image::factory(5)->create(['room_id' => $room]);
         // });
-        Room::factory(50)->create();
+        Room::factory(25)->create();
     }
 }
