@@ -5,10 +5,13 @@
     <main class="content">
         <div class="container-fluid bg-light p-4">
             <div class="shadow-sm border p-4 bg-white rounded">
-				
-                <h1 class="h3 mb-5 text-center text-uppercase text-warning">
+                <div class="d-flex">
+				<a href="{{ url()->previous() }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg></a>
+                <h1 class="h3 mb-5 flex-grow-1 text-center text-uppercase text-white" style="text-shadow: 1px 1px 10px #79ff00;">
                    add new room
 				</h1>
+            </div>
                 <form
                     action="/room"
                     id="room__form"
@@ -178,10 +181,10 @@
                                 </div>
                             </div>
 
-                            <div class="float-right">
+                            <div class="text-center">
                                 <button
                                     type="submit"
-                                    class="btn btn-lg btn-success"
+                                    class="btn btn-lg btn-success w-50"
                                 >
                                     Add
                                 </button>
