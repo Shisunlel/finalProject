@@ -46,7 +46,7 @@
         <section class="about-footer">
           <h6><strong> About </strong></h6>
           <ul class="navbar-nav">
-            <a href="#" class="mb-1"><li class="nav-item">Our Team</li></a>
+            <a href="#team" class="mb-1"><li class="nav-item">Our Team</li></a>
             <a href="#" class="mb-1"><li class="nav-item">Career</li></a>
             <a href="#" class="mb-1"><li class="nav-item">Partners</li></a>
           </ul>
@@ -56,7 +56,7 @@
         <section class="host-footer">
           <h6><strong> Host </strong></h6>
           <ul class="navbar-nav">
-            <a href="#" class="mb-1"><li class="nav-item">Host your home</li></a>
+            <a href="{{route('room.new')}}" class="mb-1"><li class="nav-item">Host your home</li></a>
             <a href="#" class="mb-1"><li class="nav-item">Guideline and Policy</li></a>
             <a href="#" class="mb-1"><li class="nav-item">Payments</li></a>
           </ul>
