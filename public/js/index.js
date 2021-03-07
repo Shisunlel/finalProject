@@ -1,4 +1,6 @@
 const faders = document.querySelectorAll(".fade-in");
+const toast = document.querySelector('.toast');
+const init = new bootstrap.Toast(toast);
 
 const appearOptions = {
   threshold: 0,
@@ -23,3 +25,6 @@ appearOptions);
 faders.forEach((fader) => {
   appearOnScroll.observe(fader);
 });
+
+//toast appear
+init.show();

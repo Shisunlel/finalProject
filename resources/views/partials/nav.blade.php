@@ -20,7 +20,7 @@
     <div class="header__image d-sm-none">
       <img src="/img/navheader.jpg" class="w-100" alt="">
       <div class="d-flex d-md-none justify-content-center">
-        <form class="form-inline d-flex w-75" action="{{ route('room')}}">
+        <form class="form-inline d-flex w-75" action="{{ route('search')}}">
           <input
             id="smallNavSearch"
             class="form-control me-sm-2 rounded"
@@ -31,7 +31,7 @@
             required
           />
           <span id="nav_search_btn"
-                      ><button id="search__btn" type="submit" class="text-dark" href="{{ route('room') }}"
+                      ><button id="search__btn" type="submit" class="text-dark" href="{{ route('search') }}"
                         ><i class="fas fa-search"></i></button
                     ></span>
         </form>
@@ -89,7 +89,7 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/house/new">Become a host</a>
+          <a class="nav-link" href="{{route('room.new')}}">Become a host</a>
         </li>
         @endauth
         <li class="nav-item">

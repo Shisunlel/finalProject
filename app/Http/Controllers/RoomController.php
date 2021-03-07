@@ -2,30 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Facility;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    // public function index()
-    // {
-    //     // $result = Room::find(2)->image();
-    //     // $result = Room::join('images', 'rooms.id', '=', 'images.room_id')->select('rooms.id', 'title', 'description', 'address', 'price', 'available', 'room_id', 'link')->get();
-    //     // $result = Image::join('rooms', 'images.room_id', '=', 'rooms.id')->get();
-    //     $result = DB::select('SELECT rooms.id, title, description, address, price, link, min(room_id) FROM rooms INNER JOIN images ON rooms.id = images.room_id WHERE qty > 0 GROUP BY rooms.id ORDER BY RAND() LIMIT 20');
-    //     return view('rooms.index', ['rooms' => $result]);
-    // }
-
-    public function search(Request $request)
+    public function __construct()
     {
-        $query = $request->q;
-        if (empty($query)) {
-            $query = "Phnom Penh";
-        }
-        $result = Room::with('Images')->where('address', 'like', "%{$query}%")->paginate(20);
-
-        $result->appends(['q' => $query]);
-        return view('rooms.index', ['rooms' => $result]);
-
+        return $this->middleware('auth');
     }
+
+    public function index()
+    {
+        $facilities = Facility::get();
+        return view('rooms.new', ['facilities' => $facilities]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|min:5',
+            'description' => 'required|min:10',
+            'address' => 'required|min:10',
+            'price' => 'required|numeric|between:0.99,500.00',
+            'qty' => 'required|integer',
+            'guest' => 'required|integer',
+            'image' => 'required',
+            'image.*' => 'image|mimes:jpg,png,jpeg,svg,webp|max:2048',
+        ]);
+
+        $request->user()->rooms()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'address' => $request->address,
+            'price' => $request->price,
+            'qty' => $request->qty,
+            'guest' => $request->guest,
+        ]);
+
+        // get image name with url
+        if ($request->file('image')) {
+            //throw into an array
+            foreach ($request->image as $image) {
+                $imageName = time() . rand(1, 10000) . $image->getClientOriginalName();
+                $path = $image->move(public_path('img/room'), $imageName);
+                $img_arr[] = $imageName;
+            }
+        }
+
+        //find newly created room id and model
+        $latest_id = Room::max('id');
+        $recently_added_model = Room::find($latest_id);
+
+        //save many image
+        foreach ($img_arr as $item) {
+            $recently_added_model->images()->create([
+                'link' => $item,
+            ]);
+        }
+
+        //associating id with facility
+        if (!empty($request->facility)) {
+            foreach ($request->facility as $item) {
+                $recently_added_model->facilities()->syncWithoutDetaching([intval($item)]);
+            }
+        }
+
+        return redirect('/')->with('success', 'Room create successfully');
+    }
+
 }
