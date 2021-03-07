@@ -1,3 +1,7 @@
+body {
+  font-size: 16px !important;
+}
+
 html {
   height: 100%;
 }
@@ -294,7 +298,7 @@ li.facilities-icon {
 
 .sticky-show {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-out;
   z-index: 1;
 }
 
@@ -315,20 +319,22 @@ footer {
   color: #fff;
   transition: color 1.5s ease-in;
 }
+#facebook:hover,
+#twitter:hover,
+#github:hover {
+  transition: color 0.5s ease-in-out;
+}
 
 #facebook:hover {
   color: #3b5998;
-  transition: color 0.5s ease-in-out;
 }
 
 #twitter:hover {
   color: #00acee;
-  transition: color 0.5s ease-in-out;
 }
 
 #github:hover {
   color: #211f1f;
-  transition: color 0.5s ease-in-out;
 }
 
 @media only screen and (min-width: 800px) {
