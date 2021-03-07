@@ -12,7 +12,7 @@ class RegisterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['guest']);
+        $this->middleware('guest');
     }
 
     public function index()
@@ -40,6 +40,6 @@ class RegisterController extends Controller
 
         Auth::attempt($request->only('email', 'password'));
 
-        return redirect()->route('room');
+        return redirect()->route('/');
     }
 }

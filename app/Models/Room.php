@@ -18,12 +18,6 @@ class Room extends Model
         'price',
         'qty',
         'guest',
-        'available',
-        'user_id',
-    ];
-
-    protected $attributes = [
-        'available' => true,
     ];
 
     public function users()
@@ -38,12 +32,12 @@ class Room extends Model
 
     public function rents()
     {
-        return $this->belongsToMany(Rent::class);
+        return $this->belongsToMany(Rent::class)->withTimestamps();
     }
 
     public function wishlists()
     {
-        return $this->belongsToMany(Wishlist::class);
+        return $this->belongsToMany(Wishlist::class)->withTimestamps();
     }
 
     public function images()
@@ -53,6 +47,6 @@ class Room extends Model
 
     public function facilities()
     {
-        return $this->belongsToMany(Facility::class);
+        return $this->belongsToMany(Facility::class)->withTimestamps();
     }
 }

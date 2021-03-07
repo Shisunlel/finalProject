@@ -25,6 +25,17 @@
       This app require JavaScript enabled for it to work properly. Please enable
       JavaScript and refresh the page to continue.
     </noscript>
+    {{-- success message --}}
+    @if (session('success'))
+    <div class="toast align-items-center text-white bg-success bg-gradient border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{session('success')}}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+    @endif
     <div class="container-fluid m-0 p-0">
       <section id="headerContainer">
         <div class="container">
@@ -98,9 +109,9 @@
                   mind of booking with our app
                 </p>
                 <div class="form-group">
-                  <form class="searchForm" action="{{ route('room') }}" method="GET">
+                  <form class="searchForm" action="{{ route('search') }}" method="GET">
                     <span id="search"
-                      ><a type="submit" class="text-dark" href="{{ route('room') }}"
+                      ><a type="submit" class="text-dark" href="{{ route('search') }}"
                         ><i class="fas fa-search"></i></a
                     ></span>
                     <input

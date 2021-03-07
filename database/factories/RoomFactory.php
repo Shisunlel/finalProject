@@ -28,7 +28,6 @@ class RoomFactory extends Factory
             'qty' => $this->faker->randomDigitNotNull,
             'price' => $this->faker->randomFloat(2, 15, 35),
             'guest' => $this->faker->numberBetween(1, 5),
-            'available' => 1,
             // 'user_id' => function () {
             //     return \App\Models\User::factory()->create();
             // },

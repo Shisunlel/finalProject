@@ -17,6 +17,6 @@ class Facility extends Model
 
     public function rooms()
     {
-        $this->belongsToMany(Room::class);
+        $this->belongsToMany(Room::class)->withTimestamps();
     }
 }

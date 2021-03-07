@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['guest']);
+        $this->middleware('guest');
     }
 
     public function index()
@@ -31,7 +31,7 @@ class LoginController extends Controller
         $login = array($fieldType => $request->username, 'password' => $request->password);
 
         if (Auth::attempt($login, $request->remember)) {
-            return redirect()->route('room');
+            return redirect()->back();
         }
 
         return back()->with("error", "Email or Password doesn't matched");
