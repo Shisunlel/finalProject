@@ -5,7 +5,7 @@
       ><img class="w-100" src="/img/logo.png" alt=""
     /></a>
     <div id="form-container" class="d-none d-sm-block">
-      <form class="form-inline my-lg-0 justify-content-end" action="{{ route('room')}}" method="POST">
+      <form class="form-inline my-lg-0 justify-content-end" action="{{ route('search')}}" method="POST">
         @csrf
         <input
           id="navSearch"
