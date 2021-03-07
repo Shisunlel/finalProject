@@ -5,8 +5,7 @@
       ><img class="w-100" src="/img/logo.png" alt=""
     /></a>
     <div id="form-container" class="d-none d-sm-block">
-      <form class="form-inline my-lg-0 justify-content-end" action="{{ route('search')}}" method="POST">
-        @csrf
+      <form class="form-inline my-lg-0 justify-content-end" action="{{ route('search')}}">
         <input
           id="navSearch"
           class="form-control me-sm-2 rounded"
@@ -21,8 +20,7 @@
     <div class="header__image d-sm-none">
       <img src="/img/navheader.jpg" class="w-100" alt="">
       <div class="d-flex d-md-none justify-content-center">
-        <form class="form-inline d-flex w-75" action="{{ route('search')}}" method="POST">
-          @csrf
+        <form class="form-inline d-flex w-75" action="{{ route('search')}}">
           <input
             id="smallNavSearch"
             class="form-control me-sm-2 rounded"
