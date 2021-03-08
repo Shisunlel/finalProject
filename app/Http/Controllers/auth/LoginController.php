@@ -31,7 +31,7 @@ class LoginController extends Controller
         $login = array($fieldType => $request->username, 'password' => $request->password);
 
         if (Auth::attempt($login, $request->remember)) {
-            return redirect()->back();
+            return redirect()->intended('/');
         }
 
         return back()->with("error", "Email or Password doesn't matched");

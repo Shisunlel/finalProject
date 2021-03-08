@@ -1,6 +1,8 @@
 const faders = document.querySelectorAll(".fade-in");
 const toast = document.querySelector('.toast');
 const init = new bootstrap.Toast(toast);
+const slider = document.getElementById("guest");
+const output = document.getElementById("slider__indicator");
 
 const appearOptions = {
   threshold: 0,
@@ -26,5 +28,15 @@ faders.forEach((fader) => {
   appearOnScroll.observe(fader);
 });
 
+//slider indicator
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+
 //toast appear
+if(toast){
 init.show();
+}
+

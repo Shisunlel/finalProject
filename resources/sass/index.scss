@@ -14,6 +14,10 @@ ul {
     list-style: none;
 }
 
+a{
+    text-decoration: none;
+}
+
 body {
     font-family: "Nunito", "Poppins", sans-serif;
     background: color.$light-shade;
@@ -76,6 +80,7 @@ a {
 #services h1,
 #features h1 {
     letter-spacing: 0.25rem;
+    font-family: 'RocknRoll One', 'Poppins', cursive;
 }
 
 /* END DEFAULT */
@@ -177,6 +182,7 @@ a {
     color: color.$white;
     & h1 {
         line-height: 1;
+        font-family: 'Akaya Telivigala', cursive;
 
         & span {
             display: table;
