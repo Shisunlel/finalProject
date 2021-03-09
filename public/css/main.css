@@ -176,6 +176,10 @@ form #navSearch:focus {
   justify-content: flex-end;
 }
 
+.room__card:hover {
+  box-shadow: 0 0 1em 0 #bbb;
+}
+
 #action-top {
   width: 100%;
 }

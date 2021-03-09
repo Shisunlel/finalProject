@@ -4,6 +4,8 @@ const sticky = document.querySelector("#sticky-fluid");
 const footer = document.querySelector("footer");
 const navButton = document.querySelector(".navbar-toggler");
 const navCollapse = document.querySelector(".navbar-collapse");
+const slider = document.getElementById("guest");
+const output = document.getElementById("slider__indicator");
 
 // moreImage.addEventListener('click', ()=>{
 //     div = document.createElement('div');
@@ -56,3 +58,9 @@ let dissappear = () => {
     }, 250);
 };
 
+//slider indicator
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
