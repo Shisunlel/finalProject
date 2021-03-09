@@ -46,7 +46,7 @@
                                 type="range"
                                 name="guest"
                                 class="form-range"
-                                value="{{ $guest ? $guest : 1}}"
+                                value="@if(isset($guest)) {{ $guest}} @else 1 @endif"
                                 step="1"
                                 min="1"
                                 max="9"
@@ -96,12 +96,12 @@
                     >
                         <i class="fas fa-search"></i></button
                 ></span>
-
-                <input
+                
+                    <input
                     type="range"
                     name="guest"
                     class="form-range"
-                    value="{{ $guest ? $guest : 1 }}"
+                    value="@if (isset($guest)) {{ $guest}} @else 1 @endif"
                     step="1"
                     min="1"
                     max="9"

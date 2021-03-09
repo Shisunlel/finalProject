@@ -1,27 +1,9 @@
-// const moreImage = document.getElementById('add-more');
-// const imgTag = document.querySelector('#imageTag');
 const sticky = document.querySelector("#sticky-fluid");
 const footer = document.querySelector("footer");
 const navButton = document.querySelector(".navbar-toggler");
 const navCollapse = document.querySelector(".navbar-collapse");
-const slider = document.getElementById("guest");
-const output = document.getElementById("slider__indicator");
-
-// moreImage.addEventListener('click', ()=>{
-//     div = document.createElement('div');
-//     input = document.createElement('input');
-//     div.classList.add("form-group");
-//     imgTag.after(div);
-//     // class="form-control"
-//     // placeholder="image"
-//     // type="text"
-//     // name="house[image]"
-//     input.classList.add("form-control");
-//     input.setAttribute("placeholder", "image");
-//     input.setAttribute("type", "text");
-//     input.setAttribute("name", "image");
-//     div.appendChild(input);
-// });
+let slider = document.getElementById("guest");
+let output = document.getElementById("slider__indicator");
 
 if (sticky) {
     window.addEventListener("scroll", function (e) {
@@ -60,7 +42,9 @@ let dissappear = () => {
 
 //slider indicator
 output.innerHTML = slider.value;
+slider.value = Number(output.innerHTML);
 
 slider.oninput = function() {
   output.innerHTML = this.value;
 }
+

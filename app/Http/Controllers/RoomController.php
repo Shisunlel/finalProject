@@ -10,7 +10,7 @@ class RoomController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware('auth');
+        return $this->middleware('auth')->except(['show', 'search']);
     }
 
     public function index()
@@ -70,6 +70,24 @@ class RoomController extends Controller
         }
 
         return redirect('/')->with('success', 'Room create successfully');
+    }
+
+    public function show($id)
+    {
+        $result = Room::with('Images')->with('Facilities')->where('id', $id)->get();
+        return view('rooms.show')->with('room', $result);
+    }
+
+    public function search(Request $request)
+    {
+        $location = $request->location;
+        $guest = $request->guest;
+        if (empty($location)) {
+            $location = " ";
+        }
+        $result = Room::with('Images')->where('address', 'like', "%{$location}%")->where('guest', '>=', "{$guest}")->orderBy('guest')->paginate(20);
+        $result->appends(['location' => $location, 'guest' => $guest]);
+        return view('rooms.index', ['rooms' => $result, 'guest' => $guest]);
     }
 
 }

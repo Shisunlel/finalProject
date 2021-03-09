@@ -3,12 +3,129 @@ body {
 }
 
 html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   height: 100%;
 }
 
 body {
-  height: 100%;
+  font-family: "Nunito", "Poppins" sans-serif;
+  overflow-x: hidden;
   background: #f4f0f0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: #f4f0f0;
+  text-decoration: none;
+}
+a:hover {
+  color: #6c655c;
+  transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  -moz-transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  -webkit-transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.bg-primary,
+.btn-primary {
+  background: #64a432 !important;
+}
+
+.btn-outline-success {
+  outline: #53ac47;
+}
+.btn-outline-success:hover {
+  background: #53ac47;
+  scale: 1.1;
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-dark-shade {
+  background: #3a283d;
+  color: #f4f0f0;
+  opacity: 0.95;
+}
+.btn-dark-shade#emailBtn:hover {
+  color: #f4f0f0;
+  opacity: 1;
+  scale: 1.1;
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.btn-dark-shade:focus {
+  box-shadow: 0.15px 2.2px 0.225px #f4f0f0;
+  border: none;
+  outline: none;
+  color: #f4f0f0;
+  background: #3a283d;
+}
+
+.bg-dark-shade {
+  background: #3a283d;
+  color: #f4f0f0;
+  opacity: 0.95;
+}
+
+.bg-light-shaded,
+btn-light-shaded {
+  background: #f4f0f0;
+}
+
+.border-top-light-accent {
+  border-top: 1px solid #6c655c;
+}
+
+.bg-dark-accent {
+  background: #5c4a3f;
+}
+
+.text-info {
+  color: #39283d;
+}
+
+.text-warning {
+  color: #d19c0f !important;
+}
+
+.text-dark-accent {
+  color: #5c4a3f;
+}
+
+.text-light-shade {
+  color: #f4f0f0;
+}
+
+.text-success {
+  color: #53ac47 !important;
+}
+
+.text-danger {
+  color: #f44336 !important;
+}
+
+.text-info {
+  color: #39283d !important;
+}
+
+.btn-danger,
+.bg-danger {
+  background: #f44336;
+}
+
+.btn-warning,
+.bg-warning {
+  background: #d19c0f;
+}
+
+.btn-outline-danger {
+  outline: #f44336;
 }
 
 img {

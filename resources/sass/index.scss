@@ -1,79 +1,9 @@
 @use 'color.scss';
-
-/* DEFAULT */
-
-html,
-* {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-ul {
-    list-style: none;
-}
-
-a{
-    text-decoration: none;
-}
-
-body {
-    font-family: "Nunito", "Poppins", sans-serif;
-    background: color.$light-shade;
-    width: 100%;
-}
+@use 'reset.scss';
 
 .no-mpding {
     padding: 0;
     margin: 0;
-}
-
-.btn-dark-shade,
-.bg-dark-shade {
-    background: color.$dark-shade;
-    color: color.$light-shade;
-    opacity: 0.95;
-}
-
-a {
-    color: color.$light-shade;
-
-    &:hover {
-        color: color.$light-accent;
-        -o-transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-        transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-        -moz-transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-        -webkit-transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-    }
-}
-
-.bg-dark-accent {
-    background: color.$dark-accent;
-}
-
-.text-info {
-    color: color.$info;
-}
-
-.text-warning {
-    color: color.$warning !important;
-}
-
-.text-success {
-    color: color.$success !important;
-}
-
-.text-danger {
-    color: color.$danger !important;
-}
-
-.text-info {
-    color: color.$info !important;
-}
-
-.text-skin {
-    color: palegoldenrod;
 }
 
 #about h1,

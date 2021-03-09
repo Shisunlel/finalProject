@@ -10,7 +10,7 @@
         <div class="col-6 col-lg-3 mt-4 mt-md-5">
             <div class="card room__card">
             <div class="image-container">
-                <a href="/house/{{$room->id}}">
+                <a href="/room/{{$room->id}}">
                 <img loading="lazy" src="{{$room->images[0]->link}}" alt="" style="border-radius: 5px" />
                 </a>
                 <a id="saved" href="/saved">
