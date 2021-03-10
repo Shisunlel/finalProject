@@ -74,7 +74,7 @@ class RoomController extends Controller
 
     public function show($id)
     {
-        $result = Room::with('Images')->with('Facilities')->where('id', $id)->get();
+        $result = Room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $id)->get();
         return view('rooms.show')->with('room', $result);
     }
 
