@@ -38,7 +38,7 @@
                     <div class="modal-content bg-gradient bg-white text-dark">
                         <div class="modal-header">
                             <h5 class="modal-title" id="#filterLabel">
-                                How many people are staying ?
+                                How many people will be staying ?
                             </h5>
                         </div>
                         <div class="modal-body">
@@ -76,9 +76,10 @@
         <img src="/img/navheader.jpg" class="w-100" alt="" />
         <div class="d-flex d-md-none justify-content-center">
             <form
-                class="form-inline d-flex w-75"
+                class="form-inline w-75"
                 action="{{ route('search') }}"
             >
+            <div class="d-flex">
                 <input
                     id="smallNavSearch"
                     class="form-control me-sm-2 rounded"
@@ -96,7 +97,8 @@
                     >
                         <i class="fas fa-search"></i></button
                 ></span>
-                
+            </div>    
+                <div class="">
                     <input
                     type="range"
                     name="guest"
@@ -105,9 +107,14 @@
                     step="1"
                     min="1"
                     max="9"
-                    id="guest"
-                    hidden
+                    id="guest_sm"
                 />
+                <label
+                                for="guest"
+                                id="slider__indicator_sm"
+                                class="form-label w-100 text-center"
+                            ></label>
+            </div>
             </form>
         </div>
     </div>

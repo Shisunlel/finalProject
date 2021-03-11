@@ -351,6 +351,10 @@ footer {
   margin-top: auto;
 }
 
+h6.text-uppercase {
+  font-family: "Oswald", "Nunito";
+}
+
 #footer-cp,
 #footer-container,
 #footer-column {

@@ -2,7 +2,9 @@
 <link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet" href="/css/show.css" />
 @endsection @section('content')
-{{-- {{$room[0]}} --}}
+{{-- {{$room[0]}}
+<p></p>
+{{$comment_user}} --}}
 <div class="container-fluid my-5">
     <div class="container-xxl">
     <h2 class="m-0" id="show__header__title">{{$room[0]->title}}</h2>
@@ -21,14 +23,17 @@
                 data-bs-interval="false"
             >
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"></button>
-                @for ($i=1; $i< count($room[0]->images); $i++)
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $i }}"></button>
-                @endfor
+                @if (count($room[0]->images) > 1)
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    @for ($i=1; $i< count($room[0]->images); $i++)
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $i }}"></button>
+                    @endfor
+                @endif
               </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active h-100">
                         <img
+                            loading="lazy"
                             src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/@endif{{$room[0]->images[0]->link}}"
                             class="d-block w-100"
                             alt="..."
@@ -37,12 +42,14 @@
                     @for ($i=1; $i< count($room[0]->images); $i++)
                     <div class="carousel-item h-100">
                         <img
+                            loading="lazy"
                             src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/@endif{{$room[0]->images[$i]->link}}"
                             alt=""
                             class="w-100"
                         />
                     </div>
                     @endfor
+                    @if (count($room[0]->images) > 1)
                     <button
                         class="carousel-control-prev"
                         type="button"
@@ -67,10 +74,11 @@
                         ></span>
                         <span class="visually-hidden">Next</span>
                     </button>
+                    @endif
                 </div>
             </div>
         </section>
-        <section class="detail my-5 my-lg-0 col-lg-6">
+        <section class="detail my-3 my-lg-0 col-lg-6">
             <div class="accordion accordion-flush" id="description__accordion">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
@@ -97,7 +105,7 @@
                             @if (Str::length($room[0]->description) > 150)
                             <a
                                 type="button"
-                                class="btn btn-light ml-1"
+                                class="btn btn-light ms-1"
                                 data-bs-toggle="modal"
                                 data-bs-target="#description"
                             >
@@ -280,6 +288,54 @@
                     <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
                   </svg></span></a>
                </div>
+            </div>
+        </section>
+    </div>
+    <div class="row">
+        <section class="review">
+            <h5 id="review__header"><span id="show__all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                  </span>  All reviews</h5>
+            <div id="review__form__container">
+                <form id="review__form" action="{{ route('review', ['id' => $room[0]->id ]) }}">
+                    @csrf
+                    <textarea name="review" id="review__box" class="form-control" placeholder="Share your experience with others"></textarea>
+                    <input type="button" id="review__btn" value="Send">
+                </form>
+            </div>
+            <div id="review__container" class="row my-4">
+                @foreach ($room[0]->reviews as $review)
+                    <div class="col-12 col-md-6">
+                        <div class="card py-3">
+                            <div class="review__header px-2">
+                                <div class="user__wrapper d-flex">
+                                   <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->profile}} @break @endif @endforeach" id="profile__image">
+                                    <p class="ms-2 fw-bold">@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->username}} @break @endif @endforeach</p>
+                                    <span class="ms-auto dropdown__hover">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        </svg>
+                                        <ul class="dropdown">
+                                            <li><a href="{{route('review.edit', ['id' => $room[0]->id, 'review_id' => $review->id])}}">Edit</a></li>
+                                            <form id="form__delete__review" action="{{ route('review', ['id' => $room[0]->id]) }}" method="POST">
+                                                @method('DELETE')
+                                                <li><input id="remove__input" type="submit" value="Remove"></li>
+                                            </form>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text text-left">{{ $review->updated_at->diffForHumans() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </section>
     </div>

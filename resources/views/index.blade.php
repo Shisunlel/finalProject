@@ -176,7 +176,7 @@
                                         />
                                         <button
                                             type="button"
-                                            class="btn btn-light ml-1"
+                                            class="btn btn-light ms-1"
                                             data-bs-toggle="modal"
                                             data-bs-target="#filter"
                                         >
@@ -551,7 +551,7 @@
                 <div class="row text-md-center my-3">
                     <div class="col-12 col-md-4 mt-2 mb-2">
                         <section class="about-footer">
-                            <h6><strong> About </strong></h6>
+                            <h6 class="text-uppercase" style="font-family: 'Oswald'"><strong> About </strong></h6>
                             <ul class="navbar-nav">
                                 <a href="#team" class="mb-1"
                                     ><li class="nav-item">Our Team</li></a
@@ -567,7 +567,7 @@
                     </div>
                     <div class="col-12 col-md-4 mt-2 mb-2">
                         <section class="host-footer">
-                            <h6><strong> Host </strong></h6>
+                            <h6 class="text-uppercase" style="font-family: 'Oswald'"><strong> Host </strong></h6>
                             <ul class="navbar-nav">
                                 <a href="{{ route('room.new') }}" class="mb-1"
                                     ><li class="nav-item">Host your home</li></a
@@ -585,7 +585,7 @@
                     </div>
                     <div class="col-12 col-md-4 mt-2 mb-2">
                         <section class="support-footer">
-                            <h6><strong> Support </strong></h6>
+                            <h6 class="text-uppercase" style="font-family: 'Oswald'"><strong> Support </strong></h6>
                             <ul class="navbar-nav">
                                 <a href="#" class="mb-1"
                                     ><li class="nav-item">Help</li></a
