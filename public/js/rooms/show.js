@@ -46,7 +46,7 @@ threedot.forEach((dot) => {
 
 let showallreview = () => {
     setTimeout(() => {
-        review.classList.add("show_review");
+        review.classList.toggle("show_review");
     }, 250);
 };
 

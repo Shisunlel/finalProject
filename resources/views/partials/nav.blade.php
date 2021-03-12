@@ -175,6 +175,11 @@
                     >Become a host</a
                 >
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('saved') }}"
+                    >Saved</a
+                >
+            </li>
             @endauth
             <li class="nav-item">
                 <a class="nav-link" href="/help">Help</a>

@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row p-1 my-3">
         @forelse ($rooms as $room)
-        <div class="col-6 col-lg-3 mt-4 mt-md-5">
+        @if (count($room->images) > 0)
+        <div class="col-6 col-lg-3 my-4">
             <div class="card room__card">
                 <div class="image-container">
                     <a href="/room/{{$room->id}}">
@@ -15,23 +16,25 @@
                             style="border-radius: 5px"
                         />
                     </a>
-                    <a id="saved" href="/saved">
+                    <a id="saved" href="{{route('saved')}}">
                         <i class="far fa-heart fa-2x text-danger"></i>
                     </a>
                 </div>
                 <article class="px-3 py-2 pt-xl-0">
-                    <span>{{ Str::limit($room->address, 15) }}</span>
-                    <p class="house-title">{{ Str::limit($room->title, 35)}}</p>
+                    <span class="fw-light">{{ Str::limit($room->address, 15) }}</span>
+                    <p class="house-title fw-bold">{{ Str::limit($room->title, 35)}}</p>
                     <span>${{$room->price}}</span>
                 </article>
             </div>
         </div>
+        @endif
         @empty
         <p class="text-center">Sorry your search has returned no result</p>
         @endforelse
     </div>
 </div>
 {{ $rooms->links('pagination::bootstrap-4') }}
-@endsection @section('script')
+@endsection 
+@section('script')
 <script src="/js/rooms/rooms.js"></script>
 @endsection

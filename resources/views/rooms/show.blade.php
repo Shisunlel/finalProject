@@ -7,7 +7,14 @@
 {{$comment_user}} --}}
 <div class="container-fluid my-5">
     <div class="container-xxl">
-    <h2 class="m-0" id="show__header__title">{{$room[0]->title}}</h2>
+    <div class="d-flex">
+        <h2 class="m-0" id="show__header__title">{{$room[0]->title}}</h2>
+        <span class="ms-auto">
+            <a id="saved__show__page" href="{{route('saved')}}">
+                <i class="far fa-heart fa-2x text-danger"></i>
+            </a>
+        </span>
+    </div>
     <p class="m-0 p-0" style="color: #666">
         <sup>$</sup
         ><span class="mx-1 room__price"
@@ -174,6 +181,7 @@
                         </div>
                     </div>
                 </div>
+                @if (count($room[0]->facilities) > 0)
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingThree">
                         <button
@@ -200,6 +208,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFour">
                         <button
@@ -298,6 +307,7 @@
                     <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                   </svg>
                   </span>  All reviews</h5>
+                  @auth
             <div id="review__form__container">
                 <form id="review__form" action="{{ route('review', ['id' => $room[0]->id ]) }}">
                     @csrf
@@ -305,6 +315,7 @@
                     <input type="button" id="review__btn" value="Send">
                 </form>
             </div>
+            @endauth
             <div id="review__container" class="row my-4">
                 @foreach ($room[0]->reviews as $review)
                     <div class="col-12 col-md-6">
