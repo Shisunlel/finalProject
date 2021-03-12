@@ -3,7 +3,9 @@
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +34,9 @@ Route::get('/s/room', [RoomController::class, 'search'])->name('search');
 Route::get('/room/new', [RoomController::class, 'index'])->name('room.new');
 Route::post('/room', [RoomController::class, 'store'])->name('room');
 Route::get('/room/{id}', [RoomController::class, 'show'])->whereNumber('id');
+
+Route::post('/room/{id}/review/', [ReviewController::class, 'store'])->whereNumber('id')->name('review');
+Route::delete('/room/{id}/review/', [ReviewController::class, 'destroy'])->whereNumber('id');
+Route::get('/room/{id}/review/{review_id}', [ReviewController::class, 'show'])->whereNumber('id')->name('review.edit');
+
+Route::get('saved', [WishlistController::class, 'index'])->name('saved');

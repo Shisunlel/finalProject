@@ -1,21 +1,358 @@
-@extends('/layouts.default')
-@include('/partials.nav')
-@section('style')
-    <link rel="stylesheet" href="/css/main.css">
-@endsection
-@section('content')
-{{$room[0]}}
-<div class="container my-3">
-    <div class="row">
+@extends('/layouts.default') @include('/partials.nav') @section('style')
+<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/show.css" />
+@endsection @section('content')
+{{-- {{$room[0]}}
+<p></p>
+{{$comment_user}} --}}
+<div class="container-fluid my-5">
+    <div class="container-xxl">
+    <div class="d-flex">
+        <h2 class="m-0" id="show__header__title">{{$room[0]->title}}</h2>
+        <span class="ms-auto">
+            <a id="saved__show__page" href="{{route('saved')}}">
+                <i class="far fa-heart fa-2x text-danger"></i>
+            </a>
+        </span>
+    </div>
+    <p class="m-0 p-0" style="color: #666">
+        <sup>$</sup
+        ><span class="mx-1 room__price"
+            ><strong>{{$room[0]->price}}</strong></span
+        >/month
+    </p>
+    <div class="row mt-2">
         <section class="image col-lg-6">
-            @foreach ($room[0]->images as $image)
-                <img src="{{ $image->link }}" alt="" class="w-100">
-            @endforeach
+            <div
+                id="carouselExampleControlsNoTouching"
+                class="carousel slide"
+                data-bs-touch="false"
+                data-bs-interval="false"
+            >
+            <div class="carousel-indicators">
+                @if (count($room[0]->images) > 1)
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    @for ($i=1; $i< count($room[0]->images); $i++)
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $i }}"></button>
+                    @endfor
+                @endif
+              </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active h-100">
+                        <img
+                            loading="lazy"
+                            src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/@endif{{$room[0]->images[0]->link}}"
+                            class="d-block w-100"
+                            alt="..."
+                        />
+                    </div>
+                    @for ($i=1; $i< count($room[0]->images); $i++)
+                    <div class="carousel-item h-100">
+                        <img
+                            loading="lazy"
+                            src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/@endif{{$room[0]->images[$i]->link}}"
+                            alt=""
+                            class="w-100"
+                        />
+                    </div>
+                    @endfor
+                    @if (count($room[0]->images) > 1)
+                    <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselExampleControlsNoTouching"
+                        data-bs-slide="prev"
+                    >
+                        <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                        ></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselExampleControlsNoTouching"
+                        data-bs-slide="next"
+                    >
+                        <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                        ></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    @endif
+                </div>
+            </div>
         </section>
-        <section class="detail col-lg-6"></section>
+        <section class="detail my-3 my-lg-0 col-lg-6">
+            <div class="accordion accordion-flush" id="description__accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button
+                            class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne"
+                            aria-expanded="true"
+                            aria-controls="flush-collapseOne"
+                        >
+                            Description
+                        </button>
+                    </h2>
+                    <div
+                        id="flush-collapseOne"
+                        class="accordion-collapse show"
+                        aria-labelledby="flush-headingOne"
+                        data-bs-parent="#description__accordion"
+                    >
+                        <div class="accordion-body text-left">
+                            {!! Str::limit(nl2br(e($room[0]->description)),150,
+                            '...') !!}
+                            @if (Str::length($room[0]->description) > 150)
+                            <a
+                                type="button"
+                                class="btn btn-light ms-1"
+                                data-bs-toggle="modal"
+                                data-bs-target="#description"
+                            >
+                                Read more...
+                            </a>
+                            @endif
+                        </div>
+                        
+
+                        <!-- button for drop down -->
+                        <!-- Modal -->
+                        <div
+                            class="modal fade"
+                            id="description"
+                            tabindex="-1"
+                            aria-labelledby="#descriptionLabel"
+                            aria-hidden="true"
+                        >
+                            <div
+                                class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                            >
+                                <div
+                                    class="modal-content bg-gradient bg-white text-dark"
+                                >
+                                    <div class="modal-body">
+                                        <p class="text-left">
+                                            {!! nl2br(e($room[0]->description))
+                                            !!}
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer d-lg-none">
+                                        <button
+                                            type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal"
+                                        >
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseTwo"
+                        >
+                            Address
+                        </button>
+                    </h2>
+                    <div
+                        id="flush-collapseTwo"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingTwo"
+                        data-bs-parent="#description__accordion"
+                    >
+                        <div class="accordion-body">
+                            {!! nl2br(e($room[0]->address)) !!}
+                        </div>
+                    </div>
+                </div>
+                @if (count($room[0]->facilities) > 0)
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseThree"
+                        >
+                            Facilities
+                        </button>
+                    </h2>
+                    <div
+                        id="flush-collapseThree"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingThree"
+                        data-bs-parent="#description__accordion"
+                    >
+                        <div class="accordion-body">
+                            @foreach ($room[0]->facilities as $item)
+                            <p>{{ $item->facility  }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endif
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFour"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseFour"
+                        >
+                            Date
+                        </button>
+                    </h2>
+                    <div
+                        id="flush-collapseFour"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingFour"
+                        data-bs-parent="#description__accordion"
+                    >
+                        <div class="accordion-body">
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col">
+                                        <input
+                                            type="date"
+                                            class="form-control"
+                                            min="{{now()->toDateString()}}"
+                                            name="start"
+                                            id="start__date"
+                                        />
+                                    </div>
+                                    <div class="col">
+                                        <input
+                                            type="date"
+                                            class="form-control"
+                                            min="{{ now()->addMonthsNoOverflow()->toDateString() }}"
+                                            name="end"
+                                            id="end__date"
+                                            disabled
+                                        />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFive">
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFive"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseFive"
+                        >
+                            Contact
+                        </button>
+                    </h2>
+                    <div
+                        id="flush-collapseFive"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingFive"
+                        data-bs-parent="#description__accordion"
+                    >
+                        <div class="accordion-body d-flex">
+                            @isset($room[0]->user->phone_number)
+                            <div class="col-6 d-flex justify-content-center">
+                                <a class="btn btn-success" href="tel:{{ $room[0]->user->phone_number}}">Call Host</a>
+                            </div>
+                            @endisset
+                            <div class="col-6 d-flex justify-content-center">
+                                <a class="btn btn-light-accent" href="mailto:{{ $room[0]->user->email }}">Mail Host</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout__section row p-2 align-items-center my-3">
+               <div class="col-6 d-flex flex-column px-3">
+                <h5>{{ $room[0]->title }}</h5>
+                <p>Rent for 3 days</p>
+               </div>
+               <div class="col-6 text-center d-flex justify-content-center">
+                <a class="btn btn-dark-shade d-flex justify-content-around" href="#">${{ $room[0]->price * 3 }} <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                  </svg></span></a>
+               </div>
+            </div>
+        </section>
+    </div>
+    <div class="row">
+        <section class="review">
+            <h5 id="review__header"><span id="show__all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                  </span>  All reviews</h5>
+                  @auth
+            <div id="review__form__container">
+                <form id="review__form" action="{{ route('review', ['id' => $room[0]->id ]) }}">
+                    @csrf
+                    <textarea name="review" id="review__box" class="form-control" placeholder="Share your experience with others"></textarea>
+                    <input type="button" id="review__btn" value="Send">
+                </form>
+            </div>
+            @endauth
+            <div id="review__container" class="row my-4">
+                @foreach ($room[0]->reviews as $review)
+                    <div class="col-12 col-md-6">
+                        <div class="card py-3">
+                            <div class="review__header px-2">
+                                <div class="user__wrapper d-flex">
+                                   <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->profile}} @break @endif @endforeach" id="profile__image">
+                                    <p class="ms-2 fw-bold">@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->username}} @break @endif @endforeach</p>
+                                    <span class="ms-auto dropdown__hover">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        </svg>
+                                        <ul class="dropdown">
+                                            <li><a href="{{route('review.edit', ['id' => $room[0]->id, 'review_id' => $review->id])}}">Edit</a></li>
+                                            <form id="form__delete__review" action="{{ route('review', ['id' => $room[0]->id]) }}" method="POST">
+                                                @method('DELETE')
+                                                <li><input id="remove__input" type="submit" value="Remove"></li>
+                                            </form>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text text-left">{{ $review->updated_at->diffForHumans() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
     </div>
 </div>
-@endsection
-@section('script')
-    <script src="/js/rooms/rooms.js"></script>
+</div>
+@endsection @section('script')
+<script src="/js/rooms/rooms.js"></script>
+<script src="/js/rooms/show.js"></script>
 @endsection

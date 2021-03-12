@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Facility;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -74,8 +75,9 @@ class RoomController extends Controller
 
     public function show($id)
     {
-        $result = Room::with('Images')->with('Facilities')->where('id', $id)->get();
-        return view('rooms.show')->with('room', $result);
+        $result = Room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $id)->get();
+        $comment_user = User::join('reviews', 'users.id', 'user_id')->where('reviews.room_id', $id)->select('users.id', 'users.username', 'users.profile')->get();
+        return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user]);
     }
 
     public function search(Request $request)

@@ -20,9 +20,9 @@ class Room extends Model
         'guest',
     ];
 
-    public function users()
+    public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function reviews()
