@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Facility;
 use App\Models\Room;
 use App\Models\User;
+use App\Models\Wishlist;
+
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -77,7 +79,9 @@ class RoomController extends Controller
     {
         $result = Room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $id)->get();
         $comment_user = User::join('reviews', 'users.id', 'user_id')->where('reviews.room_id', $id)->select('users.id', 'users.username', 'users.profile')->get();
-        return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user]);
+
+        $wishlist = Wishlist::join('users', 'user_id', 'users.id')->join('rooms', 'room_id', 'rooms.id')->where('wishlists.user_id', auth()->id())->where('wishlists.room_id', $id)->select('wishlists.id', 'wishlists.user_id', 'wishlists.room_id')->get();
+        return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user, 'wishlist' => $wishlist]);
     }
 
     public function search(Request $request)
@@ -87,7 +91,7 @@ class RoomController extends Controller
         if (empty($location)) {
             $location = " ";
         }
-        $result = Room::with('Images')->where('address', 'like', "%{$location}%")->where('guest', '>=', "{$guest}")->orderBy('guest')->paginate(20);
+        $result = Room::with('Images', 'Wishlists')->where('address', 'like', "%{$location}%")->where('guest', '>=', "{$guest}")->orderBy('guest')->paginate(20);
         $result->appends(['location' => $location, 'guest' => $guest]);
         return view('rooms.index', ['rooms' => $result, 'guest' => $guest]);
     }

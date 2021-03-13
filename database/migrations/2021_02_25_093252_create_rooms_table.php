@@ -21,7 +21,6 @@ class CreateRoomsTable extends Migration
             $table->float('price', 5, 2);
             $table->unsignedSmallInteger('qty');
             $table->unsignedSmallInteger('guest');
-            $table->boolean('available');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

@@ -20,6 +20,11 @@ class Room extends Model
         'guest',
     ];
 
+    public function savedBy(User $user)
+    {
+        return $this->wishlists->contains('user_id', $user->id);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,7 +42,7 @@ class Room extends Model
 
     public function wishlists()
     {
-        return $this->belongsToMany(Wishlist::class)->withTimestamps();
+        return $this->hasMany(Wishlist::class);
     }
 
     public function images()

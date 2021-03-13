@@ -14,6 +14,5 @@ class ItemList extends Model
     protected $fillable = [
         'room_id',
         'wishlist_id',
-        'qty',
     ];
 }

@@ -16,7 +16,6 @@ class CreateListItemsTable extends Migration
         Schema::create('item_list', function (Blueprint $table) {
             $table->foreignId('wishlist_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('room_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedTinyInteger('qty');
             $table->timestamps();
         });
     }
