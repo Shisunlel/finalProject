@@ -6,6 +6,7 @@ use App\Models\Facility;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Wishlist;
+
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -78,6 +79,7 @@ class RoomController extends Controller
     {
         $result = Room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $id)->get();
         $comment_user = User::join('reviews', 'users.id', 'user_id')->where('reviews.room_id', $id)->select('users.id', 'users.username', 'users.profile')->get();
+
         $wishlist = Wishlist::join('users', 'user_id', 'users.id')->join('rooms', 'room_id', 'rooms.id')->where('wishlists.user_id', auth()->id())->where('wishlists.room_id', $id)->select('wishlists.id', 'wishlists.user_id', 'wishlists.room_id')->get();
         return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user, 'wishlist' => $wishlist]);
     }
