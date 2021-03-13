@@ -24,7 +24,6 @@ class ItemListFactory extends Factory
         return [
             'room_id' => rand(1, 25),
             'wishlist_id' => rand(1, 5),
-            'qty' => rand(1, 5),
         ];
     }
 }

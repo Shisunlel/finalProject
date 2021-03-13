@@ -23,6 +23,7 @@ class WishlistFactory extends Factory
     {
         return [
             'user_id' => rand(1, 5),
+            'room_id' => rand(1, 25),
         ];
     }
 }

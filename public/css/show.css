@@ -198,6 +198,11 @@ section.review {
   position: relative;
 }
 
+#review__form__container {
+  position: relative;
+  display: none;
+}
+
 #review__box {
   background: rgba(0, 172, 238, 0.1);
   color: #111;
@@ -337,5 +342,9 @@ section.review {
 @media only screen and (min-width: 992px) {
   .checkout__section > div > a {
     width: 50%;
+  }
+
+  #rating {
+    max-width: 50%;
   }
 }

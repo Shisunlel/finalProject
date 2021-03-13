@@ -6,6 +6,9 @@ const threedot = document.querySelectorAll(".bi-three-dots-vertical");
 const dropdown = document.querySelectorAll(".dropdown");
 const showall = document.querySelector("#show__all");
 const review = document.querySelector(".review");
+const rating = document.querySelector("#rating");
+const review_box = document.querySelector("#review__form__container");
+const review__detail = document.querySelector("#review__detail");
 
 startInput.addEventListener("change", date_input);
 
@@ -50,4 +53,21 @@ let showallreview = () => {
     }, 250);
 };
 
-showall.addEventListener("click", showallreview);
+if (showall) {
+    showall.addEventListener("click", showallreview);
+}
+
+function handler(e) {
+    // remove this handler
+    e.target.removeEventListener(e.type, arguments.callee);
+    review_box.style.display = "block";
+}
+
+if (rating) {
+    rating.addEventListener("change", handler);
+}
+
+//auto height for review section if null
+if (!review__detail) {
+    review.style.height = "auto";
+}

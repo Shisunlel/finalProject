@@ -10,16 +10,16 @@ class Wishlist extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'room_id',
     ];
 
     public function users()
     {
-        $this->belongsTo(User::class);
+        $this->belongsTo(User::class)->withTimestamps();
     }
 
     public function rooms()
     {
-        $this->belongsToMany(Room::class)->withTimestamps();
+        $this->belongsTo(Room::class)->withTimestamps();
     }
 }

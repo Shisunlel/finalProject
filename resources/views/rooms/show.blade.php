@@ -2,18 +2,45 @@
 <link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet" href="/css/show.css" />
 @endsection @section('content')
-{{-- {{$room[0]}}
+{{-- {{$room[0]}} --}}
 <p></p>
-{{$comment_user}} --}}
+{{-- {{$comment_user}} --}}
 <div class="container-fluid my-5">
     <div class="container-xxl">
     <div class="d-flex">
         <h2 class="m-0" id="show__header__title">{{$room[0]->title}}</h2>
-        <span class="ms-auto">
-            <a id="saved__show__page" href="{{route('saved')}}">
-                <i class="far fa-heart fa-2x text-danger"></i>
-            </a>
-        </span>
+        @guest
+            <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
+                @csrf
+                <span>
+                    <a id="saved__show__page" href="javascript:{}" onclick="document.querySelector('#saved').submit();">
+                        <i class="far fa-heart fa-2x text-danger"></i>
+                    </a>
+                </span>
+            </form>
+        @endguest
+        @auth
+            @if (!$room[0]->savedBy(auth()->user()))
+                <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
+                    @csrf
+                    <span>
+                        <a id="saved__show__page" href="javascript:{}" onclick="document.querySelector('#saved').submit();">
+                            <i class="far fa-heart fa-2x text-danger"></i>
+                        </a>
+                    </span>
+                </form>
+            @else
+                <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
+                    @csrf
+                    @method('DELETE')
+                    <span>
+                        <a id="saved__show__page" href="javascript:{}" onclick="document.querySelector('#saved').submit();">
+                            <i class="fas fa-heart fa-2x text-danger"></i>
+                        </a>
+                    </span>
+                </form>
+            @endif
+        @endauth
     </div>
     <p class="m-0 p-0" style="color: #666">
         <sup>$</sup
@@ -302,20 +329,34 @@
     </div>
     <div class="row">
         <section class="review">
+            <div class="rating mb-3">
+                @auth
+                <h4>Rating and Review</h4>
+                <form id="review__form" action="{{ route('review', ['id' => $room[0]->id ]) }}">
+                    @csrf
+                <select name="rating" class="form-select" id="rating">
+                    <option value="0" selected disabled>0</option>
+                    @for ($i = 1; $i <= 50; $i++)
+                        <option value="{{$i/10}}">{{$i/10}}</option>
+                    @endfor
+                </select>
+                @endauth
+            </div>
+            @if (!$room[0]->reviews->isEmpty())
             <h5 id="review__header"><span id="show__all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                   </svg>
                   </span>  All reviews</h5>
+            @endif
                   @auth
             <div id="review__form__container">
-                <form id="review__form" action="{{ route('review', ['id' => $room[0]->id ]) }}">
-                    @csrf
-                    <textarea name="review" id="review__box" class="form-control" placeholder="Share your experience with others"></textarea>
-                    <input type="button" id="review__btn" value="Send">
+               <textarea name="review" id="review__box" class="form-control" placeholder="Share your experience with others"></textarea>
+                <input type="button" id="review__btn" value="Send">
                 </form>
             </div>
             @endauth
+            @if (!$room[0]->reviews->isEmpty())
             <div id="review__container" class="row my-4">
                 @foreach ($room[0]->reviews as $review)
                     <div class="col-12 col-md-6">
@@ -339,7 +380,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
+                                <p id="review__detail" class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
                             </div>
                             <div class="card-footer">
                                 <p class="card-text text-left">{{ $review->updated_at->diffForHumans() }}</p>
@@ -348,6 +389,7 @@
                     </div>
                 @endforeach
             </div>
+             @endif
         </section>
     </div>
 </div>
