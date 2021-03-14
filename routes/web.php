@@ -42,3 +42,7 @@ Route::get('/rooms/{id}/review/{review_id}', [ReviewController::class, 'show'])-
 Route::get('/rooms/saved', [WishlistController::class, 'index'])->name('saved');
 Route::post('/rooms/{room}/saved', [WishlistController::class, 'store'])->name('saved.action');
 Route::delete('/rooms/{room}/saved', [WishlistController::class, 'destroy']);
+
+Route::get('/checkout',function(){
+    return view('checkout.checkout');
+});
