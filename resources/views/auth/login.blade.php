@@ -20,7 +20,7 @@
 
         
         <form
-            action="{{ route('login') }}"
+            action="{{ route('login.store') }}"
             id="login__form"
             method="POST"
         >
@@ -68,13 +68,13 @@
             <div class="row mb-2">
                 <div class="col-6">
                     <div class="form-text text-start">
-                        <a id="login__link" href="/register">New here?</a>
+                        <a id="login__link" href="{{route('register.index')}}">New here?</a>
                     </div>
                 </div>
                 
                 <div class="col-6">
                     <div class="form-text text-end">
-                        <a id="login__link" href="#">Forgot Password?</a>
+                        <a id="forget__password" href="#">Forget Password?</a>
                     </div>
                 </div>
             </div>

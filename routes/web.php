@@ -23,21 +23,29 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
+Route::resource('/register', RegisterController::class)->only([
+    'index', 'store',
+]);
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'store']);
+Route::resource('/login', LoginController::class)->only([
+    'index', 'store',
+]);
+
 Route::post('/logout', [LogoutController::class, 'index'])->name('logout');
 
 Route::get('/s/rooms', [RoomController::class, 'search'])->name('search');
-Route::get('/rooms/new', [RoomController::class, 'index'])->name('room.new');
-Route::post('/rooms', [RoomController::class, 'store'])->name('room');
-Route::get('/rooms/{id}', [RoomController::class, 'show'])->whereNumber('id')->name('show.room');
+Route::resource('/rooms', RoomController::class)->except([
+    'index',
+])->parameters([
+    'rooms' => 'id',
+]);
 
-Route::post('/rooms/{id}/review/', [ReviewController::class, 'store'])->whereNumber('id')->name('review');
-Route::delete('/rooms/{id}/review/', [ReviewController::class, 'destroy'])->whereNumber('id');
-Route::get('/rooms/{id}/review/{review_id}', [ReviewController::class, 'show'])->whereNumber('id')->name('review.edit');
+Route::resource('/rooms.reviews', ReviewController::class)->except([
+    'index', 'show',
+])->parameters([
+    'rooms' => 'id',
+    'reviews' => 'review_id',
+])->shallow();
 
 Route::get('/rooms/saved', [WishlistController::class, 'index'])->name('saved');
 Route::post('/rooms/{room}/saved', [WishlistController::class, 'store'])->name('saved.action');

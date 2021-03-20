@@ -13,7 +13,7 @@
 				</h1>
             </div>
                 <form
-                    action="/room"
+                    action="{{route('rooms.store')}}"
                     id="room__form"
                     method="POST"
                     enctype="multipart/form-data"

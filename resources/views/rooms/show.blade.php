@@ -332,7 +332,7 @@
             <div class="rating mb-3">
                 @auth
                 <h4>Rating and Review</h4>
-                <form id="review__form" action="{{ route('review', ['id' => $room[0]->id ]) }}">
+                <form action="{{ route('rooms.reviews.store', $room[0]) }}" method="POST">
                     @csrf
                 <select name="rating" class="form-select" id="rating">
                     <option value="0" selected disabled>0</option>
@@ -340,6 +340,7 @@
                         <option value="{{$i/10}}">{{$i/10}}</option>
                     @endfor
                 </select>
+                </form>
                 @endauth
             </div>
             @if (!$room[0]->reviews->isEmpty())
@@ -351,9 +352,11 @@
             @endif
                   @auth
             <div id="review__form__container">
+            <form id="review__form" action="{{ route('rooms.reviews.store', $room[0]) }}" method="POST">
+                @csrf
                <textarea name="review" id="review__box" class="form-control" placeholder="Share your experience with others"></textarea>
-                <input type="button" id="review__btn" value="Send">
-                </form>
+                <input type="submit" id="review__btn" value="Send">
+            </form>
             </div>
             @endauth
             @if (!$room[0]->reviews->isEmpty())
@@ -370,8 +373,8 @@
                                             <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                                         </svg>
                                         <ul class="dropdown">
-                                            <li><a href="{{route('review.edit', ['id' => $room[0]->id, 'review_id' => $review->id])}}">Edit</a></li>
-                                            <form id="form__delete__review" action="{{ route('review', ['id' => $room[0]->id]) }}" method="POST">
+                                            <li><a href="{{route('reviews.edit', $review)}}">Edit</a></li>
+                                            <form id="form__delete__review" action="{{ route('reviews.destroy', $review) }}" method="POST">
                                                 @method('DELETE')
                                                 <li><input id="remove__input" type="submit" value="Remove"></li>
                                             </form>
@@ -380,7 +383,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p id="review__detail" class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
+                                <p class="review__detail" class="card-text" contenteditable="true">{!! nl2br(e($review->review_detail)) !!}</p>
                             </div>
                             <div class="card-footer">
                                 <p class="card-text text-left">{{ $review->updated_at->diffForHumans() }}</p>

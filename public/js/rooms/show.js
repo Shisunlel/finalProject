@@ -8,7 +8,7 @@ const showall = document.querySelector("#show__all");
 const review = document.querySelector(".review");
 const rating = document.querySelector("#rating");
 const review_box = document.querySelector("#review__form__container");
-const review__detail = document.querySelector("#review__detail");
+const review__detail = document.querySelector(".review__detail");
 
 startInput.addEventListener("change", date_input);
 
@@ -71,3 +71,7 @@ if (rating) {
 if (!review__detail) {
     review.style.height = "auto";
 }
+
+//retrive rating value
+//create new select element
+//append to form 

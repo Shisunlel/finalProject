@@ -13,7 +13,7 @@ class ReviewController extends Controller
 
     public function store(Request $request)
     {
-
+        dd($request);
     }
 
     public function destroy(Request $request)

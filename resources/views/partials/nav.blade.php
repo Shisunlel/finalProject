@@ -155,10 +155,10 @@
         <ul class="navbar-nav ml-auto">
             @guest
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                <a class="nav-link" href="{{ route('register.index') }}">Register</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                <a class="nav-link" href="{{ route('login.index') }}">Login</a>
             </li>
             <hr
                 width="100%"
@@ -171,7 +171,7 @@
                 >
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('room.new') }}"
+                <a class="nav-link" href="{{ route('rooms.create') }}"
                     >Become a host</a
                 >
             </li>

@@ -6,7 +6,6 @@ use App\Models\Facility;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Wishlist;
-
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -16,7 +15,7 @@ class RoomController extends Controller
         return $this->middleware('auth')->except(['show', 'search']);
     }
 
-    public function index()
+    public function create()
     {
         $facilities = Facility::get();
         return view('rooms.new', ['facilities' => $facilities]);
@@ -48,7 +47,7 @@ class RoomController extends Controller
         if ($request->file('image')) {
             //throw into an array
             foreach ($request->image as $image) {
-                $imageName = time() . rand(1, 10000) . $image->getClientOriginalName();
+                $imageName = $image->getClientOriginalName() . time() . rand(1, 10000);
                 $path = $image->move(public_path('img/room'), $imageName);
                 $img_arr[] = $imageName;
             }
@@ -77,11 +76,13 @@ class RoomController extends Controller
 
     public function show($id)
     {
-        $result = Room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $id)->get();
-        $comment_user = User::join('reviews', 'users.id', 'user_id')->where('reviews.room_id', $id)->select('users.id', 'users.username', 'users.profile')->get();
+        if (Room::findOrFail($id)) {
+            $result = Room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $id)->get();
+            $comment_user = User::join('reviews', 'users.id', 'user_id')->where('reviews.room_id', $id)->select('users.id', 'users.username', 'users.profile')->get();
 
-        $wishlist = Wishlist::join('users', 'user_id', 'users.id')->join('rooms', 'room_id', 'rooms.id')->where('wishlists.user_id', auth()->id())->where('wishlists.room_id', $id)->select('wishlists.id', 'wishlists.user_id', 'wishlists.room_id')->get();
-        return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user, 'wishlist' => $wishlist]);
+            $wishlist = Wishlist::join('users', 'user_id', 'users.id')->join('rooms', 'room_id', 'rooms.id')->where('wishlists.user_id', auth()->id())->where('wishlists.room_id', $id)->select('wishlists.id', 'wishlists.user_id', 'wishlists.room_id')->get();
+            return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user, 'wishlist' => $wishlist]);
+        }
     }
 
     public function search(Request $request)
@@ -94,6 +95,21 @@ class RoomController extends Controller
         $result = Room::with('Images', 'Wishlists')->where('address', 'like', "%{$location}%")->where('guest', '>=', "{$guest}")->orderBy('guest')->paginate(20);
         $result->appends(['location' => $location, 'guest' => $guest]);
         return view('rooms.index', ['rooms' => $result, 'guest' => $guest]);
+    }
+
+    public function destroy($id)
+    {
+        $room = Room::findOrFail($id);
+    }
+
+    public function edit($id)
+    {
+        $room = Room::findOrFail($id);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $room = Room::findOrFail($id);
     }
 
 }

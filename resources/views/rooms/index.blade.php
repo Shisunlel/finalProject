@@ -8,7 +8,7 @@
         <div class="col-6 col-lg-3 my-4">
             <div class="card room__card">
                 <div class="image-container">
-                    <a href="{{route('show.room', $room->id)}}">
+                    <a href="{{route('rooms.show', $room->id)}}">
                         <img
                             loading="lazy"
                             src="@if (!Str::of($room->images[0]->link)->startsWith('https')) /img/room/@endif{{$room->images[0]->link }}"
