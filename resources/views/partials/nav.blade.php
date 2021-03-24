@@ -19,7 +19,7 @@
             />
             <button
                 type="button"
-                class="btn btn-light ml-1"
+                class="btn btn-light ms-1"
                 data-bs-toggle="modal"
                 data-bs-target="#filter"
             >
@@ -152,7 +152,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ms-auto">
             @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('register.index') }}">Register</a>
@@ -166,8 +166,8 @@
             />
             @endguest @auth
             <li class="nav-item">
-                <span class="navbar-text" style="color: #111"
-                    >Welcome, {{auth()->user()->username}}</span
+                <a class="nav-link" href="{{ route('profile') }}"
+                    >Profile</a
                 >
             </li>
             <li class="nav-item">
@@ -176,7 +176,7 @@
                 >
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('saved') }}"
+                <a class="nav-link" href="{{ route('saved.index') }}"
                     >Saved</a
                 >
             </li>

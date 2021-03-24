@@ -20,7 +20,8 @@ mix.sass('resources/sass/color.scss', 'public/css')
     .sass('resources/sass/index.scss', 'public/css')
     .sass('resources/sass/register.scss', 'public/css/auth')
     .sass('resources/sass/main.scss', 'public/css')
-    .sass('resources/sass/show.scss', 'public/css');
+    .sass('resources/sass/show.scss', 'public/css')
+    .sass('resources/sass/saved.scss', 'public/css');
 
 
 // mix.js('resources/js/rooms.js', 'public/js/rooms');

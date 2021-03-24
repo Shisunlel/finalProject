@@ -74,13 +74,12 @@ class RoomController extends Controller
         return redirect('/')->with('success', 'Room create successfully');
     }
 
-    public function show($id)
+    public function show(Room $room)
     {
-        if (Room::findOrFail($id)) {
-            $result = Room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $id)->get();
-            $comment_user = User::join('reviews', 'users.id', 'user_id')->where('reviews.room_id', $id)->select('users.id', 'users.username', 'users.profile')->get();
-
-            $wishlist = Wishlist::join('users', 'user_id', 'users.id')->join('rooms', 'room_id', 'rooms.id')->where('wishlists.user_id', auth()->id())->where('wishlists.room_id', $id)->select('wishlists.id', 'wishlists.user_id', 'wishlists.room_id')->get();
+        if (Room::findOrFail($room->id)) {
+            $result = $room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $room->id)->get();
+            $comment_user = User::join('reviews', 'users.id', 'user_id')->where('reviews.room_id', $room->id)->select('users.id', 'users.username', 'users.profile')->get();
+            $wishlist = Wishlist::join('users', 'user_id', 'users.id')->join('rooms', 'room_id', 'rooms.id')->where('wishlists.user_id', auth()->id())->where('wishlists.room_id', $room->id)->select('wishlists.id', 'wishlists.user_id', 'wishlists.room_id')->get();
             return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user, 'wishlist' => $wishlist]);
         }
     }
@@ -97,19 +96,24 @@ class RoomController extends Controller
         return view('rooms.index', ['rooms' => $result, 'guest' => $guest]);
     }
 
-    public function destroy($id)
+    public function destroy(Room $room)
     {
-        $room = Room::findOrFail($id);
+        $room::findOrFail($room->id);
+        if ($room->owndedBy(auth()->user())) {
+            $room->delete();
+
+            return redirect('/')->with('success', 'Room delete successfully');
+        }
     }
 
-    public function edit($id)
+    public function edit(Room $room)
     {
-        $room = Room::findOrFail($id);
+        $room::findOrFail($room->id);
     }
 
-    public function update(Request $request, $id)
+    public function update(Room $room, Request $request)
     {
-        $room = Room::findOrFail($id);
+        $room::findOrFail($room->id);
     }
 
 }

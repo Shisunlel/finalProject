@@ -15,11 +15,11 @@ class Wishlist extends Model
 
     public function users()
     {
-        $this->belongsTo(User::class)->withTimestamps();
+        return $this->belongsTo(User::class);
     }
 
     public function rooms()
     {
-        $this->belongsTo(Room::class)->withTimestamps();
+        return $this->belongsTo(Room::class);
     }
 }

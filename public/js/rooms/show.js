@@ -9,6 +9,9 @@ const review = document.querySelector(".review");
 const rating = document.querySelector("#rating");
 const review_box = document.querySelector("#review__form__container");
 const review__detail = document.querySelector(".review__detail");
+const review__form = document.querySelector("#review__form");
+const toast = document.querySelector('.toast');
+const init = new bootstrap.Toast(toast);
 
 startInput.addEventListener("change", date_input);
 
@@ -57,6 +60,7 @@ if (showall) {
     showall.addEventListener("click", showallreview);
 }
 
+let rating_val = 0;
 function handler(e) {
     // remove this handler
     e.target.removeEventListener(e.type, arguments.callee);
@@ -65,6 +69,7 @@ function handler(e) {
 
 if (rating) {
     rating.addEventListener("change", handler);
+    rating.addEventListener("change", new_select_element);
 }
 
 //auto height for review section if null
@@ -72,6 +77,27 @@ if (!review__detail) {
     review.style.height = "auto";
 }
 
-//retrive rating value
 //create new select element
-//append to form 
+const select = document.createElement("SELECT");
+
+function new_select_element(e) {
+    rating_val = e.target.value;
+    if (select.childElementCount > 0) {
+        select.children[0].value = rating_val;
+    } else {
+        select.name = "rating";
+        select.id = "new_rating";
+        select.hidden = true;
+        const option = document.createElement("OPTION");
+        option.value = rating_val;
+        select.append(option);
+        review__form.append(select);
+    }
+}
+
+//append to form
+
+//toast appear
+if(toast){
+    init.show();
+    }

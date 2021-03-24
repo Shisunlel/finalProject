@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -11,18 +13,28 @@ class ReviewController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Request $request)
+    public function store(Room $room, Request $request)
     {
-        dd($request);
+        $this->validate($request, [
+            'rating' => 'required',
+            'review' => 'required',
+        ]);
+
+        $room->reviews()->create([
+            'review_detail' => $request->review,
+            'rating' => (float) $request->rating,
+            'user_id' => $request->user()->id,
+        ]);
+
+        return back();
     }
 
-    public function destroy(Request $request)
+    public function destroy(Review $review)
     {
+        if ($review->reviewedBy(auth()->user())) {
+            $review->delete();
+        }
 
-    }
-
-    public function update(Request $request)
-    {
-
+        return back()->with('success', 'Successfully deleted');
     }
 }

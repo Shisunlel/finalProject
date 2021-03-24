@@ -23,6 +23,10 @@ ul {
   padding: 0;
 }
 
+a {
+  outline: none;
+}
+
 div > section > ul > a {
   color: #f4f0f0;
   text-decoration: none;

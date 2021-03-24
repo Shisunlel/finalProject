@@ -36,17 +36,14 @@ Route::post('/logout', [LogoutController::class, 'index'])->name('logout');
 Route::get('/s/rooms', [RoomController::class, 'search'])->name('search');
 Route::resource('/rooms', RoomController::class)->except([
     'index',
-])->parameters([
-    'rooms' => 'id',
 ]);
 
-Route::resource('/rooms.reviews', ReviewController::class)->except([
-    'index', 'show',
-])->parameters([
-    'rooms' => 'id',
-    'reviews' => 'review_id',
+Route::resource('/rooms.reviews', ReviewController::class)->only([
+    'store', 'destroy',
 ])->shallow();
 
-Route::get('/rooms/saved', [WishlistController::class, 'index'])->name('saved');
-Route::post('/rooms/{room}/saved', [WishlistController::class, 'store'])->name('saved.action');
-Route::delete('/rooms/{room}/saved', [WishlistController::class, 'destroy']);
+Route::get('/saved', [WishlistController::class, 'index'])->name('saved.index');
+Route::post('/rooms/{room}/saved', [WishlistController::class, 'store'])->name('saved.store');
+Route::delete('/rooms/{room}/saved', [WishlistController::class, 'destroy'])->name('saved.destroy');
+
+Route::get('/profile-setting', [UserController::class, 'index'])->name('profile');

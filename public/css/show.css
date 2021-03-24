@@ -23,6 +23,10 @@ ul {
   padding: 0;
 }
 
+a {
+  outline: none;
+}
+
 div > section > ul > a {
   color: #f4f0f0;
   text-decoration: none;
@@ -133,6 +137,13 @@ img {
   -o-object-fit: cover;
      object-fit: cover;
   max-height: 100%;
+}
+
+.toast {
+  position: fixed;
+  right: 0;
+  bottom: 1.2em;
+  z-index: 1;
 }
 
 #show__header__title {
