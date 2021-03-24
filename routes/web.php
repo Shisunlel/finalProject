@@ -6,6 +6,7 @@ use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\RentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,9 @@ Route::get('/rooms/saved', [WishlistController::class, 'index'])->name('saved');
 Route::post('/rooms/{room}/saved', [WishlistController::class, 'store'])->name('saved.action');
 Route::delete('/rooms/{room}/saved', [WishlistController::class, 'destroy']);
 
-Route::get('/checkout',function(){
-    return view('checkout.checkout');
-});
+Route::get('/checkout', [RentController::class, 'index'])->name('checkout');
+Route::post('/checkout', [RentController::class, 'storerent']);
+
+// Route::get('/checkout',function(){
+//     return view('checkout.checkout');
+// });

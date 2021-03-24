@@ -31,7 +31,12 @@
           <!--Grid column-->
           <div class="col-md-8 mb-3 bg-light p-5">
             <div>
-              <form class="">
+              <form 
+              action="{{ route('checkout') }}"
+              id="checkout__form"
+              method="POST"
+              >
+              @csrf
                 <!--Grid row-->
                 <div class="md-form mb-3">
                   <label><strong>Date</strong></label>
@@ -51,19 +56,10 @@
 
                 <!--Pay-->
                 <label><strong>Pay With</strong></label>
-                <div class="md-form input-group pl-0 mt-2 mb-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Credit Cards or Wings"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-
-                <select class="form-select mb-3" name="Pay-type" aria-label="Default select example">
+                <select class="form-select mt-2 mb-3" name="Pay-type" aria-label="Default select example">
                   <option selected>Credit Cards or Wings</option>
-                  <option value="1">Credit Cards</option>
-                  <option value="2">Wings</option>
+                  <option value="Credit Cards">Credit Cards</option>
+                  <option value="Wings">Wings</option>
                 </select>
                 <!--email-->
                 <label><strong>Billing Address</strong></label>
@@ -72,13 +68,15 @@
                     type="text"
                     name="Address"
                     class="form-control"
-                    placeholder="Street Address"
+                    placeholder="Street Address"d
+                    required
                   />
                   <input
                     type="text"
                     name="HouseNumber"
                     class="form-control"
                     placeholder="House Number"
+                    required
                   />
                 </div>
 
@@ -110,7 +108,7 @@
                       type="text"
                       class="form-control"
                       name="card-name"
-                      placeholder=""
+                      placeholder="Name"
                       required
                     />
                     <small class="text-muted"
@@ -124,7 +122,7 @@
                       type="text"
                       class="form-control"
                       name="card-number"
-                      placeholder=""
+                      placeholder="xxxx xxxx xxxx xxxx"
                       required
                     />
                     <div class="invalid-feedback">
@@ -139,7 +137,7 @@
                       type="text"
                       class="form-control"
                       name="card-expiration"
-                      placeholder=""
+                      placeholder="MM/YY"
                       required
                     />
                     <div class="invalid-feedback">Expiration date required</div>
@@ -150,7 +148,7 @@
                       type="text"
                       class="form-control"
                       name="cc-cvv"
-                      placeholder=""
+                      placeholder="xxxx"
                       required
                     />
                     <div class="invalid-feedback">Security code required</div>

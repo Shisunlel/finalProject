@@ -13,7 +13,7 @@ class DetailRent extends Model
 
     protected $fillable = [
         'duration',
+        'rent_id',
         'room_id',
-        'user_id',
     ];
 }
