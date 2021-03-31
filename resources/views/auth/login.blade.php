@@ -1,16 +1,32 @@
-@extends('layouts/default') @section('style')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;600&family=Akaya+Telivigala&family=RocknRoll+One&family=Oswald&display=swap"
+            rel="stylesheet"
+        />
+    <!-- Custom CSS -->
 <link rel="stylesheet" href="/css/auth/register.css" />
-@endsection @section('content')
-@if (session('error'))
+    <title>Rentahouse | SETEC INSTITUTE</title>
+</head>
+<body>
+<div class="main" id="login__main">
+    <div class="logo__md d-none d-md-block"></div>
+    <div class="image__placeholder d-none d-md-block"></div>
+    <div class="register-form p-3 p-md-5">
+        @if (session('error'))
   <div class="alert alert-danger alert-dismissible fade show w-100 m-0" role="alert">
     {{ session('error') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 @endif
-<div class="main" id="login__main">
-    <div class="logo__md d-none d-md-block"></div>
-    <div class="image__placeholder d-none d-md-block"></div>
-    <div class="register-form p-3 p-md-5">
         <h1
             class="text-center mb-5 text-uppercase text-success"
             id="register-header"
@@ -96,7 +112,6 @@
         </form>
     </div>
 </div>
-@endsection
-@section('script')
 <script src="/js/auth/app.js"></script>
-@endsection
+</body>
+</html>
