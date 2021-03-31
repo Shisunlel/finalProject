@@ -1,7 +1,13 @@
 {
+    "/css/saved.css": "/css/saved.css",
     "/css/show.css": "/css/show.css",
     "/css/main.css": "/css/main.css",
     "/css/auth/register.css": "/css/auth/register.css",
     "/css/index.css": "/css/index.css",
-    "/css/color.css": "/css/color.css"
+    "/css/color.css": "/css/color.css",
+    "/css/auth/room.css": "/css/auth/room.css",
+    "/css/_mixin.css": "/css/_mixin.css",
+    "/css/forward.css": "/css/forward.css",
+    "/css/profile.css": "/css/profile.css",
+    "/css/nav.css": "/css/nav.css"
 }

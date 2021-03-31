@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -18,7 +18,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function store(HttpRequest $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             // 'email' => 'required:App\Models\User|email',

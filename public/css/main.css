@@ -23,6 +23,10 @@ ul {
   padding: 0;
 }
 
+a {
+  outline: none;
+}
+
 div > section > ul > a {
   color: #f4f0f0;
   text-decoration: none;
@@ -126,6 +130,10 @@ btn-light-shaded {
 
 .btn-outline-danger {
   outline: #f44336;
+}
+
+.rounded {
+  border-radius: 1.33rem !important;
 }
 
 .navbar {
@@ -329,8 +337,8 @@ h6.text-uppercase {
 #footer-cp,
 #footer-container,
 #footer-column {
-  padding: 0 !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 #facebook,
@@ -358,16 +366,6 @@ h6.text-uppercase {
 }
 
 @media only screen and (min-width: 800px) {
-  #action-top {
-    width: auto;
-  }
-  #action-top span {
-    width: auto;
-  }
-  #action-top form {
-    width: auto;
-  }
-
   .navbar {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -443,7 +441,6 @@ h6.text-uppercase {
   .image-container {
     height: 100%;
   }
-
   .image-container > a img {
     height: 175px;
   }

@@ -25,6 +25,11 @@ class Room extends Model
         return $this->wishlists->contains('user_id', $user->id);
     }
 
+    public function ownedBy(User $user)
+    {
+        return $this->user_id === $user->id;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,7 +42,7 @@ class Room extends Model
 
     public function rents()
     {
-        return $this->belongsToMany(Rent::class)->withTimestamps();
+        return $this->belongsToMany(Rent::class);
     }
 
     public function wishlists()
@@ -52,6 +57,6 @@ class Room extends Model
 
     public function facilities()
     {
-        return $this->belongsToMany(Facility::class)->withTimestamps();
+        return $this->belongsToMany(Facility::class);
     }
 }

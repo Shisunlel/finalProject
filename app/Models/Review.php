@@ -18,6 +18,11 @@ class Review extends Model
         'room_id',
     ];
 
+    public function reviewedBy(User $user)
+    {
+        return $this->user_id === $user->id;
+    }
+
     public function users()
     {
         return $this->belongsTo(User::class);

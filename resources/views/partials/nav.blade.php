@@ -19,7 +19,7 @@
             />
             <button
                 type="button"
-                class="btn btn-light ml-1"
+                class="btn btn-light ms-1"
                 data-bs-toggle="modal"
                 data-bs-target="#filter"
             >
@@ -139,11 +139,11 @@
             <img
                 class="w-100"
                 src="
-        @if (Str::length(auth()->user()->profile) > 11)
-            {{ auth()->user()->profile }}
-        @else
-            {{ '/img/'.auth()->user()->profile }}
-        @endif
+            @if (Str::length(auth()->user()->profile) > 11)
+                {{ '/img/user/' . auth()->id() . '/profile/' . auth()->user()->profile }}
+            @else
+                {{ '/img/'.auth()->user()->profile }}
+            @endif
         "
                 alt="profile.picture"
             />
@@ -152,13 +152,13 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ms-auto">
             @guest
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                <a class="nav-link" href="{{ route('register.index') }}">Register</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                <a class="nav-link" href="{{ route('login.index') }}">Login</a>
             </li>
             <hr
                 width="100%"
@@ -166,17 +166,17 @@
             />
             @endguest @auth
             <li class="nav-item">
-                <span class="navbar-text" style="color: #111"
-                    >Welcome, {{auth()->user()->username}}</span
+                <a class="nav-link" href="{{ route('profile') }}"
+                    >Profile</a
                 >
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('room.new') }}"
+                <a class="nav-link" href="{{ route('rooms.create') }}"
                     >Become a host</a
                 >
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('saved') }}"
+                <a class="nav-link" href="{{ route('saved.index') }}"
                     >Saved</a
                 >
             </li>

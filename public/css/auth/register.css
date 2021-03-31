@@ -23,6 +23,10 @@ ul {
   padding: 0;
 }
 
+a {
+  outline: none;
+}
+
 div > section > ul > a {
   color: #f4f0f0;
   text-decoration: none;
@@ -126,6 +130,10 @@ btn-light-shaded {
 
 .btn-outline-danger {
   outline: #f44336;
+}
+
+.rounded {
+  border-radius: 1.33rem !important;
 }
 
 img {

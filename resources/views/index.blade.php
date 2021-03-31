@@ -116,7 +116,7 @@
                                     @endauth @guest
                                     <li class="nav-item mt-2 mt-md-0">
                                         <a
-                                            href="{{ route('login') }}"
+                                            href="{{ route('login.index') }}"
                                             class="nav-link"
                                             >Login</a
                                         >
@@ -125,7 +125,7 @@
                                         <a
                                             class="btn btn-dark-shade"
                                             id="registerbtn"
-                                            href="{{ route('register') }}"
+                                            href="{{ route('register.index') }}"
                                             >Register</a
                                         >
                                     </li>
@@ -569,7 +569,7 @@
                         <section class="host-footer">
                             <h6 class="text-uppercase" style="font-family: 'Oswald'"><strong> Host </strong></h6>
                             <ul class="navbar-nav">
-                                <a href="{{ route('room.new') }}" class="mb-1"
+                                <a href="{{ route('rooms.create') }}" class="mb-1"
                                     ><li class="nav-item">Host your home</li></a
                                 >
                                 <a href="#" class="mb-1"

@@ -1,0 +1,91 @@
+body {
+  font-size: 16px !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar-brand {
+  width: 100px;
+  height: 100px;
+}
+
+.navbar-toggler {
+  display: flex !important;
+  align-items: center;
+}
+.navbar-toggler:hover, .navbar-toggler:focus {
+  box-shadow: 0 1px 0 0 rgba(75, 70, 77, 0.3);
+  outline: none;
+}
+.navbar-toggler-icon {
+  margin-right: 5px;
+}
+
+#navProfile {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+#navProfile img {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+footer {
+  margin-top: auto;
+}
+
+#footer-cp,
+#footer-container,
+#footer-column {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#facebook,
+#twitter,
+#github {
+  color: #fff;
+  transition: color 1.5s ease-in;
+}
+#facebook:hover,
+#twitter:hover,
+#github:hover {
+  transition: color 0.5s ease-in-out;
+}
+
+#facebook:hover {
+  color: #3b5998;
+}
+
+#twitter:hover {
+  color: #00acee;
+}
+
+#github:hover {
+  color: #211f1f;
+}
+
+@media only screen and (min-width: 768px) {
+  .nav-item:nth-child(2) > .nav-link {
+    width: 130px;
+  }
+
+  .navbar-toggler {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 990px) {
+  #footer-cp,
+#footer-container,
+#footer-column {
+    margin: auto !important;
+    padding: auto !important;
+  }
+}

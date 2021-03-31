@@ -1,6 +1,8 @@
-@extends('layouts/default') @section('style')
+@extends('layouts/default') 
+@section('style')
 <link rel="stylesheet" href="/css/auth/register.css" />
-@endsection @section('content')
+@endsection 
+@section('content')
 <div class="main">
     <div class="logo__md d-none d-md-block"></div>
     <div class="image__placeholder d-none d-md-block"></div>
@@ -12,7 +14,7 @@
             Register
         </h1>
         <form
-            action="{{ route('register') }}"
+            action="{{ route('register.store') }}"
             id="register__form"
             method="POST"
         >
@@ -127,7 +129,7 @@
                 @enderror
             </div>
             <div class="form-text text-end">
-                <a id="login__link" href="/login">Already a member?</a>
+                <a id="login__link" href="{{route('login.index')}}">Already a member?</a>
             </div>
             <button
                 type="submit"

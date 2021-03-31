@@ -26,7 +26,7 @@ class RegisterController extends Controller
             'firstname' => 'required|regex:/^[a-zA-Z]+$/u',
             'lastname' => 'required|regex:/^[a-zA-Z]+$/u',
             'email' => 'required|unique:App\Models\User|email',
-            'username' => 'required|min:6|string|unique:App\Models\User',
+            'username' => 'required|min:6|alpha_dash|unique:App\Models\User',
             'password' => 'required|confirmed|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
         ]);
 

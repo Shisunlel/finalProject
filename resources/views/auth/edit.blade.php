@@ -9,15 +9,16 @@
 				<a href="{{ url()->previous() }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg></a>
                 <h1 class="h3 mb-5 flex-grow-1 text-center text-uppercase text-white" style="text-shadow: 1px 1px 10px #79ff00;">
-                   add new room
+                   edit room
 				</h1>
             </div>
                 <form
-                    action="{{route('rooms.store')}}"
+                    action="{{route('rooms.update', $room)}}"
                     id="room__form"
                     method="POST"
                     enctype="multipart/form-data"
                 >
+                    @method('UPDATE')
                     @csrf
                     <div class="row">
                         <div class="col-12 col-lg-6">
@@ -29,7 +30,7 @@
                                     id="title"
                                     placeholder="John's Olivia Beautiful Riverside Apartment"
                                     name="title"
-                                    value="{{ old('title') }}"
+                                    value="{{$room->title}}"
                                 />
 
                                 @error('title')
@@ -46,7 +47,7 @@
                                     rows="4"
                                     placeholder="With an amazing balcony for you to enjoy with your s.o"
                                     name="description"
-                                >{{ old('description') }}</textarea>
+                                >{{ $room->description }}</textarea>
 
                                 @error('description')
                                 <div class="text-danger">
@@ -62,7 +63,7 @@
                                     rows="4"
                                     placeholder="John's Street"
                                     name="address"
-                                >{{ old('address') }}</textarea>
+                                >{{ $room->address }}</textarea>
 
                                 @error('address')
                                 <div class="text-danger">
@@ -84,7 +85,7 @@
                                     id="price"
                                     placeholder="0.00$"
                                     name="price"
-                                    value="{{ old('price') }}"
+                                    value="{{ $room->price }}"
                                 />
 
                                 @error('price')
@@ -101,7 +102,7 @@
                                     class="custom-select my-1 me-sm-2"
                                     id="qty"
                                     name="qty"
-                                    value="{{ old('qty') }}"
+                                    value="{{ $room->qty }}"
                                 >
                                     <option selected value="1">1</option>
                                     @for ($i = 2; $i < 10; $i++)
@@ -121,7 +122,7 @@
                                     class="custom-select my-1 me-sm-2"
                                     id="inlineFormCustomSelectPref"
                                     name="guest"
-                                    value="{{ old('guest') }}"
+                                    value="{{ $room->guest }}"
                                 >
                                     <option selected value="1">1</option>
                                     @for ($i = 2; $i < 10; $i++)
@@ -177,7 +178,7 @@
                                 <div class="text-primary">tip</div>
                                 <div class="text-muted mt-1">
                                     Please check all form before click the
-                                    button Add
+                                    button Update
                                 </div>
                             </div>
 
@@ -186,7 +187,7 @@
                                     type="submit"
                                     class="btn btn-lg btn-success w-50"
                                 >
-                                    Add
+                                    Update
                                 </button>
                                 <button
                                     type="reset"
