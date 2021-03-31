@@ -139,11 +139,11 @@
             <img
                 class="w-100"
                 src="
-        @if (Str::length(auth()->user()->profile) > 11)
-            {{ auth()->user()->profile }}
-        @else
-            {{ '/img/'.auth()->user()->profile }}
-        @endif
+            @if (Str::length(auth()->user()->profile) > 11)
+                {{ '/img/user/' . auth()->id() . '/profile/' . auth()->user()->profile }}
+            @else
+                {{ '/img/'.auth()->user()->profile }}
+            @endif
         "
                 alt="profile.picture"
             />

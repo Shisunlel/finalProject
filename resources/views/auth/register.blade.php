@@ -1,6 +1,8 @@
-@extends('layouts/default') @section('style')
+@extends('layouts/default') 
+@section('style')
 <link rel="stylesheet" href="/css/auth/register.css" />
-@endsection @section('content')
+@endsection 
+@section('content')
 <div class="main">
     <div class="logo__md d-none d-md-block"></div>
     <div class="image__placeholder d-none d-md-block"></div>

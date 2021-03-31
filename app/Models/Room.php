@@ -25,7 +25,7 @@ class Room extends Model
         return $this->wishlists->contains('user_id', $user->id);
     }
 
-    public function owndedBy(User $user)
+    public function ownedBy(User $user)
     {
         return $this->user_id === $user->id;
     }

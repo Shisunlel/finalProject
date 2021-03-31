@@ -223,100 +223,59 @@ footer {
     padding: auto !important;
   }
 }
-.fa-heart:hover {
-  filter: brightness(80%);
+#sidebar {
+  padding-right: 0;
+}
+#sidebar > ul {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2rem;
 }
 
-#saved > .fa-heart {
+#sidebar > ul > li {
+  margin: 2rem 0;
+}
+
+.active {
+  box-shadow: 0 2px 2px 0 rgba(17, 17, 17, 0.2);
+}
+
+#editable__info {
+  box-shadow: inset 2px 0 4px -2px rgba(17, 17, 17, 0.4);
+}
+#editable__info > section {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.action__link {
+  margin-left: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+:is(.fa-trash-alt, .fa-edit):hover {
+  filter: brightness(120%);
+}
+
+[id^=trashed] {
+  display: inline-block;
+}
+
+#saved > .fa-trash-alt, #saved .fa-edit {
+  transform: translate(0.3em, -6em);
   cursor: -webkit-grab;
   cursor: grab;
 }
 
-.pagination {
-  justify-content: flex-end;
-}
-
-.room__card {
-  display: flex;
-  flex-direction: row;
-  transition: transform 500ms ease;
-}
-.room__card:hover {
-  box-shadow: 0 0 1em 0 #bbb;
-  transform: scale(1.02);
-  transition: transform 500ms ease;
-  background: #ddd;
-}
-
-.image-container {
-  width: 50%;
-  max-width: 175px;
-}
-.image-container a img {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-article {
-  width: 237px;
-  max-width: 237px;
-}
-
-.rounded {
-  border-radius: 1.33rem !important;
-}
-
-.house-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  max-height: 24px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  font-family: "Oswald", inherit;
-}
-
-@media only screen and (min-width: 768px) {
-  .room__card {
-    flex-direction: column;
-  }
-
-  .image-container {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-  }
-
-  article {
-    width: auto;
-    max-width: 100%;
-  }
-
-  #saved > .fa-heart {
-    transform: translate(0.3em, -6.5em);
-  }
-
-  .nav-item:nth-child(2) > .nav-link {
-    width: 130px;
-  }
-}
-@media only screen and (min-width: 990px) {
-  .image-container > a img {
-    height: 175px;
-  }
-
-  #saved > .fa-heart {
+@media only screen and (min-width: 1100px) {
+  #saved > .fa-trash-alt, #saved .fa-edit {
     transform: translate(0.3em, -5.25em);
-  }
-
-  #footer-cp,
-#footer-container,
-#footer-column {
-    padding: auto !important;
-    margin: auto !important;
   }
 }

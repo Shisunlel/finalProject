@@ -132,6 +132,10 @@ btn-light-shaded {
   outline: #f44336;
 }
 
+.rounded {
+  border-radius: 1.33rem !important;
+}
+
 .no-mpding {
   padding: 0;
   margin: 0;

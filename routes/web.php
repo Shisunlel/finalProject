@@ -5,6 +5,7 @@ use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +48,6 @@ Route::post('/rooms/{room}/saved', [WishlistController::class, 'store'])->name('
 Route::delete('/rooms/{room}/saved', [WishlistController::class, 'destroy'])->name('saved.destroy');
 
 Route::get('/profile-setting', [UserController::class, 'index'])->name('profile');
+Route::put('/profile-setting/{user}', [UserController::class, 'update'])->name('profile.update');
+Route::get('/view-home', [UserController::class, 'home'])->name('view-home');
+Route::get('/history', [UserController::class, 'history'])->name('history');

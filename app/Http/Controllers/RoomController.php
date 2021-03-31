@@ -47,9 +47,10 @@ class RoomController extends Controller
         if ($request->file('image')) {
             //throw into an array
             foreach ($request->image as $image) {
-                $imageName = $image->getClientOriginalName() . time() . rand(1, 10000);
-                $path = $image->move(public_path('img/room'), $imageName);
-                $img_arr[] = $imageName;
+                $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $imageNamee = $imageName . time() . rand(1, 10000) . '.' . $image->getClientOriginalExtension();
+                $path = $image->move(public_path('img/room'), $imageNamee);
+                $img_arr[] = $imageNamee;
             }
         }
 
@@ -99,9 +100,8 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         $room::findOrFail($room->id);
-        if ($room->owndedBy(auth()->user())) {
+        if ($room->ownedBy(auth()->user())) {
             $room->delete();
-
             return redirect('/')->with('success', 'Room delete successfully');
         }
     }
@@ -109,11 +109,23 @@ class RoomController extends Controller
     public function edit(Room $room)
     {
         $room::findOrFail($room->id);
+        $facilities = Facility::get();
+        return view('auth.edit')->with(['room' => $room, 'facilities' => $facilities]);
     }
 
     public function update(Room $room, Request $request)
     {
         $room::findOrFail($room->id);
+        $this->validate($request, [
+            'title' => 'required|min:5',
+            'description' => 'required|min:10',
+            'address' => 'required|min:10',
+            'price' => 'required|numeric|between:0.99,500.00',
+            'qty' => 'required|integer',
+            'guest' => 'required|integer',
+            'image' => 'required',
+            'image.*' => 'image|mimes:jpg,png,jpeg,svg,webp|max:2048',
+        ]);
     }
 
 }

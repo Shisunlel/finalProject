@@ -21,12 +21,13 @@
                 src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg"
                 alt=""
             />
-            @endguest @auth
+            @endguest 
+            @auth
             <img
                 class="w-100"
                 src="
         @if (Str::length(auth()->user()->profile) > 11)
-            {{ auth()->user()->profile }}
+            {{ 'img/user/' . auth()->id() . '/profile/' . auth()->user()->profile }}
         @else
             {{ '/img/'.auth()->user()->profile }}
         @endif

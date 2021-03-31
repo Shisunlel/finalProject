@@ -132,6 +132,10 @@ btn-light-shaded {
   outline: #f44336;
 }
 
+.rounded {
+  border-radius: 1.33rem !important;
+}
+
 .navbar {
   display: flex;
   flex-wrap: nowrap;
@@ -333,8 +337,8 @@ h6.text-uppercase {
 #footer-cp,
 #footer-container,
 #footer-column {
-  padding: 0 !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 #facebook,
@@ -437,7 +441,6 @@ h6.text-uppercase {
   .image-container {
     height: 100%;
   }
-
   .image-container > a img {
     height: 175px;
   }
