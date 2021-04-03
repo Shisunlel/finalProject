@@ -260,12 +260,23 @@ footer {
   display: block;
 }
 
+.form-label {
+  color: #5d6974;
+}
+
 :is(.fa-trash-alt, .fa-edit):hover {
   filter: brightness(120%);
 }
 
 [id^=trashed] {
   display: inline-block;
+}
+
+.toast {
+  position: absolute;
+  right: 0;
+  bottom: 1.2em;
+  z-index: 1;
 }
 
 #saved > .fa-trash-alt, #saved .fa-edit {

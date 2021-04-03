@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image as Img;
 
 class UserController extends Controller
@@ -59,7 +60,8 @@ class UserController extends Controller
             'username' => 'sometimes|required|min:6|alpha_dash|unique:App\Models\User',
             'dob' => 'sometimes|required|date',
             'phone' => 'sometimes|required|numeric|unique:App\Models\User,phone_number|starts_with:0|digits_between:9,10',
-            'password' => 'sometimes|required|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            'current_password' => 'sometimes|required|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            'new_password' => 'sometimes|required|min:8|confirmed|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
             'idcard' => 'sometimes|required|image|mimes:jpg,png,jpeg,svg,webp|max:2048|dimensions:min_width=500,min_height=500',
             'profile' => 'sometimes|required|image|mimes:jpg,png,jpeg,svg,webp|max:2048|dimensions:min_width=500,min_height=500',
         ]);
@@ -73,12 +75,19 @@ class UserController extends Controller
         $request->username && $user->username = $request->username;
         $request->dob && $user->dob = $request->dob;
         $request->phone && $user->phone_number = $request->phone;
-        $request->password && $user->password = Hash::make($request->password);
+
+        if (Hash::check($request->current_password, $user->password)) {
+            $request->new_password && $user->password = Hash::make($request->new_password);
+        } else {
+            throw ValidationException::withMessages(['current_password' => "Incorrect password!"]);
+        }
+
         if ($request->hasFile('idcard')) {
             $image = $request->idcard;
             $imageName = $this->saveImage($image, 'id_card', 500, 500);
             $user->id_card = $imageName;
         }
+
         if ($request->hasFile('profile')) {
             $image = $request->profile;
             $imageName = $this->saveImage($image, 'profile', 50, 50);
@@ -86,7 +95,7 @@ class UserController extends Controller
         }
 
         if ($user->save()) {
-            return back();
+            return back()->with('success', 'Update successfully!');
         } else {
             return back()->with('error', 'update fail');
         }
