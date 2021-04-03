@@ -1,6 +1,9 @@
-@extends('layouts.default') @section('style')
+@extends('layouts.default') 
+@section('style')
 <link rel="stylesheet" href="/css/main.css" />
-@endsection @section('content')
+@endsection 
+@section('content')
+{{$facilities}}
 <div class="main">
     <main class="content">
         <div class="container-fluid bg-light p-4">
@@ -18,8 +21,8 @@
                     method="POST"
                     enctype="multipart/form-data"
                 >
-                    @method('UPDATE')
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <div class="mb-3 shadow-sm border p-4">

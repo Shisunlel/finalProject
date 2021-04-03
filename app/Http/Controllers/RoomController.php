@@ -109,23 +109,59 @@ class RoomController extends Controller
     public function edit(Room $room)
     {
         $room::findOrFail($room->id);
+        $room->with('Facilities')->get();
+        dd($room);
         $facilities = Facility::get();
-        return view('auth.edit')->with(['room' => $room, 'facilities' => $facilities]);
+        return view('rooms.edit')->with(['room' => $room, 'facilities' => $facilities]);
     }
 
     public function update(Room $room, Request $request)
     {
         $room::findOrFail($room->id);
         $this->validate($request, [
-            'title' => 'required|min:5',
-            'description' => 'required|min:10',
-            'address' => 'required|min:10',
-            'price' => 'required|numeric|between:0.99,500.00',
-            'qty' => 'required|integer',
-            'guest' => 'required|integer',
-            'image' => 'required',
+            'title' => 'sometimes|required|min:5',
+            'description' => 'sometimes|required|min:10',
+            'address' => 'sometimes|required|min:10',
+            'price' => 'sometimes|required|numeric|between:0.99,500.00',
+            'qty' => 'sometimes|required|integer',
+            'guest' => 'sometimes|required|integer',
+            'image' => 'sometimes|required',
             'image.*' => 'image|mimes:jpg,png,jpeg,svg,webp|max:2048',
         ]);
+
+        $request->title && $room->title = $request->title;
+        $request->description && $room->description = $request->description;
+        $request->address && $room->address = $request->address;
+        $request->price && $room->price = $request->price;
+        $request->qty && $room->qty = $request->qty;
+        $request->guest && $room->guest = $request->guest;
+
+        // get image name with url
+        if ($request->hasFile('image')) {
+            //throw into an array
+            foreach ($request->image as $image) {
+                $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $imageNamee = $imageName . time() . rand(1, 10000) . '.' . $image->getClientOriginalExtension();
+                $path = $image->move(public_path('img/room'), $imageNamee);
+                $img_arr[] = $imageNamee;
+            }
+
+            //save many image
+            foreach ($img_arr as $item) {
+                $room->images->link = $item;
+            }
+        }
+
+        //associating id with facility
+        if (!empty($request->facility)) {
+            foreach ($request->facility as $item) {
+                $room->facilities()->syncWithoutDetaching([intval($item)]);
+            }
+        }
+
+        if ($room->push()) {
+            return redirect()->route('view-home');
+        }
     }
 
 }

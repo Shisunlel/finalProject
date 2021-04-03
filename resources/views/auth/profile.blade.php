@@ -4,10 +4,39 @@
 <link rel="stylesheet" href="/css/profile.css" />
 @endsection 
 @section('content')
+@if (session('success'))
+        <div
+            class="toast align-items-center text-white bg-success bg-gradient border-0"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+            data-bs-autohide="true"
+            data-bs-animation="true"
+            data-bs-delay="2000"
+        >
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ session("success") }}
+                </div>
+            </div>
+        </div>
+@endif
 @if (session('error'))
-<div>
-    {{session('error')}}
-</div>
+        <div
+            class="toast align-items-center text-white bg-danger bg-gradient border-0"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+            data-bs-autohide="true"
+            data-bs-animation="true"
+            data-bs-delay="2000"
+        >
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ session("error") }}
+                </div>
+            </div>
+        </div>
 @endif
 <div class="container-fluid">
     <div class="row mt-2">
@@ -62,7 +91,7 @@
                     @csrf
                     @method('PUT')
                     <div class="col-md-12">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">username must be over 6 characters and unique</label>
                         <input type="text" class="form-control" id="username" name="username" value="{{auth()->user()->username}}">
                         @error('username')
                     <div class="text-danger">
@@ -90,7 +119,7 @@
                     @csrf
                     @method('PUT')
                     <div class="col-md-12">
-                        <label for="email" class="form-label">Email Address</label>
+                        <label for="email" class="form-label">email must be unique</label>
                         <input type="email" class="form-control" id="email" name="email" value="{{auth()->user()->email}}">
                         @error('email')
                     <div class="text-danger">
@@ -118,8 +147,8 @@
                     @csrf
                     @method('PUT')
                     <div class="col-md-12">
-                        <label for="dob" class="form-label">Date of birth</label>
-                        <input type="date" class="form-control" id="dob" name="dob" value="{{auth()->user()->dob}}">
+                        <label for="dob" class="form-label">ensure that you are over 18</label>
+                        <input type="date" class="form-control" id="dob" name="dob" value="{{auth()->user()->dob}}" max="{{now()}}">
                         @error('dob')
                     <div class="text-danger">
                         {{ $message }}
@@ -146,7 +175,7 @@
                     @csrf
                     @method('PUT')
                     <div class="col-md-12">
-                        <label for="phone" class="form-label">Phone Number</label>
+                        <label for="phone" class="form-label">a unique phone number</label>
                         <input type="text" class="form-control" id="phone" name="phone" value="{{auth()->user()->phone_number}}">
                         @error('phone')
                     <div class="text-danger">
@@ -174,7 +203,6 @@
                     @csrf
                     @method('PUT')
                     <div class="col-md-12">
-                        <label for="idcard" class="form-label">Identification Card</label>
                         <input type="file" class="form-control" id="idcard" name="idcard" accept=".png, .jpeg, .jpg, .svg, .webp">
                         @error('idcard')
                     <div class="text-danger">
@@ -201,10 +229,24 @@
                 <form class="row g-3" action="{{route('profile.update', auth()->user())}}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="col-md-12">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="********">
-                        @error('password')
+                    <div class="col-md-12 gap-3">
+                        <label for="password" class="form-label">Current password</label>
+                        <input type="password" class="form-control" id="current_password" name="current_password" placeholder="********">
+                        @error('current_password')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                        <label for="password" class="form-label">New password</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password" placeholder="********">
+                        @error('new_password')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                        <label for="password" class="form-label">Password confirmation</label>
+                        <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" placeholder="********">
+                        @error('confirm_password')
                     <div class="text-danger">
                         {{ $message }}
                     </div>
@@ -230,7 +272,6 @@
                     @csrf
                     @method('PUT')
                     <div class="col-md-12">
-                        <label for="profile" class="form-label">Profile</label>
                         <input type="file" class="form-control" id="profile" name="profile" accept=".png, .jpeg, .jpg, .svg, .webp">
                         @error('profile')
                     <div class="text-danger">
