@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/css/main.css" />
 @endsection 
 @section('content')
-{{$facilities}}
+{{-- {{$room}} --}}
 <div class="main">
     <main class="content">
         <div class="container-fluid bg-light p-4">
@@ -168,7 +168,7 @@
                                 <div class="p-2">
 									@foreach ($facilities as $facility)
 										<div class="col-6 col-md-2 form-check form-check-inline">
-											<input class="form-check-input" name="facility[]" type="checkbox" id="facility{{$loop->iteration}}" value="{{$facility->id}}">
+											<input class="form-check-input" name="facility[]" type="checkbox" id="facility{{$loop->iteration}}" value="{{$facility->id}}" @foreach ($room->facilities as $item) {{ $item->id == $facility->id ? 'checked' : '' }} @endforeach>
 											<label class="form-check-label" for="facility{{$loop->iteration}}">{{ $facility->facility }}</label>
 										</div>
 									@endforeach
