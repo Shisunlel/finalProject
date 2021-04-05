@@ -7,12 +7,21 @@ use App\Models\Room;
 use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
     public function __construct()
     {
         return $this->middleware('auth')->except(['show', 'search']);
+    }
+
+    public function saveImage($image)
+    {
+        $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $imageNamee = $imageName . time() . rand(1, 10000) . '.' . $image->getClientOriginalExtension();
+        $path = $image->move(public_path('img/room'), $imageNamee);
+        return $imageNamee;
     }
 
     public function create()
@@ -47,10 +56,7 @@ class RoomController extends Controller
         if ($request->file('image')) {
             //throw into an array
             foreach ($request->image as $image) {
-                $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $imageNamee = $imageName . time() . rand(1, 10000) . '.' . $image->getClientOriginalExtension();
-                $path = $image->move(public_path('img/room'), $imageNamee);
-                $img_arr[] = $imageNamee;
+                $img_arr[] = $this->saveImage($image);
             }
         }
 
@@ -97,20 +103,9 @@ class RoomController extends Controller
         return view('rooms.index', ['rooms' => $result, 'guest' => $guest]);
     }
 
-    public function destroy(Room $room)
-    {
-        $room::findOrFail($room->id);
-        if ($room->ownedBy(auth()->user())) {
-            $room->delete();
-            return redirect('/')->with('success', 'Room delete successfully');
-        }
-    }
-
     public function edit(Room $room)
     {
         $room::findOrFail($room->id);
-        $room->with('Facilities')->get();
-        dd($room);
         $facilities = Facility::get();
         return view('rooms.edit')->with(['room' => $room, 'facilities' => $facilities]);
     }
@@ -140,27 +135,40 @@ class RoomController extends Controller
         if ($request->hasFile('image')) {
             //throw into an array
             foreach ($request->image as $image) {
-                $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $imageNamee = $imageName . time() . rand(1, 10000) . '.' . $image->getClientOriginalExtension();
-                $path = $image->move(public_path('img/room'), $imageNamee);
-                $img_arr[] = $imageNamee;
+                $img_arr[] = $this->saveImage($image);
+            }
+
+            // remove old image
+            foreach ($room->images as $item) {
+                Storage::disk('public')->delete("img/room/{$item->link}");
             }
 
             //save many image
             foreach ($img_arr as $item) {
-                $room->images->link = $item;
+                $room->images[0]->link = $item;
             }
         }
 
         //associating id with facility
+        $facility = array();
         if (!empty($request->facility)) {
             foreach ($request->facility as $item) {
-                $room->facilities()->syncWithoutDetaching([intval($item)]);
+                $facility[] = intval($item);
             }
+            $room->facilities()->sync($facility);
         }
 
         if ($room->push()) {
             return redirect()->route('view-home');
+        }
+    }
+
+    public function destroy(Room $room)
+    {
+        $room::findOrFail($room->id);
+        if ($room->ownedBy(auth()->user())) {
+            $room->delete();
+            return redirect('/')->with('success', 'Room delete successfully');
         }
     }
 

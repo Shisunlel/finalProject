@@ -264,7 +264,7 @@
         <section id="profile__section">
             <div class="info__container">
                 <h6 class="fw-bold">Profile</h6>
-                <img src="{{ 'img/user/' . auth()->id() . '/profile/' . auth()->user()->profile}}" alt="">
+                <img src="{{ 'img/user/' . auth()->id() . '/profile/' . auth()->user()->profile}}" alt="" height="100px">
             </div>
             <div class="info__container hidden">
                 <h6 class="fw-bold">Profile</h6>
@@ -287,6 +287,29 @@
             <div class="action__link">
                 <a type="button">Edit</a>
             </div>
+        </section>
+        <section id="remove__section">
+                <form class="ms-auto" action="{{route('profile.destroy', auth()->user())}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <a class="btn btn-danger" id="removed" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        Delete account
+                    </a>
+                    <div class="modal" id="deleteModal"> 
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Are you sure?</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button type="button" class="btn btn-danger" onclick="document.getElementById('removed').submit();">Delete</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </form>
         </section>
     </div>
     <div class="col-0 col-md-4"></div>

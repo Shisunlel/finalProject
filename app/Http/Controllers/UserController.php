@@ -17,7 +17,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    private function saveImage($request, $dir, $width, $height)
+    public function saveImage($request, $dir, $width, $height)
     {
         $image = $request;
         $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
@@ -29,10 +29,17 @@ class UserController extends Controller
             Storage::disk('public')->makeDirectory($dir);
         }
         $img = Img::make($image->path());
-        $img->resize($width, $height, function ($constraint) {
-            $constraint->aspectRatio();
+        $img->resize($width, $height, function ($contraint) {
+            $contraint->aspectRatio();
         })->save($destination . '/' . $imageName);
         return $imageName;
+    }
+
+    public function removeImage($request, $dir)
+    {
+        $oldImage = $request;
+        $dir = 'img/user/' . auth()->id() . "/{$dir}";
+        Storage::disk('public')->delete($dir . "/{$oldImage}");
     }
 
     public function index()
@@ -76,28 +83,41 @@ class UserController extends Controller
         $request->dob && $user->dob = $request->dob;
         $request->phone && $user->phone_number = $request->phone;
 
-        if (Hash::check($request->current_password, $user->password)) {
-            $request->new_password && $user->password = Hash::make($request->new_password);
-        } else {
-            throw ValidationException::withMessages(['current_password' => "Incorrect password!"]);
+        if ($request->current_password) {
+            if (Hash::check($request->current_password, $user->password)) {
+                $request->new_password && $user->password = Hash::make($request->new_password);
+            } else {
+                throw ValidationException::withMessages(['current_password' => "Incorrect password!"]);
+            }
         }
 
         if ($request->hasFile('idcard')) {
             $image = $request->idcard;
             $imageName = $this->saveImage($image, 'id_card', 500, 500);
+            $removeImage = $this->removeImage($user->id_card, 'id_card');
             $user->id_card = $imageName;
         }
 
         if ($request->hasFile('profile')) {
             $image = $request->profile;
-            $imageName = $this->saveImage($image, 'profile', 50, 50);
+            $imageName = $this->saveImage($image, 'profile', 400, 400);
+            $removeImage = $this->removeImage($user->profile, 'profile');
             $user->profile = $imageName;
         }
 
         if ($user->save()) {
             return back()->with('success', 'Update successfully!');
         } else {
-            return back()->with('error', 'update fail');
+            return back()->with('error', 'Update fail');
+        }
+    }
+
+    public function destroy(User $user)
+    {
+        $user::findOrFail($user->id);
+        if ($user->id == auth()->user()->id) {
+            $user->delete();
+            return redirect('/')->with('success', 'Account has been removed');
         }
     }
 }

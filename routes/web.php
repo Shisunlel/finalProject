@@ -49,5 +49,6 @@ Route::delete('/rooms/{room}/saved', [WishlistController::class, 'destroy'])->na
 
 Route::get('/profile-setting', [UserController::class, 'index'])->name('profile');
 Route::put('/profile-setting/{user}', [UserController::class, 'update'])->name('profile.update');
+Route::delete('/profile-setting/{user}', [UserController::class, 'destroy'])->name('profile.destroy');
 Route::get('/view-home', [UserController::class, 'home'])->name('view-home');
 Route::get('/history', [UserController::class, 'history'])->name('history');
