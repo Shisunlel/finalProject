@@ -8,14 +8,10 @@ const showall = document.querySelector("#show__all");
 const review = document.querySelector(".review");
 const rating = document.querySelector("#rating");
 const review_box = document.querySelector("#review__form__container");
-<<<<<<< HEAD
-const review__detail = document.querySelector("#review__detail");
-=======
 const review__detail = document.querySelector(".review__detail");
 const review__form = document.querySelector("#review__form");
 const toast = document.querySelector('.toast');
 const init = new bootstrap.Toast(toast);
->>>>>>> origin/rapol-v9
 
 startInput.addEventListener("change", date_input);
 
@@ -64,10 +60,7 @@ if (showall) {
     showall.addEventListener("click", showallreview);
 }
 
-<<<<<<< HEAD
-=======
 let rating_val = 0;
->>>>>>> origin/rapol-v9
 function handler(e) {
     // remove this handler
     e.target.removeEventListener(e.type, arguments.callee);
@@ -76,18 +69,13 @@ function handler(e) {
 
 if (rating) {
     rating.addEventListener("change", handler);
-<<<<<<< HEAD
-=======
     rating.addEventListener("change", new_select_element);
->>>>>>> origin/rapol-v9
 }
 
 //auto height for review section if null
 if (!review__detail) {
     review.style.height = "auto";
 }
-<<<<<<< HEAD
-=======
 
 //create new select element
 const select = document.createElement("SELECT");
@@ -113,4 +101,3 @@ function new_select_element(e) {
 if(toast){
     init.show();
     }
->>>>>>> origin/rapol-v9
