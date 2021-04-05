@@ -68,7 +68,6 @@ function handler(e) {
 }
 
 if (rating) {
-    rating.addEventListener("change", handler);
     rating.addEventListener("change", new_select_element);
 }
 

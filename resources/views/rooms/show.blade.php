@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="/css/show.css" />
 @endsection @section('content')
 {{-- {{$room[0]}} --}}
+<<<<<<< HEAD
+<p></p>
+=======
 @if (session('success'))
         <div
             class="toast align-items-center text-white bg-success bg-gradient border-0"
@@ -24,13 +27,18 @@
             </div>
         </div>
         @endif
+>>>>>>> origin/rapol-v9
 {{-- {{$comment_user}} --}}
 <div class="container-fluid my-5">
     <div class="container-xxl">
     <div class="d-flex">
         <h2 class="m-0" id="show__header__title">{{$room[0]->title}}</h2>
         @guest
+<<<<<<< HEAD
+            <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
+=======
             <form class="ms-auto d-inline" action="{{route('saved.store', $room[0])}}" method="POST" id="saved">
+>>>>>>> origin/rapol-v9
                 @csrf
                 <span>
                     <a id="saved__show__page" href="javascript:{}" onclick="document.querySelector('#saved').submit();">
@@ -41,7 +49,11 @@
         @endguest
         @auth
             @if (!$room[0]->savedBy(auth()->user()))
+<<<<<<< HEAD
+                <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
+=======
                 <form class="ms-auto d-inline" action="{{route('saved.store', $room[0])}}" method="POST" id="saved">
+>>>>>>> origin/rapol-v9
                     @csrf
                     <span>
                         <a id="saved__show__page" href="javascript:{}" onclick="document.querySelector('#saved').submit();">
@@ -50,7 +62,11 @@
                     </span>
                 </form>
             @else
+<<<<<<< HEAD
+                <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
+=======
                 <form class="ms-auto d-inline" action="{{route('saved.destroy', $room[0])}}" method="POST" id="saved">
+>>>>>>> origin/rapol-v9
                     @csrf
                     @method('DELETE')
                     <span>
@@ -352,7 +368,11 @@
             <div class="rating mb-3">
                 @auth
                 <h4>Rating and Review</h4>
+<<<<<<< HEAD
+                <form id="review__form" action="{{ route('review', ['id' => $room[0]->id ]) }}">
+=======
                 <form action="{{ route('rooms.reviews.store', $room[0]) }}" method="POST">
+>>>>>>> origin/rapol-v9
                     @csrf
                 <select name="rating" class="form-select" id="rating">
                     <option value="0" selected disabled>0</option>
@@ -407,7 +427,11 @@
                                 </div>
                             </div>
                             <div class="card-body">
+<<<<<<< HEAD
+                                <p id="review__detail" class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
+=======
                                 <p class="review__detail" class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
+>>>>>>> origin/rapol-v9
                             </div>
                             <div class="card-footer">
                                 <p class="card-text text-left">{{ $review->updated_at->diffForHumans() }}</p>
