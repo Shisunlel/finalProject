@@ -3,6 +3,7 @@
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\RentController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
@@ -52,6 +53,5 @@ Route::put('/profile-setting/{user}', [UserController::class, 'update'])->name('
 Route::delete('/profile-setting/{user}', [UserController::class, 'destroy'])->name('profile.destroy');
 Route::get('/view-home', [UserController::class, 'home'])->name('view-home');
 Route::get('/history', [UserController::class, 'history'])->name('history');
-Route::get('/checkout', function () {
-    return view('checkout.checkout');
-});
+Route::get('/checkout', [RentController::class, 'index'])->name('checkout');
+Route::post('/checkout', [RentController::class, 'storerent']);
