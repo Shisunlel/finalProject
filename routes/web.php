@@ -52,3 +52,6 @@ Route::put('/profile-setting/{user}', [UserController::class, 'update'])->name('
 Route::delete('/profile-setting/{user}', [UserController::class, 'destroy'])->name('profile.destroy');
 Route::get('/view-home', [UserController::class, 'home'])->name('view-home');
 Route::get('/history', [UserController::class, 'history'])->name('history');
+Route::get('/checkout', function () {
+    return view('checkout.checkout');
+});
