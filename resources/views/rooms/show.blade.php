@@ -388,6 +388,7 @@
                                 <div class="user__wrapper d-flex">
                                    <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->profile}} @break @endif @endforeach" id="profile__image">
                                     <p class="ms-2 fw-bold">@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->username}} @break @endif @endforeach</p>
+                                    @auth
                                     @if ($review->reviewedBy(auth()->user()))
                                     <span class="ms-auto dropdown__hover">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -402,6 +403,7 @@
                                         </ul>
                                     </span>
                                     @endif
+                                    @endauth
                                 </div>
                             </div>
                             <div class="card-body">

@@ -289,7 +289,7 @@
             </div>
         </section>
         <section id="remove__section">
-                <form class="ms-auto" action="{{route('profile.destroy', auth()->user())}}" method="POST">
+                <form class="ms-auto" id="removed" action="{{route('profile.destroy', auth()->user())}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <a class="btn btn-danger" id="removed" data-bs-toggle="modal" data-bs-target="#deleteModal">
