@@ -23,7 +23,7 @@
         <!-- CUSTOM CSS -->
         <link rel="stylesheet" href="/css/index.css" />
 
-        <title>Rentahouse | SETEC INSTITUTE</title>
+        <title>{{config('app.name')}}</title>
     </head>
     <body>
         <noscript>

@@ -14,6 +14,6 @@
         />
     <!-- Custom CSS -->
     @yield('style')
-    <title>Rentahouse | SETEC INSTITUTE</title>
+    <title>{{strtolower($view_name)}}</title>
 </head>
 <body>

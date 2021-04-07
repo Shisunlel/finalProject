@@ -118,6 +118,10 @@ btn-light-shaded {
   color: #39283d !important;
 }
 
+.text-gold {
+  color: #ffd700;
+}
+
 .btn-danger,
 .bg-danger {
   background: #f44336;
@@ -134,6 +138,14 @@ btn-light-shaded {
 
 .rounded {
   border-radius: 1.33rem !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: block;
 }
 
 .navbar {

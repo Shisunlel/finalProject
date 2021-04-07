@@ -14,7 +14,7 @@
         />
     <!-- Custom CSS -->
 <link rel="stylesheet" href="/css/auth/register.css" />
-    <title>Rentahouse | SETEC INSTITUTE</title>
+    <title>Register</title>
 </head>
 <body>
 <div class="main">

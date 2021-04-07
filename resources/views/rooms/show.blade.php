@@ -3,9 +3,6 @@
 <link rel="stylesheet" href="/css/show.css" />
 @endsection @section('content')
 {{-- {{$room[0]}} --}}
-<<<<<<< HEAD
-<p></p>
-=======
 @if (session('success'))
         <div
             class="toast align-items-center text-white bg-success bg-gradient border-0"
@@ -27,18 +24,13 @@
             </div>
         </div>
         @endif
->>>>>>> origin/rapol-v9
 {{-- {{$comment_user}} --}}
 <div class="container-fluid my-5">
     <div class="container-xxl">
     <div class="d-flex">
         <h2 class="m-0" id="show__header__title">{{$room[0]->title}}</h2>
         @guest
-<<<<<<< HEAD
-            <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
-=======
             <form class="ms-auto d-inline" action="{{route('saved.store', $room[0])}}" method="POST" id="saved">
->>>>>>> origin/rapol-v9
                 @csrf
                 <span>
                     <a id="saved__show__page" href="javascript:{}" onclick="document.querySelector('#saved').submit();">
@@ -49,11 +41,7 @@
         @endguest
         @auth
             @if (!$room[0]->savedBy(auth()->user()))
-<<<<<<< HEAD
-                <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
-=======
                 <form class="ms-auto d-inline" action="{{route('saved.store', $room[0])}}" method="POST" id="saved">
->>>>>>> origin/rapol-v9
                     @csrf
                     <span>
                         <a id="saved__show__page" href="javascript:{}" onclick="document.querySelector('#saved').submit();">
@@ -62,11 +50,7 @@
                     </span>
                 </form>
             @else
-<<<<<<< HEAD
-                <form class="ms-auto d-inline" action="{{route('saved.action', $room[0])}}" method="POST" id="saved">
-=======
                 <form class="ms-auto d-inline" action="{{route('saved.destroy', $room[0])}}" method="POST" id="saved">
->>>>>>> origin/rapol-v9
                     @csrf
                     @method('DELETE')
                     <span>
@@ -82,8 +66,13 @@
         <sup>$</sup
         ><span class="mx-1 room__price"
             ><strong>{{$room[0]->price}}</strong></span
-        >/month
+        >/day
     </p>
+    @error('cost')
+    <div class="text-danger">
+        {{ $message }}
+    </div>
+    @enderror
     <div class="row mt-2">
         <section class="image col-lg-6">
             <div
@@ -149,15 +138,51 @@
             </div>
         </section>
         <section class="detail my-3 my-lg-0 col-lg-6">
-            <div class="accordion accordion-flush" id="description__accordion">
+            <div class="accordion accordion-flush" id="rating__accordion">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button
                             class="accordion-button"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne"
+                            data-bs-target="#flush-rating"
                             aria-expanded="true"
+                            aria-controls="flush-rating"
+                        >
+                            Rating & Reviews
+                        </button>
+                    </h2>
+                    <div
+                        id="flush-rating"
+                        class="accordion-collapse show"
+                        aria-labelledby="flush-rating"
+                        data-bs-parent="#rating__accordion"
+                    >
+                        <div class="accordion-body text-left">
+                            @php
+                            $total = 0;
+                            foreach($room[0]->reviews as $review){
+                                $total += $review->rating;
+                            }
+                            @endphp
+                            @for ($i=floor($total); $i>0; $i--)
+                            <i class="fas fa-star text-gold"></i>
+                            @endfor
+                            @for ($i=round($total)-$total; $i > 0; $i--)
+                            <i class="fas fa-star-half text-gold"></i>
+                            @endfor
+                            ({{count($room[0]->reviews)}})
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne"
+                            aria-expanded="false"
                             aria-controls="flush-collapseOne"
                         >
                             Description
@@ -165,7 +190,7 @@
                     </h2>
                     <div
                         id="flush-collapseOne"
-                        class="accordion-collapse show"
+                        class="accordion-collapse collapse"
                         aria-labelledby="flush-headingOne"
                         data-bs-parent="#description__accordion"
                     >
@@ -292,9 +317,10 @@
                         data-bs-parent="#description__accordion"
                     >
                         <div class="accordion-body">
-                            <form action="#">
+                            <form id="checkoutform" action="{{route('checkout.index', $room[0])}}">
                                 <div class="row">
                                     <div class="col">
+                                        <label for="start__date">Startdate</label>
                                         <input
                                             type="date"
                                             class="form-control"
@@ -302,8 +328,14 @@
                                             name="start"
                                             id="start__date"
                                         />
+                                        @error('start')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="col">
+                                        <label for="end__date">Enddate</label>
                                         <input
                                             type="date"
                                             class="form-control"
@@ -312,8 +344,15 @@
                                             id="end__date"
                                             disabled
                                         />
+                                        @error('end')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
+                                <input id="total_cost" type="number" name="cost" hidden>
+                                <input id="dur" type="number" name="duration" hidden>
                             </form>
                         </div>
                     </div>
@@ -353,10 +392,10 @@
             <div class="checkout__section row p-2 align-items-center my-3">
                <div class="col-6 d-flex flex-column px-3">
                 <h5>{{ $room[0]->title }}</h5>
-                <p>Rent for 3 days</p>
+                <p>Rent for <span id="duration"></span></p>
                </div>
                <div class="col-6 text-center d-flex justify-content-center">
-                <a class="btn btn-dark-shade d-flex justify-content-around" href="/checkout">${{ $room[0]->price * 3 }} <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                <a class="btn btn-dark-shade d-flex justify-content-around" href="javascript:{}" onclick="document.getElementById('checkoutform').submit();">$<span id="cost"></span><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
                     <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
                   </svg></span></a>
                </div>
@@ -368,11 +407,7 @@
             <div class="rating mb-3">
                 @auth
                 <h4>Rating and Review</h4>
-<<<<<<< HEAD
-                <form id="review__form" action="{{ route('review', ['id' => $room[0]->id ]) }}">
-=======
                 <form action="{{ route('rooms.reviews.store', $room[0]) }}" method="POST">
->>>>>>> origin/rapol-v9
                     @csrf
                 <select name="rating" class="form-select" id="rating">
                     <option value="0" selected disabled>0</option>
@@ -427,11 +462,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-<<<<<<< HEAD
-                                <p id="review__detail" class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
-=======
                                 <p class="review__detail" class="card-text">{!! nl2br(e($review->review_detail)) !!}</p>
->>>>>>> origin/rapol-v9
                             </div>
                             <div class="card-footer">
                                 <p class="card-text text-left">{{ $review->updated_at->diffForHumans() }}</p>
@@ -491,5 +522,8 @@
 @endsection
 @section('script')
 <script src="/js/rooms/rooms.js"></script>
+<script>
+    const room = {!! json_encode($room[0]->price, JSON_HEX_TAG) !!}
+</script>
 <script src="/js/rooms/show.js"></script>
 @endsection
