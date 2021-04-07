@@ -235,100 +235,15 @@ footer {
     padding: auto !important;
   }
 }
-.fa-heart:hover {
-  filter: brightness(80%);
+.form-label {
+  color: #5d6974;
 }
 
-#saved > .fa-heart {
-  cursor: -webkit-grab;
-  cursor: grab;
-}
-
-.pagination {
-  justify-content: flex-end;
-}
-
-.room__card {
-  display: flex;
-  flex-direction: row;
-  transition: transform 500ms ease;
-}
-.room__card:hover {
-  box-shadow: 0 0 1em 0 #bbb;
-  transform: scale(1.02);
-  transition: transform 500ms ease;
-  background: #ddd;
-}
-
-.image-container {
-  width: 50%;
-  max-width: 175px;
-}
-.image-container a img {
-  width: 100%;
-  height: 100%;
+img {
+  height: 250px;
+  width: 250px;
   max-width: 100%;
-  max-height: 100%;
+  border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-article {
-  width: 237px;
-  max-width: 237px;
-}
-
-.rounded {
-  border-radius: 1.33rem !important;
-}
-
-.house-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  max-height: 24px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  font-family: "Oswald", inherit;
-}
-
-@media only screen and (min-width: 768px) {
-  .room__card {
-    flex-direction: column;
-  }
-
-  .image-container {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-  }
-
-  article {
-    width: auto;
-    max-width: 100%;
-  }
-
-  #saved > .fa-heart {
-    transform: translate(0.3em, -6.5em);
-  }
-
-  .nav-item:nth-child(2) > .nav-link {
-    width: 130px;
-  }
-}
-@media only screen and (min-width: 990px) {
-  .image-container > a img {
-    height: 175px;
-  }
-
-  #saved > .fa-heart {
-    transform: translate(0.3em, -5.25em);
-  }
-
-  #footer-cp,
-#footer-container,
-#footer-column {
-    padding: auto !important;
-    margin: auto !important;
-  }
 }

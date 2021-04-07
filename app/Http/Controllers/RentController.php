@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailRent;
 use App\Models\Rent;
+use App\Models\Room;
+use Illuminate\Http\Request as HttpRequest;
 
 class RentController extends Controller
 {
@@ -12,12 +14,19 @@ class RentController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Room $room, HttpRequest $request)
     {
-        return view('checkout.checkout');
+        $this->validate($request, [
+            'start' => 'required|date|before:end',
+            'end' => 'required|date|after:start',
+            'cost' => 'required|numeric|min:1',
+            'duration' => 'required|numeric|min:1',
+        ]);
+        $request->service = 3.00;
+        return view('rooms.checkout.checkout')->with(['room' => $room, 'request' => $request]);
     }
 
-    public function storerent()
+    public function store()
     {
         $rent = Rent::create([
             'user_id' => auth()->user()->id,
