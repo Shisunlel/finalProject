@@ -14,9 +14,10 @@ class CreateRentDetailsTable extends Migration
     public function up()
     {
         Schema::create('detail_rent', function (Blueprint $table) {
+            $table->primary('rent_id');
             $table->unsignedSmallInteger('duration');
-            $table->foreignId('rent_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('room_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('rent_id')->constrained();
+            $table->foreignId('room_id')->constrained();
             $table->timestamps();
         });
     }

@@ -277,29 +277,6 @@ form #navSearch:hover {
   font-family: "Oswald", inherit;
 }
 
-.profile img {
-  max-width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.facilities-icon {
-  display: flex;
-  align-items: baseline;
-}
-.facilities-icon > p > i {
-  width: 1rem;
-}
-
-#newComment {
-  display: inline-block;
-  position: fixed;
-  right: 1rem;
-  bottom: 12rem;
-  border-radius: 25px;
-  box-shadow: 2px 5px 5px 0.125px rgba(70, 66, 71, 0.5);
-}
-
 #sticky-fluid {
   position: fixed;
   bottom: 0;

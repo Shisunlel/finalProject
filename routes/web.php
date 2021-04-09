@@ -54,4 +54,4 @@ Route::delete('/profile-setting/{user}', [UserController::class, 'destroy'])->na
 Route::get('/view-home', [UserController::class, 'home'])->name('view-home');
 Route::get('/history', [UserController::class, 'history'])->name('history');
 Route::get('{room}/checkout', [RentController::class, 'index'])->name('checkout.index');
-Route::post('/checkout', [RentController::class, 'store'])->name('checkout.store');
+Route::post('{room}/checkout', [RentController::class, 'store'])->name('checkout.store');

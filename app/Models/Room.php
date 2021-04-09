@@ -42,7 +42,7 @@ class Room extends Model
 
     public function rents()
     {
-        return $this->belongsToMany(Rent::class)->withTimestamps();
+        return $this->belongsToMany(Rent::class, 'detail_rent', 'room_id', 'rent_id')->withTimestamps();
     }
 
     public function wishlists()

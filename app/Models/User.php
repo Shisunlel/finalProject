@@ -28,6 +28,11 @@ class User extends Authenticatable
         'phone_number',
         'dob',
         'profile',
+        'housenumber',
+        'district',
+        'commune',
+        'street',
+        'province',
     ];
 
     /**

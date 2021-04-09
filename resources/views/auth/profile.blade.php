@@ -72,7 +72,7 @@
                     @enderror
                       </div>
                       <div class="col-md-2 ms-auto">
-                      <button class="btn-success btn-sm">Submit</button>
+                      <button class="btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
@@ -100,7 +100,7 @@
                     @enderror
                       </div>
                       <div class="col-md-2 ms-auto">
-                      <button class="btn-success btn-sm">Submit</button>
+                      <button class="btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
@@ -128,7 +128,7 @@
                     @enderror
                       </div>
                       <div class="col-md-2 ms-auto">
-                      <button class="btn-success btn-sm">Submit</button>
+                      <button class="btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
@@ -156,7 +156,108 @@
                     @enderror
                       </div>
                       <div class="col-md-2 ms-auto">
-                      <button class="btn-success btn-sm">Submit</button>
+                      <button class="btn-success btn-sm">Update</button>
+                    </div>
+                </form>
+            </div>
+            <div class="action__link">
+                <a type="button">Edit</a>
+            </div>
+        </section>
+        <section id="address__section">
+            <div class="info__container">
+                <h6 class="fw-bold">Address</h6>
+                @if (!empty(auth()->user()->housenumber || auth()->user()->street || auth()->user()->district || auth()->user()->commune || auth()->user()->province))
+                <p>{{auth()->user()->housenumber}}, Street {{auth()->user()->street}}, Khan {{auth()->user()->district}}, Sangkat {{auth()->user()->commune}}, {{auth()->user()->provice}}</p>
+                @else
+                <p class="form-label">Wew, nothing here</p>
+                @endif
+            </div>
+            <div class="info__container hidden">
+                <h6 class="fw-bold">Address</h6>
+                <form class="row g-3" action="{{route('profile.update', auth()->user())}}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="row">
+                        <label for="address" class="form-label mt-3">your address will be use when making a purchase</label>
+                        <div class="col-12 col-lg-6 mt-2">
+                            <input
+                              type="text"
+                              name="housenumber"
+                              class="form-control"
+                              placeholder="452"
+                              value="{{old('housenumber')}}"
+                              required
+                            />
+                            @error('housenumber')
+                                <div class="text-danger">
+                                  {{$message}}
+                                </div>
+                            @enderror
+                          </div>
+                          <div class="col-12 col-lg-6 mt-2">
+                            <input
+                              type="text"
+                              name="street"
+                              class="form-control"
+                              placeholder="Kampuchea Krom"
+                              value="{{old('street')}}"
+                              required
+                            />
+                            @error('street')
+                                <div class="text-danger">
+                                  {{$message}}
+                                </div>
+                            @enderror
+                            </div>
+                          <div class="col-12 col-lg-6 mt-2">
+                            <input
+                              type="text"
+                              name="commune"
+                              class="form-control"
+                              placeholder="Teuk Laak II"
+                              value="{{old('commune')}}"
+                              required
+                            />
+                            @error('commune')
+                                <div class="text-danger">
+                                  {{$message}}
+                                </div>
+                            @enderror
+                            </div>
+                            <div class="col-12 col-lg-6 mt-2">
+                              <input
+                                type="text"
+                                name="district"
+                                class="form-control"
+                                placeholder="Toul Kork"
+                                value="{{old('district')}}"
+                                required
+                              />
+                              @error('district')
+                                  <div class="text-danger">
+                                    {{$message}}
+                                  </div>
+                              @enderror
+                              </div>
+                              <div class="col-12 mt-2">
+                                <input
+                                  type="text"
+                                  name="province"
+                                  class="form-control"
+                                  placeholder="Phnom Penh"
+                                  value="{{old('province')}}"
+                                  required
+                                />
+                                @error('province')
+                                    <div class="text-danger">
+                                      {{$message}}
+                                    </div>
+                                @enderror
+                                </div>
+                    </div>
+                    <div class="col-md-2 ms-auto">
+                    <button class="btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
@@ -184,7 +285,7 @@
                     @enderror
                       </div>
                       <div class="col-md-2 ms-auto">
-                      <button class="btn-success btn-sm">Submit</button>
+                      <button class="btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
@@ -211,7 +312,7 @@
                     @enderror
                       </div>
                       <div class="col-md-2 ms-auto">
-                      <button class="btn-success btn-sm">Submit</button>
+                      <button class="btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
@@ -253,7 +354,7 @@
                     @enderror
                       </div>
                       <div class="col-md-2 ms-auto">
-                      <button class="btn-success btn-sm">Submit</button>
+                      <button class="btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
@@ -280,7 +381,7 @@
                     @enderror
                       </div>
                       <div class="col-md-2 ms-auto">
-                      <button class="btn-success btn-sm">Submit</button>
+                      <button class="btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
