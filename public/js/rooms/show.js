@@ -59,7 +59,7 @@ function getDuration(){
 threedot.forEach((dot) => {
     dot.addEventListener("click", () => {
         dot.classList.toggle("fill");
-        dot.nextElementSibling.classList.toggle("show");
+        dot.nextElementSibling.classList.toggle("shows");
 
         document.addEventListener("click", (e) => {
             let clickArea = dot.contains(e.target);
@@ -70,7 +70,7 @@ threedot.forEach((dot) => {
 
         let dissappear = () => {
             setTimeout(() => {
-                dot.nextElementSibling.classList.remove("show");
+                dot.nextElementSibling.classList.remove("shows");
                 dot.classList.remove("fill");
             }, 100);
         };
@@ -107,6 +107,7 @@ if (!review__detail) {
 const select = document.createElement("SELECT");
 
 function new_select_element(e) {
+    handler(e);
     rating_val = e.target.value;
     if (select.childElementCount > 0) {
         select.children[0].value = rating_val;

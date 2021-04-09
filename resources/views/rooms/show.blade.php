@@ -138,25 +138,25 @@
             </div>
         </section>
         <section class="detail my-3 my-lg-0 col-lg-6">
-            <div class="accordion accordion-flush" id="rating__accordion">
+            <div class="accordion accordion-flush" id="main__accordion">
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
+                    <h2 class="accordion-header" id="rating_accordion_header">
                         <button
                             class="accordion-button"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="#flush-rating"
+                            data-bs-target="#rating_accordion"
                             aria-expanded="true"
-                            aria-controls="flush-rating"
+                            aria-controls="rating_accordion"
                         >
                             Rating & Reviews
                         </button>
                     </h2>
                     <div
-                        id="flush-rating"
-                        class="accordion-collapse show"
-                        aria-labelledby="flush-rating"
-                        data-bs-parent="#rating__accordion"
+                        id="rating_accordion"
+                        class="accordion-collapse collapse show"
+                        aria-labelledby="rating_accordion_header"
+                        data-bs-parent="#main__accordion"
                     >
                         <div class="accordion-body text-left">
                             @php
@@ -176,23 +176,23 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
+                    <h2 class="accordion-header" id="description_accordion_header">
                         <button
                             class="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne"
+                            data-bs-target="#description_accordion"
                             aria-expanded="false"
-                            aria-controls="flush-collapseOne"
+                            aria-controls="description_accordion"
                         >
                             Description
                         </button>
                     </h2>
                     <div
-                        id="flush-collapseOne"
+                        id="description_accordion"
                         class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne"
-                        data-bs-parent="#description__accordion"
+                        aria-labelledby="description_accordion_header"
+                        data-bs-parent="#main__accordion"
                     >
                         <div class="accordion-body text-left">
                             {!! Str::limit(nl2br(e($room[0]->description)),150,
@@ -208,9 +208,6 @@
                             </a>
                             @endif
                         </div>
-                        
-
-                        <!-- button for drop down -->
                         <!-- Modal -->
                         <div
                             class="modal fade"
@@ -246,23 +243,23 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
+                    <h2 class="accordion-header" id="address_accordion_header">
                         <button
                             class="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseTwo"
+                            data-bs-target="#address_accordion"
                             aria-expanded="false"
-                            aria-controls="flush-collapseTwo"
+                            aria-controls="address_accordion"
                         >
                             Address
                         </button>
                     </h2>
                     <div
-                        id="flush-collapseTwo"
+                        id="address_accordion"
                         class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingTwo"
-                        data-bs-parent="#description__accordion"
+                        aria-labelledby="address_accordion_header"
+                        data-bs-parent="#main__accordion"
                     >
                         <div class="accordion-body">
                             {!! nl2br(e($room[0]->address)) !!}
@@ -271,23 +268,23 @@
                 </div>
                 @if (count($room[0]->facilities) > 0)
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingThree">
+                    <h2 class="accordion-header" id="facilities_accordion_header">
                         <button
                             class="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseThree"
+                            data-bs-target="#facilities_accordion"
                             aria-expanded="false"
-                            aria-controls="flush-collapseThree"
+                            aria-controls="facilities_accordion"
                         >
                             Facilities
                         </button>
                     </h2>
                     <div
-                        id="flush-collapseThree"
+                        id="facilities_accordion"
                         class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingThree"
-                        data-bs-parent="#description__accordion"
+                        aria-labelledby="facilities_accordion_header"
+                        data-bs-parent="#main__accordion"
                     >
                         <div class="accordion-body">
                             @foreach ($room[0]->facilities as $item)
@@ -298,23 +295,23 @@
                 </div>
                 @endif
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingFour">
+                    <h2 class="accordion-header" id="date_accordion_header">
                         <button
                             class="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseFour"
+                            data-bs-target="#date_accordion"
                             aria-expanded="false"
-                            aria-controls="flush-collapseFour"
+                            aria-controls="date_accordion"
                         >
                             Date
                         </button>
                     </h2>
                     <div
-                        id="flush-collapseFour"
+                        id="date_accordion"
                         class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingFour"
-                        data-bs-parent="#description__accordion"
+                        aria-labelledby="date_accordion_header"
+                        data-bs-parent="#main__accordion"
                     >
                         <div class="accordion-body">
                             <form id="checkoutform" action="{{route('checkout.index', $room[0])}}">
@@ -358,23 +355,23 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingFive">
+                    <h2 class="accordion-header" id="contact_accordion_header">
                         <button
                             class="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseFive"
+                            data-bs-target="#contact_accordion"
                             aria-expanded="false"
-                            aria-controls="flush-collapseFive"
+                            aria-controls="contact_accordion"
                         >
                             Contact
                         </button>
                     </h2>
                     <div
-                        id="flush-collapseFive"
+                        id="contact_accordion"
                         class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingFive"
-                        data-bs-parent="#description__accordion"
+                        aria-labelledby="contact_accordion_header"
+                        data-bs-parent="#main__accordion"
                     >
                         <div class="accordion-body d-flex">
                             @isset($room[0]->user->phone_number)
@@ -441,7 +438,7 @@
                         <div class="card py-3">
                             <div class="review__header px-2">
                                 <div class="user__wrapper d-flex">
-                                   <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->profile}} @break @endif @endforeach" id="profile__image">
+                                   <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->profile}} @break @endif @endforeach" class="profile__image">
                                     <p class="ms-2 fw-bold">@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->username}} @break @endif @endforeach</p>
                                     @auth
                                     @if ($review->reviewedBy(auth()->user()))

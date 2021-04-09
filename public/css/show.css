@@ -151,7 +151,7 @@ btn-light-shaded {
 img {
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   max-height: 100%;
 }
 
@@ -206,9 +206,18 @@ input[type=date].form-control:focus {
   width: 75%;
 }
 
+@supports (overflow-y: clip) {
+  section.review {
+    overflow-y: clip;
+  }
+}
+@supports not (overflow-y: clip) {
+  section.review {
+    overflow-y: hidden;
+  }
+}
 section.review {
   height: 250px;
-  overflow-y: clip;
   transition: height 250ms ease-in;
 }
 
@@ -265,7 +274,7 @@ section.review {
   outline: 1px solid #00acee;
 }
 
-#profile__image {
+.profile__image {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -324,7 +333,7 @@ section.review {
   color: #111;
 }
 
-.show {
+.shows {
   display: block;
 }
 

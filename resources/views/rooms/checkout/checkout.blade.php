@@ -18,6 +18,27 @@
 </head>
 <body>
     <!--Main layout-->
+    @if (session('error'))
+        <div
+            class="toast align-items-center text-white bg-danger bg-gradient border-0"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+            data-bs-autohide="false"
+        >
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ session("error") }}
+                </div>
+                <button
+                    type="button"
+                    class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast"
+                    aria-label="Close"
+                ></button>
+            </div>
+        </div>
+        @endif
     <main class="mt-5 pt-4">
       <div class="container wow fadeIn">
         <!-- Heading -->
@@ -30,32 +51,28 @@
         <!--Grid row-->
         <div class="row">
           <!--Grid column-->
-          <div class="col-md-8 mb-3 bg-light p-5 order-2 order-md-1">
+          <div class="col-lg-8 mb-3 bg-light p-5 order-2 order-lg-1">
             <div>
               <form 
-              action="{{ route('checkout.store') }}"
+              action="{{ route('checkout.store', $room) }}"
               id="checkout__form"
               method="POST"
               enctype="multipart/form-data"
               >
               @csrf
                 <!--Grid row-->
+                <input type="date" name="dob" value="{{auth()->user()->dob}}" hidden>
                 <div class="md-form mb-3">
                   <h6 class="fw-bold">Date</h6>
                   <div class="justify-content-between d-flex">
                     <p class="info__container">{{$request->start}}</p>
-                    @error('date')
-                      <div class="text-danger">
-                        {{$message}}
-                      </div>
-                  @enderror
-                    <div class="info__container hidden">
-                      <input class="form-control" type="date" name="date" min="{{$request->start}}" max="{{$request->end}}" value="{{$request->start}}">
-                    </div>
-                    <span class="action__link">
-                    <a type="button">Edit</a>
-                  </span>
                   </div>
+                  <input type="hidden" name"trash">
+                  <input type="date" name="start" value="{{$request->start}}" hidden>
+                  <input type="date" name="end" value="{{$request->end}}" hidden>
+                  <input type="number" name="cost" value="{{$request->cost}}" hidden>
+                  <input type="number" name="duration" value="{{$request->duration}}" hidden>
+                  <input type="number" name="total" value="{{sprintf("%.2f", $request->cost + ($request->service * ($request->duration / 15)))}}" hidden>
                 </div>
                 <div class="md-form">
                   <h6 class="fw-bold">Guest</h6>
@@ -86,24 +103,19 @@
                 </select>
                 <!--email-->
                 <h6 class="fw-bold">Billing Address</h6>
-                <div class="md-form mt-2 mb-4 d-grid gap-2">
-                  <input
-                    type="text"
-                    name="address"
-                    class="form-control"
-                    placeholder="Street Address"
-                    required
-                  />
-                  @error('address')
-                      <div class="text-danger">
-                        {{$message}}
-                      </div>
-                  @enderror
+                <div class="md-form row mt-2 mb-4">
+                @if (!empty(auth()->user()->housenumber || auth()->user()->street || auth()->user()->district || auth()->user()->commune || auth()->user()->province))
+                    <span>
+                      # {{auth()->user()->housenumber}}, Street {{auth()->user()->street}}, Khan {{auth()->user()->district}}, Sangkat {{auth()->user()->commune}}, {{auth()->user()->provice}}
+                    </span>
+                @else
+                  <div class="col-12 col-lg-6 mt-2">
                   <input
                     type="text"
                     name="housenumber"
                     class="form-control"
-                    placeholder="House Number"
+                    placeholder="452"
+                    value="{{old('housenumber')}}"
                     required
                   />
                   @error('housenumber')
@@ -112,7 +124,68 @@
                       </div>
                   @enderror
                 </div>
-
+                <div class="col-12 col-lg-6 mt-2">
+                  <input
+                    type="text"
+                    name="street"
+                    class="form-control"
+                    placeholder="Kampuchea Krom"
+                    value="{{old('street')}}"
+                    required
+                  />
+                  @error('street')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
+                  </div>
+                <div class="col-12 col-lg-6 mt-2">
+                  <input
+                    type="text"
+                    name="commune"
+                    class="form-control"
+                    placeholder="Teuk Laak II"
+                    value="{{old('commune')}}"
+                    required
+                  />
+                  @error('commune')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
+                  </div>
+                  <div class="col-12 col-lg-6 mt-2">
+                    <input
+                      type="text"
+                      name="district"
+                      class="form-control"
+                      placeholder="Toul Kork"
+                      value="{{old('district')}}"
+                      required
+                    />
+                    @error('district')
+                        <div class="text-danger">
+                          {{$message}}
+                        </div>
+                    @enderror
+                    </div>
+                    <div class="col-12 mt-2">
+                      <input
+                        type="text"
+                        name="province"
+                        class="form-control"
+                        placeholder="Phnom Penh"
+                        value="{{old('province')}}"
+                        required
+                      />
+                      @error('province')
+                          <div class="text-danger">
+                            {{$message}}
+                          </div>
+                      @enderror
+                      </div>
+                  @endif
+                </div>
                 <span><strong>Required</strong></span>
                 <div class="md-form mt-2">
                   <h6 class="fw-bold">Phone Number</h6>
@@ -125,7 +198,12 @@
               >
               <div class="info__container hidden my-2">
                 <small class="form-label">Phone number should always start with 0</small>
-                <input type="text" class="form-control" name="phonenumber" placeholder="Phone number">
+                <input type="text" class="form-control" name="phonenumber" placeholder="Phone number" inputmode="numeric" pattern="[0-9]*" value="{{old('phonenumber')}}">
+                @error('phonenumber')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
               </div>
               <a type="button" class="add">Add</a>
                 @endif
@@ -144,67 +222,114 @@
                       place</small>
                       <div class="info__container hidden my-2">
                         <input type="file" class="form-control" name="profile" accept=".png, .jpeg, .jpg, .svg, .webp">
+                        @error('profile')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
                       </div>
                     <a type="button" class="add">Add</a>
                   </div>
                   @endif
                 </div>
-
                 <div class="row">
-                  <div class="col-md-6 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label for="cc-name">Name on card</label>
                     <input
                       type="text"
                       class="form-control"
                       name="card-name"
-                      placeholder="Name"
+                      placeholder="Cardholder name"
                       required
                     />
+                    @error('card-name')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
                     <small class="form-label"
                       >Full name as displayed on card</small
                     >
-                    <div class="invalid-feedback">Name on card is required</div>
                   </div>
-                  <div class="col-md-6 mb-3">
+                  <div class="col-lg-6 mb-3">
                     <label for="cc-number">Credit card number</label>
                     <input
                       type="text"
                       class="form-control"
                       name="card-number"
-                      placeholder="xxxx xxxx xxxx xxxx"
+                      placeholder="Card number"
+                      inputmode="numeric" 
+                      pattern="[0-9]*"
                       required
                     />
-                    <div class="invalid-feedback">
-                      Credit card number is required
-                    </div>
+                    @error('card-number')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-3 mb-3">
-                    <label for="cc-expiration">Expiration</label>
+                  <div class="col-lg-3 mb-3">
+                    <label for="cc-expiration">Expiration Date</label>
+                    <div class="row">
+                      <div class="col">
                     <input
                       type="text"
                       class="form-control"
-                      name="card-expiration"
-                      placeholder="MM/YY"
+                      name="card-expire-month"
+                      placeholder="MM"
+                      inputmode="numeric" 
+                      pattern="[0-9]*"
+                      min="1"
+                      max="12"
                       required
                     />
-                    <div class="invalid-feedback">Expiration date required</div>
+                    @error('card-expire-month')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
                   </div>
-                  <div class="col-md-3 mb-3">
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="card-expire-year"
+                      inputmode="numeric" 
+                      pattern="[0-9]*"
+                      min="01"
+                      placeholder="YY"
+                      required
+                    />
+                    @error('card-expire-year')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
+                  </div>
+                  </div>
+                  </div>
+                  <div class="col-lg-3 mb-3">
                     <label for="cc-expiration">CVV</label>
                     <input
                       type="text"
                       class="form-control"
                       name="cvv"
-                      placeholder="xxxx"
+                      inputmode="numeric" 
+                      pattern="[0-9]*"
+                      placeholder="Security code(CVV)"
                       required
                     />
-                    <div class="invalid-feedback">Security code required</div>
+                    @error('cvv')
+                      <div class="text-danger">
+                        {{$message}}
+                      </div>
+                  @enderror
                   </div>
                 </div>
                 <hr class="mb-4" />
-                <button class="btn btn-primary btn-lg btn-block" type="submit">
+                <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="return preventUnderage();">
                   Continue to checkout
                 </button>
               </form>
@@ -212,9 +337,9 @@
           </div>
           <!--Grid column-->
           <!--Grid column-->
-          <div class="col-md-4 order-1">
+          <div class="col-lg-4 order-1">
             <!-- Heading -->
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="d-flex d-md-block d-lg-flex justify-content-between align-items-center mb-3">
               <span class="text-muted">Payments</span>
               <span class="badge badge-secondary badge-pill">3</span>
             </h4>
@@ -302,9 +427,9 @@
 </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="/js/rooms/checkout.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
- <!-- Font Awesome -->
+<script src="/js/rooms/checkout.js"></script>
+<!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/7686e548c6.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -20,6 +20,6 @@ class Rent extends Model
 
     public function rooms()
     {
-        return $this->belongsToMany(Room::class);
+        return $this->belongsToMany(Room::class, 'detail_rent', 'rent_id', 'room_id')->withTimestamps();
     }
 }

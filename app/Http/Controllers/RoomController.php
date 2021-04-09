@@ -78,7 +78,7 @@ class RoomController extends Controller
             }
         }
 
-        return redirect('/')->with('success', 'Room create successfully');
+        return redirect()->route('view-home')->with('success', 'Room create successfully');
     }
 
     public function show(Room $room)
@@ -159,7 +159,9 @@ class RoomController extends Controller
         }
 
         if ($room->push()) {
-            return redirect()->route('view-home');
+            return redirect()->route('view-home')->with('success', 'Update successfully');
+        } else {
+            return redirect()->back()->withInput();
         }
     }
 
@@ -168,7 +170,7 @@ class RoomController extends Controller
         $room::findOrFail($room->id);
         if ($room->ownedBy(auth()->user())) {
             $room->delete();
-            return redirect('/')->with('success', 'Room delete successfully');
+            return redirect()->route('view-home')->with('success', 'Room delete successfully');
         }
     }
 
