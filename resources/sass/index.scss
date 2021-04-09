@@ -10,7 +10,7 @@
 #services h1,
 #features h1 {
     letter-spacing: 0.25rem;
-    font-family: 'RocknRoll One', 'Poppins', cursive;
+    font-family: "RocknRoll One", "Poppins", cursive;
 }
 
 /* END DEFAULT */
@@ -29,21 +29,11 @@
     }
 
     & img {
-        -webkit-transition: -webkit-transform 1s ease-out;
-        transition: -webkit-transform 1s ease-out;
-        -o-transition: transform 1s ease-out;
         transition: transform 1s ease-out;
-        transition: transform 1s ease-out, -webkit-transform 1s ease-out;
 
         &:hover {
-            -webkit-transform: scale(1.5);
-            -ms-transform: scale(1.5);
             transform: scale(1.5);
-            -webkit-transition: -webkit-transform 1s ease-in;
-            transition: -webkit-transform 1s ease-in;
-            -o-transition: transform 1s ease-in;
             transition: transform 1s ease-in;
-            transition: transform 1s ease-in, -webkit-transform 1s ease-in;
         }
     }
 }
@@ -70,19 +60,12 @@
 #registerbtn {
     width: 100px;
     border-radius: 25px;
-    -webkit-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    -o-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 
     &:hover {
-        -webkit-transform: scaleY(1.2) scaleX(1.1);
-        -ms-transform: scaleY(1.2) scaleX(1.1);
         transform: scaleY(1.2) scaleX(1.1);
-        -webkit-box-shadow: 0 2px 0.125px color.$light-accent;
         box-shadow: 0 2px 0.125px color.$light-accent;
         color: color.$light-shade;
-        -webkit-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-        -o-transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     }
 }
@@ -112,7 +95,7 @@
     color: color.$white;
     & h1 {
         line-height: 1;
-        font-family: 'Akaya Telivigala', cursive;
+        font-family: "Akaya Telivigala", cursive;
 
         & span {
             display: table;
@@ -148,15 +131,8 @@ form {
     left: 4%;
 
     & .fa-search:hover {
-        -webkit-transform: scale(1.2);
-        -ms-transform: scale(1.2);
         transform: scale(1.2);
-        -webkit-transition: -webkit-transform 0.5s ease-in-out;
-        transition: -webkit-transform 0.5s ease-in-out;
-        -o-transition: transform 0.5s ease-in-out;
         transition: transform 0.5s ease-in-out;
-        transition: transform 0.5s ease-in-out,
-            -webkit-transform 0.5s ease-in-out;
     }
 }
 
@@ -168,8 +144,6 @@ form {
     border: none;
     padding: 20px 25px;
     width: 100%;
-    -webkit-box-shadow: 0 5px 2px 0.125px rgba(0, 0, 0, 0.1),
-        0 3.2px 0.425px 0.25px rgba(0, 0, 0, 0.1);
     box-shadow: 0 5px 2px 0.125px rgba(0, 0, 0, 0.1),
         0 3.2px 0.425px 0.25px rgba(0, 0, 0, 0.1);
 
@@ -199,11 +173,9 @@ form {
         flex-direction: column;
         align-items: center;
         flex: 1 0 0%;
-        -webkit-transition: all 0.5s ease-out;
         transition: all 0.5s ease-out;
 
         &:hover {
-            -webkit-transform: translate(1.05%, -5%);
             transform: translate(1.05%, -5%);
         }
     }
@@ -245,15 +217,9 @@ form {
         border-radius: 50%;
         max-width: 100%;
         max-height: 100%;
-        -webkit-transition: -webkit-transform 1s ease-in;
-        transition: -webkit-transform 1s ease-in;
-        -o-transition: transform 1s ease-in;
         transition: transform 1s ease-in;
-        transition: transform 1s ease-in, -webkit-transform 1s ease-in;
 
         &:hover {
-            -webkit-transform: scale(1.2);
-            -ms-transform: scale(1.2);
             transform: scale(1.2);
         }
     }
@@ -283,26 +249,13 @@ footer {
 #twitter,
 #github {
     color: #fff;
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
     transform: scale(1);
-    -webkit-transition: color 1.5s ease-in;
-    -o-transition: color 1.5s ease-in;
     transition: color 1.5s ease-in;
 
     &:hover {
-        -webkit-transition: color 0.5s ease-in-out;
-        -o-transition: color 0.5s ease-in-out;
         transition: color 0.5s ease-in-out;
-        -webkit-transform: scale(1.2);
-        -ms-transform: scale(1.2);
         transform: scale(1.2);
-        -webkit-transition: -webkit-transform 300ms ease-in-out;
-        transition: -webkit-transform 300ms ease-in-out;
-        -o-transition: transform 300ms ease-in-out;
         transition: transform 300ms ease-in-out;
-        transition: transform 300ms ease-in-out,
-            -webkit-transform 300ms ease-in-out;
     }
 }
 
@@ -324,8 +277,6 @@ footer {
 
 .fade-in {
     opacity: 0;
-    -webkit-transition: opacity 250ms ease-in;
-    -o-transition: opacity 250ms ease-in;
     transition: opacity 250ms ease-in;
 
     &.appear {
@@ -333,7 +284,7 @@ footer {
     }
 }
 
-.toast{
+.toast {
     position: absolute;
     right: 0;
     bottom: 1.2em;
@@ -347,8 +298,6 @@ footer {
     }
 
     .card {
-        -webkit-box-flex: 1 !important;
-        -ms-flex: auto !important;
         flex: auto !important;
         margin-bottom: 2em !important;
     }
@@ -378,24 +327,18 @@ footer {
     }
 
     .card-deck {
-        display: -ms-flexbox;
         display: flex;
-        -ms-flex-flow: row wrap;
         flex-flow: row wrap;
         margin-right: -15px;
         margin-left: -15px;
     }
 
     .card {
-        -webkit-box-flex: 1 !important;
-        -ms-flex: 1 0 0% !important;
         flex: 1 0 0% !important;
         margin: 0 15px;
 
         & .card-animation:hover {
             padding: 30px 35px;
-            -webkit-transform: translate(1.05%, -5%);
-            -ms-transform: translate(1.05%, -5%);
             transform: translate(1.05%, -5%);
         }
 
@@ -411,7 +354,6 @@ footer {
 
 @media only screen and (min-width: 1100px) {
     .card {
-        -webkit-box-shadow: 30px 0 20px 0 rgba(0, 0, 0, 0.1);
         box-shadow: 30px 0 20px 0 rgba(0, 0, 0, 0.1);
 
         &-deck {
