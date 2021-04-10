@@ -24,7 +24,14 @@ class DetailRentFactory extends Factory
         return [
             'duration' => rand(1, 5),
             'room_id' => rand(1, 25),
-            'rent_id' => rand(1, 5),
+            'rent_id' => $this->faker->unique(true)->numberBetween(1, 25),
+            'housenumber' => $this->faker->randomNumber(5, false),
+            'street' => $this->faker->streetName(),
+            'commune' => $this->faker->state(),
+            'district' => $this->faker->cityPrefix(),
+            'province' => $this->faker->randomElement(['Phnom Penh', 'Kampong Cham', 'Siem Reap', 'Kampong Thom', 'Koh Kong', 'Mondulkiri']),
+            'cost' => $this->faker->randomFloat(2, 100, 900),
+            'total' => $this->faker->randomFloat(2, 100, 900),
         ];
     }
 }

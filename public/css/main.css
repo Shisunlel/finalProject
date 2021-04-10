@@ -395,7 +395,7 @@ h6.text-uppercase {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 
   #form-container {

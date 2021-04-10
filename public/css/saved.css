@@ -180,7 +180,7 @@ a {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 footer {
@@ -270,7 +270,7 @@ footer {
   max-width: 100%;
   max-height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 article {
