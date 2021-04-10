@@ -31,6 +31,11 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'id_card' => $this->faker->imageUrl(500, 500, 'users', true),
             'phone_number' => $this->faker->unique()->randomNumber(9, true),
+            'housenumber' => $this->faker->randomNumber(5, false),
+            'street' => $this->faker->streetName(),
+            'commune' => $this->faker->state(),
+            'district' => $this->faker->cityPrefix(),
+            'province' => $this->faker->randomElement(['Phnom Penh', 'Kampong Cham', 'Siem Reap', 'Kampong Thom', 'Koh Kong', 'Mondulkiri']),
             'dob' => $this->faker->date(),
             'profile' => $this->faker->imageUrl(500, 500, 'user', true),
             'remember_token' => Str::random(10),

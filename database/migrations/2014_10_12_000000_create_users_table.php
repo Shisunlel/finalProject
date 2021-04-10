@@ -23,6 +23,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('id_card')->nullable();
             $table->string('phone_number', 11)->nullable()->unique();
+            $table->string('housenumber')->nullable();
+            $table->string('street')->nullable();
+            $table->string('commune')->nullable();
+            $table->string('district')->nullable();
+            $table->string('province')->nullable();
             $table->date('dob')->nullable();
             $table->string('profile')->nullable();
             $table->rememberToken();
