@@ -24,7 +24,7 @@ class DetailRentFactory extends Factory
         return [
             'duration' => rand(1, 5),
             'room_id' => rand(1, 25),
-            'rent_id' => $this->faker->unique(true)->numberBetween(1, 25),
+            'rent_id' => $this->faker->unique()->numberBetween(1, 25),
             'housenumber' => $this->faker->randomNumber(5, false),
             'street' => $this->faker->streetName(),
             'commune' => $this->faker->state(),

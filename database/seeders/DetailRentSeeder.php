@@ -14,6 +14,6 @@ class DetailRentSeeder extends Seeder
      */
     public function run()
     {
-        DetailRent::factory(25)->create();
+        DetailRent::factory(10)->create();
     }
 }
