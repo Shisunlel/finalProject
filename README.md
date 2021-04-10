@@ -97,3 +97,35 @@ php artisan migrate:fresh --seed
 ```
 php artisan serve
 ```
+
+##Linux With Docker Already Install
+
+> Laravel config
+
+```
+composer update && composer install
+composer require laravel/sail --dev
+php artisan sail:install
+```
+
+> set alias for sail to vendor/bin/sail
+> edit docker-compose
+> change port mysql to 3307
+> change port apache to 8084
+> add APP_PORT to apche port if not yet exist
+> DB_PORT to mysql default, DB_HOST mysql
+
+Then run these command
+
+```
+docker-compose up
+php artisan key:generate
+sail up
+```
+
+Then migrate database in docker by open another terminal
+
+```
+sail shell
+php artisan migrate --seed
+```
