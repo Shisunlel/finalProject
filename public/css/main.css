@@ -42,6 +42,14 @@ div > section > ul > a:hover {
 .btn-primary {
   background: #64a432 !important;
 }
+.bg-primary:hover,
+.btn-primary:hover {
+  filter: brightness(110%);
+}
+.bg-primary:active,
+.btn-primary:active {
+  box-shadow: none;
+}
 
 .btn-outline-success {
   outline: #53ac47;

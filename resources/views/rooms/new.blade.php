@@ -1,6 +1,8 @@
-@extends('layouts.default') @section('style')
+@extends('layouts.default') 
+@section('style')
 <link rel="stylesheet" href="/css/main.css" />
-@endsection @section('content')
+@endsection 
+@section('content')
 <div class="main">
     <main class="content">
         <div class="container-fluid bg-light p-4">
@@ -184,13 +186,13 @@
                             <div class="text-center">
                                 <button
                                     type="submit"
-                                    class="btn btn-lg btn-success w-50"
+                                    class="btn btn-success w-50"
                                 >
                                     Add
                                 </button>
                                 <button
                                     type="reset"
-                                    class="btn btn-lg btn-secondary"
+                                    class="btn btn-secondary"
                                 >
                                     Reset
                                 </button>
@@ -203,4 +205,7 @@
         </div>
     </main>
 </div>
+@endsection
+@section('footer')
+@include('/partials.footer')
 @endsection

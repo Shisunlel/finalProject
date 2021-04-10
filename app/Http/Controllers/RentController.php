@@ -69,6 +69,8 @@ class RentController extends Controller
             $request->district ? $detail->district = $request->district : $detail->district = auth()->user()->district;
             $request->commune ? $detail->commune = $request->commune : $detail->commune = auth()->user()->commune;
             $request->province ? $detail->province = $request->province : $detail->province = auth()->user()->province;
+            $room->qty--;
+            $room->save();
         }
 
         if ($detail->save()) {

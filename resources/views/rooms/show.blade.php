@@ -1,7 +1,10 @@
-@extends('/layouts.default') @include('/partials.nav') @section('style')
+@extends('/layouts.default') 
+@include('/partials.nav') 
+@section('style')
 <link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet" href="/css/show.css" />
-@endsection @section('content')
+@endsection 
+@section('content')
 {{-- {{$room[0]}} --}}
 @if (session('success'))
         <div
@@ -516,6 +519,9 @@
     </div>
   </div>
   </div>
+@endsection
+@section('footer')
+@include('/partials.footer')
 @endsection
 @section('script')
 <script src="/js/rooms/rooms.js"></script>

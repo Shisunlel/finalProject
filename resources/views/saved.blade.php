@@ -59,3 +59,6 @@
 </div>
 {{ $wishlist->links('pagination::bootstrap-4') }}
 @endsection
+@section('footer')
+@include('/partials.footer')
+@endsection

@@ -1,6 +1,9 @@
-@extends('/layouts.default') @include('/partials/nav') @section('style')
+@extends('/layouts.default') 
+@include('/partials/nav') 
+@section('style')
 <link rel="stylesheet" href="/css/main.css" />
-@endsection @section('content')
+@endsection 
+@section('content')
 <div class="container">
     <div class="row p-1 my-3">
         @forelse ($rooms as $room)
@@ -100,6 +103,9 @@
     </div>
   </div>
   </div>
+@endsection
+@section('footer')
+@include('/partials.footer')
 @endsection
 @section('script')
 <script src="/js/rooms/rooms.js"></script>

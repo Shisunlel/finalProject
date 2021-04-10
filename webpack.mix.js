@@ -27,7 +27,8 @@ mix.sass('resources/sass/color.scss', 'public/css')
     .sass('resources/sass/forward/forward.scss', 'public/css')
     .sass('resources/sass/mixin/_mixin.scss', 'public/css')
     .sass('resources/sass/room.scss', 'public/css/auth')
-    .sass('resources/sass/checkout.scss', 'public/css');
+    .sass('resources/sass/checkout.scss', 'public/css')
+    .sass('resources/sass/history.scss', 'public/css');
 
 
 // mix.js('resources/js/rooms.js', 'public/js/rooms');

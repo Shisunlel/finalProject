@@ -189,13 +189,13 @@
                             <div class="text-center">
                                 <button
                                     type="submit"
-                                    class="btn btn-lg btn-success w-50"
+                                    class="btn btn-success w-50"
                                 >
                                     Update
                                 </button>
                                 <button
                                     type="reset"
-                                    class="btn btn-lg btn-secondary"
+                                    class="btn btn-secondary"
                                 >
                                     Reset
                                 </button>
@@ -208,4 +208,7 @@
         </div>
     </main>
 </div>
+@endsection
+@section('footer')
+@include('/partials.footer')
 @endsection

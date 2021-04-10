@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <!-- Custom Font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;600&family=Akaya+Telivigala&family=RocknRoll+One&family=Oswald&display=swap"
-            rel="stylesheet"
-        />
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{asset('css/checkout.css')}}">
-    <title>{{strtolower($view_name)}}</title>
-</head>
-<body>
+@extends('layouts.default') 
+@section('style')
+<link rel="stylesheet" href="/css/checkout.css" />
+@endsection 
+@section('content')
     <!--Main layout-->
     @if (session('error'))
         <div
@@ -329,9 +315,12 @@
                   </div>
                 </div>
                 <hr class="mb-4" />
-                <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="return preventUnderage();">
-                  Continue to checkout
-                </button>
+                <section class="💳">
+                  <button class="btn btn-success btn-block" type="submit" onclick="return preventUnderage();">
+                    Proceed to checkout
+                  </button>
+                  <label class="ms-2 text-warning" id="💳"></label>
+                </section>
               </form>
             </div>
           </div>
@@ -405,31 +394,9 @@
         <!--Grid row-->
       </div>
     </main>
-    <!--Main layout-->
-    <!-- THIS IS FOOTER -->
-<footer class="container-fluid text-light-shade bg-dark-accent px-4 py-4 border-top ">
-  <hr class="bg-dark-accent">
-  <div id="footer-container" class="container">
-  <div class="row" id="footer-cp">
-    <div id="footer-column" class="col-12 d-flex justify-content-between align-items-center text-left">
-      <span>
-      <p>&copy; {{ date('Y') }} Rentahouse, Inc. All right reserved </p>
-    </span>
-    <span>
-      <ul class="d-flex flex-row">
-        <li class="nav-item"><a href="https://www.facebook.com/shisun8" class="me-4"><i class="fab fa-facebook-f" id="facebook"></i></a></li>
-       <li class="nav-item"> <a href="https://www.twitter.com/xqcow" class="me-4"><i class="fab fa-twitter" id="twitter"></i></a></li>
-        <li class="nav-item"><a href="https://github.com/Shisunn/" class=""><i class="fab fa-github" id="github"></i></a></li>
-      </ul>
-    </span>
-    </div>
-  </div>
-</div>
-</footer>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+@section('footer')
+@include('/partials.compact_footer')
+@endsection
+@section('script')
 <script src="/js/rooms/checkout.js"></script>
-<!-- Font Awesome -->
-<script src="https://kit.fontawesome.com/7686e548c6.js" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection

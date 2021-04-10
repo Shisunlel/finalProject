@@ -42,6 +42,14 @@ div > section > ul > a:hover {
 .btn-primary {
   background: #64a432 !important;
 }
+.bg-primary:hover,
+.btn-primary:hover {
+  filter: brightness(110%);
+}
+.bg-primary:active,
+.btn-primary:active {
+  box-shadow: none;
+}
 
 .btn-outline-success {
   outline: #53ac47;
@@ -246,16 +254,6 @@ img {
   border-radius: 50%;
   -o-object-fit: cover;
   object-fit: cover;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,

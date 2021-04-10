@@ -4,6 +4,7 @@ const dob = document.querySelector('input[name="dob"]');
 const check = document.querySelector('button[type="submit"]');
 const toast = document.querySelector(".toast");
 const init = new bootstrap.Toast(toast);
+const card = document.querySelector('#💳');
 
 $(edit).click(function () {
     text = $(this).children().text();
@@ -25,6 +26,7 @@ let preventUnderage = () => {
     let age = today.getFullYear() - year.getFullYear();
     let month = today.getMonth() + 1 - (year.getMonth() + 1);
     if (age < 18 || month < 0) {
+        card.textContent = 'you are not old enough to perform this action!';
         return false;
     }
 };
