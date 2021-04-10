@@ -98,7 +98,7 @@ php artisan migrate:fresh --seed
 php artisan serve
 ```
 
-##Linux With Docker Already Install
+## Linux With Docker Already Install
 
 > Laravel config
 
