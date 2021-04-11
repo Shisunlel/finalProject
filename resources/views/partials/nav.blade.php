@@ -73,7 +73,7 @@
         </form>
     </div>
     <div class="header__image d-sm-none">
-        <img loading="lazy" class="w-100" style="background: url('/img/navheader.webp'), url('img/navheader.jpg')" alt="" />
+        <img loading="lazy" class="w-100"  src="/img/navheader.webp" onerror="this.src='/img/navheader.jpg'" alt="" />
         <div class="d-flex d-md-none justify-content-center">
             <form
                 class="form-inline w-75"
