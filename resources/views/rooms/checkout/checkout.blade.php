@@ -67,9 +67,9 @@
                       <div class="text-danger">
                         {{$message}}
                       </div>
-                  @enderror
+                    @enderror
                     <div class="info__container hidden">
-                      <label for="guest" class="form-label">How many people will be staying ?</label>
+                      <label for="guest" class="form-label">How many people will be staying ?</label> <span class="text-danger" id="guest_error"></span>
                       <input type="number" class="form-control" id="guest" name="guest" min="1" max="{{$room->guest}}" value="{{$room->guest}}">
                     </div>
                     <span class="action__link">
@@ -204,7 +204,6 @@
                       Add and confirm your date of birth
                     </small>
                   <div class="info__container hidden my-2">
-                    <small class="form-label">Phone number should always start with 0</small>
                     <input type="date" class="form-control" name="dob" max="{{now()->format('Y-m-d')}}">
                     @error('dob')
                     <div class="text-danger">

@@ -3,6 +3,7 @@ const add = document.querySelectorAll(".add");
 const dob = document.querySelector('input[name="dob"]');
 const check = document.querySelector('button[type="submit"]');
 const toast = document.querySelector(".toast");
+const guest = document.querySelector('#guest');
 const init = new bootstrap.Toast(toast);
 const card = document.querySelector('#💳');
 
@@ -30,6 +31,17 @@ let preventUnderage = () => {
         return false;
     }
 };
+
+if(guest){
+    error_msg = document.querySelector('#guest_error');
+    guest.addEventListener('focusout', ()=>{
+        if(guest.value > parseInt(guest.max)){
+            error_msg.textContent = guest.validationMessage;
+        }else{
+            error_msg.textContent = '';
+        }
+    });
+}
 
 //toast appear
 if (toast) {
