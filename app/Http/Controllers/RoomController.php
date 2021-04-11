@@ -6,6 +6,7 @@ use App\Models\Facility;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate as FacadesGate;
 use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
@@ -15,11 +16,16 @@ class RoomController extends Controller
         return $this->middleware('auth')->except(['show', 'search']);
     }
 
-    public function savedImage($image)
+    public function savedImage($image, $room_id)
     {
         $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
         $imageNamee = $imageName . time() . rand(1, 10000) . '.' . $image->getClientOriginalExtension();
-        $path = $image->move(public_path('img/room'), $imageNamee);
+        $destination = public_path("img/room/{$room_id}");
+        $dir = "/img/room/{$room_id}";
+        if (!Storage::disk('public')->exists($destination)) {
+            Storage::disk('public')->makeDirectory($dir);
+        }
+        $path = $image->move(public_path("img/room/{$room_id}"), $imageNamee);
         return $imageNamee;
     }
 
@@ -51,17 +57,17 @@ class RoomController extends Controller
             'guest' => $request->guest,
         ]);
 
+        //find newly created room id and model
+        $latest_id = Room::max('id');
+        $recently_added_model = Room::find($latest_id);
+
         // get image name with url
         if ($request->file('image')) {
             //throw into an array
             foreach ($request->image as $image) {
-                $img_arr[] = $this->savedImage($image);
+                $img_arr[] = $this->savedImage($image, $recently_added_model->id);
             }
         }
-
-        //find newly created room id and model
-        $latest_id = Room::max('id');
-        $recently_added_model = Room::find($latest_id);
 
         //save many image
         foreach ($img_arr as $item) {
@@ -103,6 +109,9 @@ class RoomController extends Controller
 
     public function edit(Room $room)
     {
+        if (!FacadesGate::allows('user-room', $room)) {
+            abort(403);
+        }
         $room::findOrFail($room->id);
         $facilities = Facility::get();
         return view('rooms.edit')->with(['room' => $room, 'facilities' => $facilities]);
@@ -110,6 +119,9 @@ class RoomController extends Controller
 
     public function update(Room $room, Request $request)
     {
+        if (!FacadesGate::allows('user-room', $room)) {
+            abort(403);
+        }
         $room::findOrFail($room->id);
         $this->validate($request, [
             'title' => 'sometimes|required|min:5',
@@ -133,12 +145,12 @@ class RoomController extends Controller
         if ($request->hasFile('image')) {
             //throw into an array
             foreach ($request->image as $image) {
-                $img_arr[] = $this->savedImage($image);
+                $img_arr[] = $this->savedImage($image, $room->id);
             }
 
             // remove old image
             foreach ($room->images as $item) {
-                Storage::disk('public')->delete("img/room/{$item->link}");
+                Storage::disk('public')->delete("img/room/{$room->id}/{$item->link}");
             }
 
             //save many image
@@ -165,6 +177,9 @@ class RoomController extends Controller
 
     public function destroy(Room $room)
     {
+        if (!FacadesGate::allows('user-room', $room)) {
+            abort(403);
+        }
         $room::findOrFail($room->id);
         if ($room->ownedBy(auth()->user())) {
             $room->delete();

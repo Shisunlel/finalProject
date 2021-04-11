@@ -97,6 +97,8 @@ class UserController extends Controller
         if ($user->id == auth()->user()->id) {
             $user->delete();
             return redirect('/')->with('success', 'Account has been removed');
+        } else {
+            abort(403);
         }
     }
 }

@@ -39,6 +39,10 @@
           <!--Grid column-->
           <div class="col-lg-8 mb-3 bg-light p-5 order-2 order-lg-1">
             <div>
+              <form id="dob_form" action="{{route('profile.update', auth()->user())}}" method="POST">
+              @csrf
+              @method('PUT')
+              </form>
               <form 
               action="{{ route('checkout.store', $room) }}"
               id="checkout__form"
@@ -204,7 +208,8 @@
                       Add and confirm your date of birth
                     </small>
                   <div class="info__container hidden my-2">
-                    <input type="date" class="form-control" name="dob" max="{{now()->format('Y-m-d')}}">
+                        <input type="date" class="form-control" name="dob" form="dob_form" max="{{now()->format('Y-m-d')}}">
+                        <button class="btn-success btn-sm mt-2" form="dob_form">Update</button>
                     @error('dob')
                     <div class="text-danger">
                       {{$message}}

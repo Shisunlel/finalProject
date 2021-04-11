@@ -95,7 +95,7 @@
                     <div class="carousel-item active h-100">
                         <img
                             loading="lazy"
-                            src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/@endif{{$room[0]->images[0]->link}}"
+                            src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/{{$room[0]->id}}/@endif{{$room[0]->images[0]->link}}"
                             class="d-block w-100"
                             alt="slideshow"
                         />
@@ -104,7 +104,7 @@
                     <div class="carousel-item h-100">
                         <img
                             loading="lazy"
-                            src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/@endif{{$room[0]->images[$i]->link}}"
+                            src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/{{$room[0]->id}}@endif{{$room[0]->images[$i]->link}}"
                             alt="slideshowtoo"
                             class="w-100"
                         />
@@ -442,7 +442,7 @@
                         <div class="card py-3">
                             <div class="review__header px-2">
                                 <div class="user__wrapper d-flex">
-                                   <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->profile}} @break @endif @endforeach" class="profile__image">
+                                    <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) @if (Str::length(auth()->user()->profile) > 11) {{ '/img/user/' . auth()->id() . '/profile/' . auth()->user()->profile }} @else {{ '/img/'.auth()->user()->profile }} @endif @break @endif @endforeach" class="profile__image">
                                     <p class="ms-2 fw-bold">@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->username}} @break @endif @endforeach</p>
                                     @auth
                                     @if ($review->reviewedBy(auth()->user()))

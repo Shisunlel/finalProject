@@ -14,7 +14,7 @@
                     <a href="{{route('rooms.show', $room->id)}}">
                         <img
                             loading="lazy"
-                            src="@if (!Str::of($room->images[0]->link)->startsWith('https')) /img/room/@endif{{$room->images[0]->link }}"
+                            src="@if (!Str::of($room->images[0]->link)->startsWith('https')) /img/room/{{$room->id}}/@endif{{$room->images[0]->link }}"
                             alt="room_img"
                             style="border-radius: 5px"
                         />
