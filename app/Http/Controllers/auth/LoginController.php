@@ -31,6 +31,7 @@ class LoginController extends Controller
         $login = array($fieldType => $request->username, 'password' => $request->password);
 
         if (Auth::attempt($login, $request->remember)) {
+            $request->session()->regenerate();
             return redirect()->intended('/');
         }
 

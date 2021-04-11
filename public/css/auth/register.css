@@ -200,7 +200,7 @@ img {
 }
 
 .image__placeholder {
-  background: url("/img/register_banner.jpg");
+  background: url("/img/register_banner.webp");
   background-position: center bottom;
   background-size: cover;
   position: relative;

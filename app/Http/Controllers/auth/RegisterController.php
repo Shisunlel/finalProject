@@ -37,11 +37,13 @@ class RegisterController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
         ])) {
-            Auth::attempt($request->only('email', 'password'));
-            return redirect()->intended('/');
-        } else {
-            return redirect()->back()->with('error', 'Error occured while creating!!');
+            if (Auth::attempt($request->only('email', 'password'))) {
+                $request->session()->regenerate();
+                return redirect()->intended('/');
+            }
         }
+
+        return redirect()->back()->with('error', 'Error occured while creating!!');
 
     }
 }
