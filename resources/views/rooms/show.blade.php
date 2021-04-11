@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="/css/show.css" />
 @endsection 
 @section('content')
-{{-- {{$room[0]}} --}}
 @if (session('success'))
         <div
             class="toast align-items-center text-white bg-success bg-gradient border-0"
@@ -406,6 +405,7 @@
         <section class="review">
             <div class="rating mb-3">
                 @auth
+                @if ($room[0]->reservedBy(auth()->user()))
                 <h4>Rating and Review</h4>
                 <form action="{{ route('rooms.reviews.store', $room[0]) }}" method="POST">
                     @csrf
@@ -416,23 +416,24 @@
                     @endfor
                 </select>
                 </form>
+                @endif
                 @endauth
             </div>
             @if (!$room[0]->reviews->isEmpty())
-            <h5 id="review__header"><span id="show__all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                  </svg>
-                  </span>  All reviews</h5>
+            <h5 id="review__header">
+                <span class="me-2" id="show__all"><i class="fas fa-chevron-down"></i></span>All reviews
+            </h5>
             @endif
-                  @auth
+            @auth
+            @if ($room[0]->reservedBy(auth()->user()))
             <div id="review__form__container">
-            <form id="review__form" action="{{ route('rooms.reviews.store', $room[0]) }}" method="POST">
-                @csrf
-               <textarea name="review" id="review__box" class="form-control" placeholder="Share your experience with others"></textarea>
-                <input type="submit" id="review__btn" value="Send">
-            </form>
+                <form id="review__form" action="{{ route('rooms.reviews.store', $room[0]) }}" method="POST">
+                    @csrf
+                   <textarea name="review" id="review__box" class="form-control" placeholder="Share your experience with others"></textarea>
+                    <input type="submit" id="review__btn" value="Send">
+                </form>
             </div>
+            @endif
             @endauth
             @if (!$room[0]->reviews->isEmpty())
             <div id="review__container" class="row my-4">
@@ -521,12 +522,12 @@
   </div>
 @endsection
 @section('footer')
-@include('/partials.footer')
-@endsection
 @section('script')
 <script src="/js/rooms/rooms.js"></script>
 <script>
     const room = {!! json_encode($room[0]->price, JSON_HEX_TAG) !!}
 </script>
 <script src="/js/rooms/show.js"></script>
+@endsection
+@include('/partials.footer')
 @endsection

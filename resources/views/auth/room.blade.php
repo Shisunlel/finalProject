@@ -80,8 +80,6 @@
 {{ $rooms->links('pagination::bootstrap-4') }}
 @endsection
 @section('footer')
-@include('/partials.compact_footer')
-@endsection
 @section('script')
 <script>
 const toast = document.querySelector(".toast");
@@ -91,4 +89,6 @@ if (toast) {
     init.show();
 }
 </script>
+@endsection
+@include('/partials.compact_footer')
 @endsection

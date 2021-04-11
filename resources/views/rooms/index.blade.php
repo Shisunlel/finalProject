@@ -105,8 +105,9 @@
   </div>
 @endsection
 @section('footer')
-@include('/partials.footer')
-@endsection
 @section('script')
 <script src="/js/rooms/rooms.js"></script>
 @endsection
+@include('/partials.footer')
+@endsection
+

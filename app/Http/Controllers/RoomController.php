@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Facility;
 use App\Models\Room;
 use App\Models\User;
-use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -85,9 +84,8 @@ class RoomController extends Controller
     {
         if (Room::findOrFail($room->id)) {
             $result = $room::with('Images', 'Facilities', 'Reviews', 'user')->where('id', $room->id)->get();
-            $comment_user = User::join('reviews', 'users.id', 'user_id')->where('reviews.room_id', $room->id)->select('users.id', 'users.username', 'users.profile')->get();
-            $wishlist = Wishlist::join('users', 'user_id', 'users.id')->join('rooms', 'room_id', 'rooms.id')->where('wishlists.user_id', auth()->id())->where('wishlists.room_id', $room->id)->select('wishlists.id', 'wishlists.user_id', 'wishlists.room_id')->get();
-            return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user, 'wishlist' => $wishlist]);
+            $comment_user = User::get();
+            return view('rooms.show', ['room' => $result, 'comment_user' => $comment_user]);
         }
     }
 

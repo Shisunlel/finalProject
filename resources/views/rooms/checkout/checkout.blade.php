@@ -47,7 +47,6 @@
               >
               @csrf
                 <!--Grid row-->
-                <input type="date" name="dob" value="{{auth()->user()->dob}}" hidden>
                 <div class="md-form mb-3">
                   <h6 class="fw-bold">Date</h6>
                   <div class="justify-content-between d-flex">
@@ -100,7 +99,7 @@
                     type="text"
                     name="housenumber"
                     class="form-control"
-                    placeholder="452"
+                    placeholder="លេខផ្ទះ"
                     value="{{old('housenumber')}}"
                     required
                   />
@@ -115,7 +114,7 @@
                     type="text"
                     name="street"
                     class="form-control"
-                    placeholder="Kampuchea Krom"
+                    placeholder="ផ្លូវ"
                     value="{{old('street')}}"
                     required
                   />
@@ -130,7 +129,7 @@
                     type="text"
                     name="commune"
                     class="form-control"
-                    placeholder="Teuk Laak II"
+                    placeholder="ខណ្ឌ"
                     value="{{old('commune')}}"
                     required
                   />
@@ -145,7 +144,7 @@
                       type="text"
                       name="district"
                       class="form-control"
-                      placeholder="Toul Kork"
+                      placeholder="សង្កាត់"
                       value="{{old('district')}}"
                       required
                     />
@@ -160,7 +159,7 @@
                         type="text"
                         name="province"
                         class="form-control"
-                        placeholder="Phnom Penh"
+                        placeholder="ខេត្ត"
                         value="{{old('province')}}"
                         required
                       />
@@ -195,6 +194,28 @@
                 @endif
                   </div>
                 </div>
+                @if (!empty(auth()->user()->dob))
+                <input type="date" name="dob" value="{{auth()->user()->dob}}" hidden>
+                @else
+                <div class="md-form mt-2">
+                  <h6 class="fw-bold">Date of birth</h6>
+                  <div class="justify-content-between d-flex">
+                    <small class="form-label">
+                      Add and confirm your date of birth
+                    </small>
+                  <div class="info__container hidden my-2">
+                    <small class="form-label">Phone number should always start with 0</small>
+                    <input type="date" class="form-control" name="dob" max="{{now()->format('Y-m-d')}}">
+                    @error('dob')
+                    <div class="text-danger">
+                      {{$message}}
+                    </div>
+                    @enderror
+                  </div>
+                  <a type="button" class="add">Add</a>
+                  </div>
+                </div>
+                @endif
                 <div class="md-form mb-3">
                   <h6 class="fw-bold">Profile Picture</h6>
                   @if (Str::contains(auth()->user()->profile, ['.jpg', '.webp', '.svg', '.png', '.jpeg']))
@@ -395,8 +416,9 @@
       </div>
     </main>
 @section('footer')
-@include('/partials.compact_footer')
-@endsection
 @section('script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="/js/rooms/checkout.js"></script>
+@endsection
+@include('/partials.compact_footer')
 @endsection

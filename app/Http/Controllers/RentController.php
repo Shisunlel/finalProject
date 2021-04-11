@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailRent;
 use App\Models\Room;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
@@ -43,9 +44,9 @@ class RentController extends Controller
             'commune' => 'sometimes|required_with:housenumber,address,district,province|string',
             'district' => 'sometimes|required_with:housenumber,address,commune,province|string',
             'province' => 'sometimes|required_with:housenumber,address,commune,district|string',
-            'phone' => 'sometimes|required|numeric|unique:App\Models\User,phone_number|starts_with:0|digits_between:9,10',
+            'phonenumber' => 'sometimes|required|numeric|unique:App\Models\User,phone_number|starts_with:0|digits_between:9,10',
             'profile' => 'sometimes|required|image|mimes:jpg,png,jpeg,svg,webp|max:2048|dimensions:min_width=500,min_height=500',
-            'card-name' => 'required|regex:/^[a-zA-Z_ ]*$/',
+            'card-name' => 'required|regex:/^[a-zA-Z_ ]*$/|min:4',
             'card-number' => 'required|numeric|digits:16',
             'card-expire-month' => 'required|numeric|digits:2|min:01|max:12',
             'card-expire-year' => 'required|numeric|digits:2|min:' . $year,
@@ -57,6 +58,9 @@ class RentController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
+            $user = User::find(auth()->id());
+            $user->phone_number || $user->phone_number = $request->phonenumber;
+            $user->dob || $user->dob = $request->dob;
             $rent = $request->user()->rents()->create();
             $detail = new DetailRent;
             $detail->rent_id = $rent->id;
@@ -70,6 +74,9 @@ class RentController extends Controller
             $request->commune ? $detail->commune = $request->commune : $detail->commune = auth()->user()->commune;
             $request->province ? $detail->province = $request->province : $detail->province = auth()->user()->province;
             $room->qty--;
+            if (!empty($user->phone_number || $user->dob)) {
+                $user->save();
+            }
             $room->save();
         }
 

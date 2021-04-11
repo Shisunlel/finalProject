@@ -30,6 +30,12 @@ class Room extends Model
         return $this->user_id === $user->id;
     }
 
+    public function reservedBy(User $user)
+    {
+        $detail = DetailRent::join('rooms', 'room_id', 'rooms.id')->join('rents', 'rent_id', 'rents.id')->where('rooms.id', $this->id)->get();
+        return $detail->contains('user_id', $user->id);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
