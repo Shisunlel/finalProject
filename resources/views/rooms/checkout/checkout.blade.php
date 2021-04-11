@@ -215,6 +215,25 @@
                   </div>
                 </div>
                 @endif
+                @if (empty(auth()->user()->id_card))
+                <div class="md-form mt-2">
+                  <h6 class="fw-bold">Identification Card</h6>
+                  <div class="justify-content-between d-flex">
+                    <small class="form-label">
+                      Host would like to know who will be staying at their place
+                    </small>
+                  <div class="info__container hidden my-2">
+                    <input type="file" class="form-control" id="idcard" name="idcard" accept=".png, .jpeg, .jpg, .svg, .webp">
+                    @error('idcard')
+                    <div class="text-danger">
+                      {{$message}}
+                    </div>
+                    @enderror
+                  </div>
+                  <a type="button" class="add">Add</a>
+                  </div>
+                </div>
+                @endif
                 <div class="md-form mb-3">
                   <h6 class="fw-bold">Profile Picture</h6>
                   @if (Str::contains(auth()->user()->profile, ['.jpg', '.webp', '.svg', '.png', '.jpeg']))
@@ -238,6 +257,7 @@
                   </div>
                   @endif
                 </div>
+
                 <div class="row">
                   <div class="col-lg-6 mb-3">
                     <label for="cc-name">Name on card</label>

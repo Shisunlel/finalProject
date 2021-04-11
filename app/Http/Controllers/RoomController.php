@@ -15,7 +15,7 @@ class RoomController extends Controller
         return $this->middleware('auth')->except(['show', 'search']);
     }
 
-    public function saveImage($image)
+    public function savedImage($image)
     {
         $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
         $imageNamee = $imageName . time() . rand(1, 10000) . '.' . $image->getClientOriginalExtension();
@@ -55,7 +55,7 @@ class RoomController extends Controller
         if ($request->file('image')) {
             //throw into an array
             foreach ($request->image as $image) {
-                $img_arr[] = $this->saveImage($image);
+                $img_arr[] = $this->savedImage($image);
             }
         }
 
@@ -133,7 +133,7 @@ class RoomController extends Controller
         if ($request->hasFile('image')) {
             //throw into an array
             foreach ($request->image as $image) {
-                $img_arr[] = $this->saveImage($image);
+                $img_arr[] = $this->savedImage($image);
             }
 
             // remove old image

@@ -209,6 +209,7 @@ form #navSearch:hover {
   box-shadow: none;
   outline: 1px solid #3a283d;
   outline-offset: 0 !important;
+  -moz-outline-radius: 1.33rem;
   transform: translateY(-1.5em);
   will-change: transform;
 }

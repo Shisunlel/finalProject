@@ -185,7 +185,7 @@
                               type="text"
                               name="housenumber"
                               class="form-control"
-                              placeholder="452"
+                              placeholder="លេខផ្ទះ"
                               value="{{old('housenumber')}}"
                               required
                             />
@@ -200,7 +200,7 @@
                               type="text"
                               name="street"
                               class="form-control"
-                              placeholder="Kampuchea Krom"
+                              placeholder="ផ្លូវ"
                               value="{{old('street')}}"
                               required
                             />
@@ -215,7 +215,7 @@
                               type="text"
                               name="commune"
                               class="form-control"
-                              placeholder="Teuk Laak II"
+                              placeholder="ខណ្ឌ"
                               value="{{old('commune')}}"
                               required
                             />
@@ -230,7 +230,7 @@
                                 type="text"
                                 name="district"
                                 class="form-control"
-                                placeholder="Toul Kork"
+                                placeholder="សង្កាត់"
                                 value="{{old('district')}}"
                                 required
                               />
@@ -245,7 +245,7 @@
                                   type="text"
                                   name="province"
                                   class="form-control"
-                                  placeholder="Phnom Penh"
+                                  placeholder="ខេត្ត"
                                   value="{{old('province')}}"
                                   required
                                 />

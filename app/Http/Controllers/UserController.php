@@ -6,40 +6,13 @@ use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
-use Intervention\Image\Facades\Image as Img;
 
 class UserController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    public function saveImage($request, $dir, $width, $height)
-    {
-        $image = $request;
-        $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-        $extension = $image->getClientOriginalExtension();
-        $imageName = $name . time() . rand(1, 10000) . '.' . $extension;
-        $destination = public_path("img/user/" . auth()->id() . "/{$dir}");
-        $dir = 'img/user/' . auth()->id() . "/{$dir}";
-        if (!Storage::disk('public')->exists($destination)) {
-            Storage::disk('public')->makeDirectory($dir);
-        }
-        $img = Img::make($image->path());
-        $img->resize($width, $height, function ($contraint) {
-            $contraint->aspectRatio();
-        })->save($destination . '/' . $imageName);
-        return $imageName;
-    }
-
-    public function removeImage($request, $dir)
-    {
-        $oldImage = $request;
-        $dir = 'img/user/' . auth()->id() . "/{$dir}";
-        Storage::disk('public')->delete($dir . "/{$oldImage}");
     }
 
     public function index()
@@ -53,11 +26,6 @@ class UserController extends Controller
         return view('auth.room')->with('rooms', $room);
     }
 
-    public function history()
-    {
-
-    }
-
     public function update(HttpRequest $request, User $user)
     {
         $this->validate($request, [
@@ -69,6 +37,11 @@ class UserController extends Controller
             'phone' => 'sometimes|required|numeric|unique:App\Models\User,phone_number|starts_with:0|digits_between:9,10',
             'current_password' => 'sometimes|required|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
             'new_password' => 'sometimes|required|min:8|confirmed|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            'housenumber' => 'sometimes|required_with:street,commune,district,province|string',
+            'street' => 'sometimes|required_with:housenumber,commune,district,province|string',
+            'commune' => 'sometimes|required_with:housenumber,street,district,province|string',
+            'district' => 'sometimes|required_with:housenumber,street,commune,province|string',
+            'province' => 'sometimes|required_with:housenumber,street,commune,district|string',
             'idcard' => 'sometimes|required|image|mimes:jpg,png,jpeg,svg,webp|max:2048|dimensions:min_width=500,min_height=500',
             'profile' => 'sometimes|required|image|mimes:jpg,png,jpeg,svg,webp|max:2048|dimensions:min_width=500,min_height=500',
         ]);
@@ -104,6 +77,12 @@ class UserController extends Controller
             $removeImage = $this->removeImage($user->profile, 'profile');
             $user->profile = $imageName;
         }
+
+        $request->housenumber && $user->housenumber = $request->housenumber;
+        $request->street && $user->street = $request->street;
+        $request->district && $user->district = $request->district;
+        $request->commune && $user->commune = $request->commune;
+        $request->province && $user->province = $request->province;
 
         if ($user->save()) {
             return back()->with('success', 'Update successfully!');

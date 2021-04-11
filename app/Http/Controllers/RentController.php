@@ -45,6 +45,7 @@ class RentController extends Controller
             'district' => 'sometimes|required_with:housenumber,street,commune,province|string',
             'province' => 'sometimes|required_with:housenumber,street,commune,district|string',
             'phonenumber' => 'sometimes|required|numeric|unique:App\Models\User,phone_number|starts_with:0|digits_between:9,10',
+            'idcard' => 'sometimes|required|image|mimes:jpg,png,jpeg,svg,webp|max:2048|dimensions:min_width=500,min_height=500',
             'profile' => 'sometimes|required|image|mimes:jpg,png,jpeg,svg,webp|max:2048|dimensions:min_width=500,min_height=500',
             'card-name' => 'required|regex:/^[a-zA-Z_ ]*$/|min:4',
             'card-number' => 'required|numeric|digits:16',
@@ -73,8 +74,22 @@ class RentController extends Controller
             $request->district ? $detail->district = $request->district : $detail->district = auth()->user()->district;
             $request->commune ? $detail->commune = $request->commune : $detail->commune = auth()->user()->commune;
             $request->province ? $detail->province = $request->province : $detail->province = auth()->user()->province;
+
+            if ($request->hasFile('idcard')) {
+                $image = $request->idcard;
+                $imageName = $this->saveImage($image, 'id_card', 500, 500);
+                $removeImage = $this->removeImage($user->id_card, 'id_card');
+                $user->id_card = $imageName;
+            }
+
+            if ($request->hasFile('profile')) {
+                $image = $request->profile;
+                $imageName = $this->saveImage($image, 'profile', 400, 400);
+                $removeImage = $this->removeImage($user->profile, 'profile');
+                $user->profile = $imageName;
+            }
             $room->qty--;
-            if (!empty($user->phone_number || $user->dob)) {
+            if (!empty($user->phone_number || $user->dob || $user->id_card || $user->profile)) {
                 $user->save();
             }
             $room->save();
