@@ -106,6 +106,9 @@
 @endsection
 @section('footer')
 @section('script')
+<script>
+  const guest_val = {!! json_encode(app('request')->input('guest'), JSON_HEX_TAG) !!}
+</script>
 <script src="/js/rooms/rooms.js"></script>
 @endsection
 @include('/partials.footer')

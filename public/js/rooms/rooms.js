@@ -32,7 +32,7 @@ if (sticky) {
 document.addEventListener("click", (e) => {
     let clickArea = navButton.contains(e.target);
     if (!clickArea) {
-       dissappear();
+        dissappear();
     }
 });
 
@@ -43,20 +43,24 @@ let dissappear = () => {
 };
 
 //slider indicator
-output.innerHTML = slider.value;
+if (typeof(guest_val) != 'undefined') {
+    output.innerHTML = guest_val;
+    output_sm.innerHTML = guest_val;
+} else {
+    output.innerHTML = slider.value;
+    output_sm.innerHTML = slider_sm.value;
+}
 slider.value = Number(output.innerHTML);
 
-slider.oninput = function() {
-  output.innerHTML = this.value;
-  slider.value = this.value;
-}
+slider.oninput = function () {
+    output.innerHTML = this.value;
+    slider.value = this.value;
+};
 
 //slider indicator sm
-output_sm.innerHTML = slider_sm.value;
 slider_sm.value = Number(output_sm.innerHTML);
 
-slider_sm.oninput = function() {
-  output_sm.innerHTML = this.value;
-  slider_sm.value = this.value;
-}
-
+slider_sm.oninput = function () {
+    output_sm.innerHTML = this.value;
+    slider_sm.value = this.value;
+};

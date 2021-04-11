@@ -98,7 +98,7 @@ class RoomController extends Controller
         }
         $result = Room::with('Images', 'Wishlists')->where('address', 'like', "%{$location}%")->where('guest', '>=', "{$guest}")->orderBy('guest')->paginate(20);
         $result->appends(['location' => $location, 'guest' => $guest]);
-        return view('rooms.index', ['rooms' => $result, 'guest' => $guest]);
+        return view('rooms.index', ['rooms' => $result]);
     }
 
     public function edit(Room $room)
