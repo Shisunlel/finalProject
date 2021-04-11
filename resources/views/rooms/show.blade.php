@@ -97,7 +97,7 @@
                             loading="lazy"
                             src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/@endif{{$room[0]->images[0]->link}}"
                             class="d-block w-100"
-                            alt="..."
+                            alt="slideshow"
                         />
                     </div>
                     @for ($i=1; $i< count($room[0]->images); $i++)
@@ -105,7 +105,7 @@
                         <img
                             loading="lazy"
                             src="@if (!Str::of($room[0]->images[0]->link)->startsWith('https'))/img/room/@endif{{$room[0]->images[$i]->link}}"
-                            alt=""
+                            alt="slideshowtoo"
                             class="w-100"
                         />
                     </div>

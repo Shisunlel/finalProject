@@ -2,7 +2,7 @@
 @section('nav')
 <nav class="navbar navbar-light navbar-expand-md bg-light-shaded border-bottom px-2">
     <a class="navbar-brand" href="/"
-        ><img class="w-100" src="/img/logo.png" alt=""
+        ><img class="w-100" src="/img/logo.png" alt="logo"
     /></a>
     <button
         class="navbar-toggler rounded"
@@ -19,7 +19,7 @@
             <img
                 class="w-100"
                 src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg"
-                alt=""
+                alt="nouser"
             />
             @endguest 
             @auth

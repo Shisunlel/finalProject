@@ -457,7 +457,7 @@
                                     <img
                                         loading="lazy"
                                         src="https://i.pinimg.com/originals/75/52/3a/75523a11530b7ae378aef6497457f7b8.jpg"
-                                        alt=""
+                                        alt="userimg"
                                     />
                                 </figure>
                                 <div class="text-content">
@@ -483,7 +483,7 @@
                                     <img
                                         loading="lazy"
                                         src="https://i.pinimg.com/originals/93/3f/fa/933ffa776e73d640baa5172fb2e315c3.jpg"
-                                        alt=""
+                                        alt="user2img"
                                     />
                                 </figure>
                                 <div class="text-content">
@@ -502,7 +502,7 @@
                                     <img
                                         loading="lazy"
                                         src="https://i.pinimg.com/originals/f9/e7/ad/f9e7ad3906cd503ee74d0867f085889e.jpg"
-                                        alt=""
+                                        alt="user3img"
                                     />
                                 </figure>
                                 <div class="text-content">
@@ -523,7 +523,7 @@
                                     <img
                                         loading="lazy"
                                         src="https://wallpaperaccess.com/full/1629593.jpg"
-                                        alt=""
+                                        alt="user4img"
                                     />
                                 </figure>
                                 <div class="text-content">

@@ -296,7 +296,7 @@
         <section id="idcard__section">
             <div class="info__container">
                 <h6 class="fw-bold">Identification Card</h6>
-                <img src="/img/user/{{ auth()->id() . '/id_card/' . auth()->user()->id_card}}" alt="" width="100%" height="100px">
+                <img src="/img/user/{{ auth()->id() . '/id_card/' . auth()->user()->id_card}}" alt="id" width="100%" height="100px">
             </div>
             <div class="info__container hidden">
                 <h6 class="fw-bold">Identification Card</h6>
@@ -365,7 +365,7 @@
         <section id="profile__section">
             <div class="info__container">
                 <h6 class="fw-bold">Profile</h6>
-                <img src="{{ 'img/user/' . auth()->id() . '/profile/' . auth()->user()->profile}}" alt="" height="100px">
+                <img src="{{ 'img/user/' . auth()->id() . '/profile/' . auth()->user()->profile}}" alt="profile" height="100px">
             </div>
             <div class="info__container hidden">
                 <h6 class="fw-bold">Profile</h6>

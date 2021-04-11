@@ -2,7 +2,7 @@
 @section('nav')
 <nav class="navbar navbar-light bg-light-shaded border-bottom px-sm-2">
     <a class="navbar-brand d-none d-sm-inline" href="/"
-        ><img class="w-100" src="/img/logo.png" alt=""
+        ><img class="w-100" src="/img/logo.png" alt="logo"
     /></a>
     <div id="form-container" class="d-none d-sm-block">
         <form
@@ -73,7 +73,7 @@
         </form>
     </div>
     <div class="header__image d-sm-none">
-        <img loading="lazy" class="w-100"  src="/img/navheader.webp" onerror="this.src='/img/navheader.jpg'" alt="" />
+        <img loading="lazy" class="w-100"  src="/img/navheader.webp" onerror="this.src='/img/navheader.jpg'" alt="navheader" />
         <div class="d-flex d-md-none justify-content-center">
             <form
                 class="form-inline w-75"
@@ -133,7 +133,7 @@
             <img
                 class="w-100"
                 src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-26.jpg"
-                alt=""
+                alt="nouser"
             />
             @endguest @auth
             <img

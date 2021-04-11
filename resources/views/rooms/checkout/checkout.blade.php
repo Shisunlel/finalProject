@@ -238,7 +238,11 @@
                   <h6 class="fw-bold">Profile Picture</h6>
                   @if (Str::contains(auth()->user()->profile, ['.jpg', '.webp', '.svg', '.png', '.jpeg']))
                   <div class="d-flex justify-content-center">
-                      <img src="/img/user/{{ auth()->id() . '/profile/' . auth()->user()->profile}}" alt="">
+                      <img src="@if (Str::length(auth()->user()->profile) > 11)
+                              {{'/img/user/' . auth()->id() . '/profile/' . auth()->user()->profile}}
+                              @else
+                                  {{'/img/'.auth()->user()->profile}}
+                              @endif" alt="profile picture">
                   </div>
                   @else
                   <div class="d-flex justify-content-between">

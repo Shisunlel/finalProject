@@ -18,7 +18,7 @@
                                     <img
                                         loading="lazy"
                                         src="@if (!Str::of($_room->images[0]->link)->startsWith('https')) /img/room/@endif{{$_room->images[0]->link }}"
-                                        alt=""
+                                        alt="room_img"
                                         style="border-radius: 5px"
                                     />
                                 </a>
