@@ -239,7 +239,7 @@ btn-light-shaded {
 }
 #header h1 {
   line-height: 1;
-  font-family: "Akaya Telivigala", cursive;
+  font-family: "Akaya Telivigala", "Poppins", cursive;
 }
 #header h1 span {
   display: table;
