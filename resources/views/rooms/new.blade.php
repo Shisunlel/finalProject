@@ -8,14 +8,26 @@
         <div class="container-fluid bg-light p-4">
             <div class="shadow-sm border p-4 bg-white rounded">
                 <div class="d-flex">
-				<a href="{{ url()->previous() }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg></a>
-                <h1 class="h3 mb-5 flex-grow-1 text-center text-uppercase text-white" style="text-shadow: 1px 1px 10px #79ff00;">
-                   add new room
-				</h1>
-            </div>
+                    <a href="{{ url()->previous() }}">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+                            /></svg
+                    ></a>
+                    <h1
+                        class="h3 mb-5 flex-grow-1 text-center text-uppercase text-white"
+                        style="text-shadow: 1px 1px 10px #79ff00"
+                    >
+                        add new room
+                    </h1>
+                </div>
                 <form
-                    action="{{route('rooms.store')}}"
+                    action="{{ route('rooms.store') }}"
                     id="room__form"
                     method="POST"
                     enctype="multipart/form-data"
@@ -48,7 +60,8 @@
                                     rows="4"
                                     placeholder="With an amazing balcony for you to enjoy with your s.o"
                                     name="description"
-                                >{{ old('description') }}</textarea>
+                                    >{{ old("description") }}</textarea
+                                >
 
                                 @error('description')
                                 <div class="text-danger">
@@ -64,7 +77,8 @@
                                     rows="4"
                                     placeholder="John's Street"
                                     name="address"
-                                >{{ old('address') }}</textarea>
+                                    >{{ old("address") }}</textarea
+                                >
 
                                 @error('address')
                                 <div class="text-danger">
@@ -159,17 +173,29 @@
                                 @enderror
                             </div>
                         </div>
-						
-						<div class="col-12">
+
+                        <div class="col-12">
                             <div class="mb-3 shadow-sm border p-4">
                                 <label>Available Facilities</label>
                                 <div class="p-2">
-									@foreach ($facilities as $facility)
-										<div class="col-6 col-md-2 form-check form-check-inline">
-											<input class="form-check-input" name="facility[]" type="checkbox" id="facility{{$loop->iteration}}" value="{{$facility->id}}">
-											<label class="form-check-label" for="facility{{$loop->iteration}}">{{ $facility->facility }}</label>
-										</div>
-									@endforeach
+                                    @foreach ($facilities as $facility)
+                                    <div
+                                        class="col-6 col-md-2 form-check form-check-inline"
+                                    >
+                                        <input
+                                            class="form-check-input"
+                                            name="facility[]"
+                                            type="checkbox"
+                                            id="facility{{$loop->iteration}}"
+                                            value="{{$facility->id}}"
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="facility{{$loop->iteration}}"
+                                            >{{ $facility->facility }}</label
+                                        >
+                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -190,10 +216,7 @@
                                 >
                                     Add
                                 </button>
-                                <button
-                                    type="reset"
-                                    class="btn btn-secondary"
-                                >
+                                <button type="reset" class="btn btn-secondary">
                                     Reset
                                 </button>
                             </div>
@@ -205,7 +228,7 @@
         </div>
     </main>
 </div>
-@endsection
-@section('footer')
-@include('/partials.footer')
+@endsection 
+@section('footer') 
+@include('/partials.footer') 
 @endsection

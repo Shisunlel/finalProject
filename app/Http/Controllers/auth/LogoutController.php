@@ -16,8 +16,10 @@ class LogoutController extends Controller
     public function index(HttpRequest $request)
     {
         Auth::logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->intended('/');
     }
 }

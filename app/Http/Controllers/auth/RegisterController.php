@@ -23,11 +23,11 @@ class RegisterController extends Controller
     public function store(HttpRequest $request)
     {
         $this->validate($request, [
-            'firstname' => 'required|regex:/^[a-zA-Z]+$/u',
-            'lastname' => 'required|regex:/^[a-zA-Z]+$/u',
-            'email' => 'required|unique:App\Models\User|email',
-            'username' => 'required|min:6|alpha_dash|unique:App\Models\User',
-            'password' => 'required|confirmed|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            'firstname' => ['required', 'regex:/^[a-zA-Z]+$/u'],
+            'lastname' => ['required', 'regex:/^[a-zA-Z]+$/u'],
+            'email' => ['required', 'unique:App\Models\User,email'],
+            'username' => ['required', 'min:6', 'alpha_dash', 'unique:App\Models\User'],
+            'password' => ['required', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
         ]);
 
         if (User::create([
@@ -37,10 +37,12 @@ class RegisterController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
         ])) {
-            if (Auth::attempt($request->only('email', 'password'))) {
-                $request->session()->regenerate();
-                return redirect()->intended('/');
+            if (!Auth::attempt($request->only('email', 'password'))) {
+                return back()->with("error", "Unexpected error occur!!");
             }
+
+            $request->session()->regenerate();
+            return redirect()->intended('/');
         }
 
         return redirect()->back()->with('error', 'Error occured while creating!!');

@@ -22,9 +22,11 @@ class RoomController extends Controller
         $imageNamee = $imageName . time() . rand(1, 10000) . '.' . $image->getClientOriginalExtension();
         $destination = public_path("img/room/{$room_id}");
         $dir = "/img/room/{$room_id}";
+
         if (!Storage::disk('public')->exists($destination)) {
             Storage::disk('public')->makeDirectory($dir);
         }
+
         $path = $image->move(public_path("img/room/{$room_id}"), $imageNamee);
         return $imageNamee;
     }
@@ -32,20 +34,21 @@ class RoomController extends Controller
     public function create()
     {
         $facilities = Facility::get();
+
         return view('rooms.new', ['facilities' => $facilities]);
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|min:5',
-            'description' => 'required|min:10',
-            'address' => 'required|min:10',
-            'price' => 'required|numeric|between:0.99,500.00',
-            'qty' => 'required|integer',
-            'guest' => 'required|integer',
-            'image' => 'required',
-            'image.*' => 'image|mimes:jpg,png,jpeg,svg,webp|max:2048',
+            'title' => ['required', 'min:5'],
+            'description' => ['required', 'min:10'],
+            'address' => ['required', 'min:10'],
+            'price' => ['required', 'numeric', 'between:0.99,500.00'],
+            'qty' => ['required', 'integer'],
+            'guest' => ['required', 'integer'],
+            'image' => ['required'],
+            'image.*' => ['image', 'mimes:jpg,png,jpeg,svg,webp', 'max:2048'],
         ]);
 
         $request->user()->rooms()->create([
@@ -99,11 +102,14 @@ class RoomController extends Controller
     {
         $location = $request->location;
         $guest = $request->guest;
+
         if (empty($location)) {
             $location = " ";
         }
+
         $result = Room::with('Images', 'Wishlists')->where('address', 'like', "%{$location}%")->where('guest', '>=', "{$guest}")->orderBy('guest')->paginate(20);
         $result->appends(['location' => $location, 'guest' => $guest]);
+
         return view('rooms.index', ['rooms' => $result]);
     }
 
@@ -112,8 +118,10 @@ class RoomController extends Controller
         if (!FacadesGate::allows('user-room', $room)) {
             abort(403);
         }
+
         $room::findOrFail($room->id);
         $facilities = Facility::get();
+
         return view('rooms.edit')->with(['room' => $room, 'facilities' => $facilities]);
     }
 
@@ -122,16 +130,18 @@ class RoomController extends Controller
         if (!FacadesGate::allows('user-room', $room)) {
             abort(403);
         }
+
         $room::findOrFail($room->id);
+
         $this->validate($request, [
-            'title' => 'sometimes|required|min:5',
-            'description' => 'sometimes|required|min:10',
-            'address' => 'sometimes|required|min:10',
-            'price' => 'sometimes|required|numeric|between:0.99,500.00',
-            'qty' => 'sometimes|required|integer',
-            'guest' => 'sometimes|required|integer',
-            'image' => 'sometimes|required',
-            'image.*' => 'image|mimes:jpg,png,jpeg,svg,webp|max:2048',
+            'title' => ['sometimes', 'required', 'min:5'],
+            'description' => ['sometimes', 'required', 'min:10'],
+            'address' => ['sometimes', 'required', 'min:10'],
+            'price' => ['sometimes', 'required', 'numeric', 'between:0.99,500.00'],
+            'qty' => ['sometimes', 'required', 'integer'],
+            'guest' => ['sometimes', 'required', 'integer'],
+            'image' => ['sometimes', 'required'],
+            'image.*' => ['image', 'mimes:jpg,png,jpeg,svg,webp', 'max:2048'],
         ]);
 
         $request->title && $room->title = $request->title;
@@ -168,11 +178,11 @@ class RoomController extends Controller
             $room->facilities()->sync($facility);
         }
 
-        if ($room->push()) {
-            return redirect()->route('view-home')->with('success', 'Update successfully');
-        } else {
+        if (!$room->push()) {
             return redirect()->back()->withInput();
         }
+
+        return redirect()->route('view-home')->with('success', 'Update successfully');
     }
 
     public function destroy(Room $room)
@@ -180,11 +190,15 @@ class RoomController extends Controller
         if (!FacadesGate::allows('user-room', $room)) {
             abort(403);
         }
+
         $room::findOrFail($room->id);
-        if ($room->ownedBy(auth()->user())) {
-            $room->delete();
-            return redirect()->route('view-home')->with('success', 'Room delete successfully');
+
+        if (!$room->ownedBy(auth()->user())) {
+            abort(403);
         }
+
+        $room->delete();
+        return redirect()->route('view-home')->with('success', 'Room delete successfully');
     }
 
 }

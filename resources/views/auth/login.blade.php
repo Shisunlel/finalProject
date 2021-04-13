@@ -13,7 +13,7 @@
             rel="stylesheet"
         />
     <!-- Custom CSS -->
-<link rel="stylesheet" href="/css/auth/register.css" />
+    <link rel="stylesheet" href="/css/auth/register.css" />
     <title>Login</title>
 </head>
 <body>
@@ -21,27 +21,24 @@
     <div class="logo__md d-none d-md-block"></div>
     <div class="image__placeholder d-none d-md-block"></div>
     <div class="register-form p-3 p-md-5">
-        @if (session('error'))
-  <div class="alert alert-danger alert-dismissible fade show w-100 m-0" role="alert">
-    {{ session('error') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-@endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show w-100 m-0" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
         <h1
             class="text-center mb-5 text-uppercase text-success"
             id="register-header"
         >
             Login
         </h1>      
-
-        
         <form
             action="{{ route('login.store') }}"
             id="login__form"
             method="POST"
         >
             @csrf
-            
             <div class="holder">
                 <div class="form-floating">
                     <input

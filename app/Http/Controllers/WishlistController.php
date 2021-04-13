@@ -15,12 +15,13 @@ class WishlistController extends Controller
 
     public function index()
     {
-        // $saved = Wishlist::join('Rooms', 'rooms.id', 'room_id')->where('wishlists.user_id', auth()->user()->id)->get();
         $saved = Wishlist::where('user_id', auth()->user()->id)->paginate(12);
+
         $a = array();
         for ($i = 0; $i < count($saved); $i++) {
             $a[$i] = $saved[$i]->room_id;
         }
+
         $room = Room::with('Images')->whereIn('rooms.id', $a)->get();
         return view('saved', ['wishlist' => $saved, 'room' => $room]);
     }

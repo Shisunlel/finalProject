@@ -269,6 +269,13 @@ footer {
   margin: 2rem 0;
 }
 
+.toast {
+  position: absolute;
+  right: 0;
+  bottom: 1.2em;
+  z-index: 1;
+}
+
 #content {
   box-shadow: inset 2px 0 4px -2px rgba(17, 17, 17, 0.4);
 }

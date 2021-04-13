@@ -21,8 +21,8 @@ class ReviewController extends Controller
         }
 
         $this->validate($request, [
-            'rating' => 'required',
-            'review' => 'required',
+            'rating' => ['required'],
+            'review' => ['required'],
         ]);
 
         $room->reviews()->create([
@@ -39,6 +39,7 @@ class ReviewController extends Controller
         if (!Gate::allows('user-reviews', $review)) {
             abort(203);
         }
+
         if ($review->reviewedBy(auth()->user())) {
             $review->delete();
         }

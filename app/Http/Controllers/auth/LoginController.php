@@ -21,20 +21,20 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            // 'email' => 'required:App\Models\User|email',
-            'username' => 'required|min:6|string',
-            'password' => 'required|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+            'username' => ['required', 'min:6', 'string'],
+            'password' => ['required', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
 
         ]);
 
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         $login = array($fieldType => $request->username, 'password' => $request->password);
 
-        if (Auth::attempt($login, $request->remember)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/');
+        if (!Auth::attempt($login, $request->remember)) {
+            return back()->with("error", "Email or Password doesn't matched");
         }
 
-        return back()->with("error", "Email or Password doesn't matched");
+        $request->session()->regenerate();
+        return redirect()->intended('/');
+
     }
 }
