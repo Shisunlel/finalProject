@@ -156,6 +156,19 @@ btn-light-shaded {
   display: block;
 }
 
+.page-item.active .page-link {
+  background-color: #3a283d !important;
+  border-color: #3a283d !important;
+  color: #eee !important;
+}
+
+.page-link {
+  color: #3a283d !important;
+}
+.page-link :hover {
+  filter: brightness(90%);
+}
+
 img {
   width: 100%;
   -o-object-fit: cover;

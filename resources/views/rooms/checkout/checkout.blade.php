@@ -204,11 +204,11 @@
                 <div class="md-form mt-2">
                   <h6 class="fw-bold">Date of birth</h6>
                   <div class="justify-content-between d-flex">
+                  <div class="info__container my-2">
                     <small class="form-label">
                       Add and confirm your date of birth
                     </small>
-                  <div class="info__container hidden my-2">
-                        <input type="date" class="form-control" name="dob" form="dob_form" max="{{now()->format('Y-m-d')}}">
+                        <input type="date" class="form-control" name="dob" form="dob_form" max="{{now()->format('Y-m-d')}}" required>
                         <button class="btn-success btn-sm mt-2" form="dob_form">Update</button>
                     @error('dob')
                     <div class="text-danger">
@@ -216,7 +216,6 @@
                     </div>
                     @enderror
                   </div>
-                  <a type="button" class="add">Add</a>
                   </div>
                 </div>
                 @endif

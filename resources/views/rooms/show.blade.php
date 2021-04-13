@@ -442,7 +442,7 @@
                         <div class="card py-3">
                             <div class="review__header px-2">
                                 <div class="user__wrapper d-flex">
-                                    <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) @if (Str::length(auth()->user()->profile) > 11) {{ '/img/user/' . auth()->id() . '/profile/' . auth()->user()->profile }} @else {{ '/img/'.auth()->user()->profile }} @endif @break @endif @endforeach" class="profile__image">
+                                    <img loading="lazy" src="@foreach ($comment_user as $user) @if ($review->user_id == $user->id) @if (Str::of($user->profile)->startsWith('https')) {{$user->profile}} @else @if (Str::length($user->profile) > 11) {{ '/img/user/' . $user->id . '/profile/' . $user->profile }} @else {{ '/img/'.$user->profile }} @endif @endif @break @endif @endforeach" class="profile__image">
                                     <p class="ms-2 fw-bold">@foreach ($comment_user as $user) @if ($review->user_id == $user->id) {{$user->username}} @break @endif @endforeach</p>
                                     @auth
                                     @if ($review->reviewedBy(auth()->user()))

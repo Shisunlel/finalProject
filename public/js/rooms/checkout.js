@@ -28,6 +28,7 @@ let preventUnderage = () => {
     let month = today.getMonth() + 1 - (year.getMonth() + 1);
     if (age < 18 || month < 0 || isNaN(year)) {
         card.textContent = 'you are not old enough to perform this action!';
+        dob.focus();
         return false;
     }
 };
