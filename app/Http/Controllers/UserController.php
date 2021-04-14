@@ -60,7 +60,6 @@ class UserController extends Controller
             $user->save();
 
             Auth::logout();
-            Auth::logoutOtherDevices($user->password);
 
             $request->session()->invalidate();
 

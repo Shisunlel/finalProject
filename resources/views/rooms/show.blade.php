@@ -187,7 +187,9 @@
                                     foreach($room[0]->reviews as $review){ 
                                         $total += $review->rating;
                                     }
-                                    $total = $total / $room[0]->reviews->count();
+                                    if($room[0]->reviews->count()> 0){
+                                        $total = $total / $room[0]->reviews->count();
+                                    }
                                 @endphp
                                 @for ($i=floor($total); $i>0; $i--)
                                 <i class="fas fa-star text-gold"></i>
