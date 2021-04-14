@@ -4,38 +4,10 @@
 <link rel="stylesheet" href="/css/profile.css" />
 @endsection @section('content') 
 @if (session('success'))
-<div
-    class="toast align-items-center text-white bg-success bg-gradient border-0"
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
-    data-bs-autohide="true"
-    data-bs-animation="true"
-    data-bs-delay="2000"
->
-    <div class="d-flex">
-        <div class="toast-body">
-            {{ session("success") }}
-        </div>
-    </div>
-</div>
+<x-alert-success />
 @endif 
 @if (session('error'))
-<div
-    class="toast align-items-center text-white bg-danger bg-gradient border-0"
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
-    data-bs-autohide="true"
-    data-bs-animation="true"
-    data-bs-delay="2000"
->
-    <div class="d-flex">
-        <div class="toast-body">
-            {{ session("error") }}
-        </div>
-    </div>
-</div>
+<x-alert-fail />
 @endif
 <div class="container-fluid">
     <div class="row mt-2">
@@ -475,7 +447,7 @@
                                 name="new_password_confirmation"
                                 placeholder="********"
                             />
-                            @error('confirm_password')
+                            @error('new_password_confirmation')
                             <div class="text-danger">
                                 {{ $message }}
                             </div>

@@ -6,27 +6,8 @@
 @endsection 
 @section('content') 
 @if (session('success'))
-<div
-    class="toast align-items-center text-white bg-success bg-gradient border-0"
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
-    data-bs-autohide="false"
->
-    <div class="d-flex">
-        <div class="toast-body">
-            {{ session("success") }}
-        </div>
-        <button
-            type="button"
-            class="btn-close btn-close-white me-2 m-auto"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-        ></button>
-    </div>
-</div>
+<x-alert-success />
 @endif
-{{-- {{$comment_user}} --}}
 <div class="container-fluid my-5">
     <div class="container-xxl">
         <div class="d-flex">
@@ -204,8 +185,9 @@
                                 @php 
                                     $total = 0; 
                                     foreach($room[0]->reviews as $review){ 
-                                        $total += $review->rating; 
-                                    } 
+                                        $total += $review->rating;
+                                    }
+                                    $total = $total / $room[0]->reviews->count();
                                 @endphp
                                 @for ($i=floor($total); $i>0; $i--)
                                 <i class="fas fa-star text-gold"></i>
@@ -213,6 +195,7 @@
                                 @for ($i=round($total)-$total; $i > 0; $i--)
                                 <i class="fas fa-star-half text-gold"></i>
                                 @endfor
+                                ({{$room[0]->reviews->count()}})
                             </div>
                         </div>
                     </div>
@@ -553,7 +536,7 @@
                 @if (!$room[0]->reviews->isEmpty())
                 <div id="review__container" class="row my-4">
                     @foreach ($room[0]->reviews as $review)
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6 my-2">
                         <div class="card py-3">
                             <div class="review__header px-2">
                                 <div class="user__wrapper d-flex">

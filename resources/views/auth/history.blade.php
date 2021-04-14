@@ -5,21 +5,7 @@
 @endsection 
 @section('content')
 @if (session('success'))
-        <div
-            class="toast align-items-center text-white bg-success bg-gradient border-0"
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-            data-bs-autohide="true"
-            data-bs-animation="true"
-            data-bs-delay="2500"
-        >
-            <div class="d-flex">
-                <div class="toast-body">
-                    {{ session("success") }}
-                </div>
-            </div>
-        </div>
+<x-alert-success />
 @endif
 <div class="container-fluid">
     <div class="row mt-2">

@@ -1,29 +1,11 @@
-@extends('layouts.default') 
+@extends('/layouts.default') 
 @section('style')
 <link rel="stylesheet" href="/css/checkout.css" />
 @endsection 
 @section('content')
 <!--Main layout-->
 @if (session('error'))
-<div
-    class="toast align-items-center text-white bg-danger bg-gradient border-0"
-    role="alert"
-    aria-live="assertive"
-    aria-atomic="true"
-    data-bs-autohide="false"
->
-    <div class="d-flex">
-        <div class="toast-body">
-            {{ session("error") }}
-        </div>
-        <button
-            type="button"
-            class="btn-close btn-close-white me-2 m-auto"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-        ></button>
-    </div>
-</div>
+<x-alert-fail />
 @endif
 <main class="mt-5 pt-4">
     <div class="container wow fadeIn">

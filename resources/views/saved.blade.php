@@ -4,8 +4,6 @@
 <link rel="stylesheet" href="/css/saved.css" />
 @endsection 
 @section('content')
-{{-- {{ $wishlist }}
-{{ $room }} --}}
 <div class="container">
     <div class="row p-1 my-3">
         @forelse ($wishlist as $wish)

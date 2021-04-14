@@ -1,7 +1,6 @@
 <x-sticky />
 <!-- THIS IS FOOTER -->
 <footer class="container-fluid text-light-shade bg-dark-accent px-4 py-4 border-top ">
-    <hr class="bg-dark-accent">
     <div id="footer-container" class="container">
     <div class="row" id="footer-cp">
         <div id="footer-column" class="col-12 d-flex justify-content-between align-items-center text-left">
@@ -24,3 +23,5 @@
 <script src="https://kit.fontawesome.com/7686e548c6.js" crossorigin="anonymous"></script>
 <script src="/js/default.js"></script>
  @yield('script')
+</body>
+</html>

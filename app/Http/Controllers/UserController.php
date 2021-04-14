@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -36,14 +37,14 @@ class UserController extends Controller
             'dob' => ['sometimes', 'required', 'date'],
             'phone' => ['sometimes', 'required', 'numeric', 'unique:App\Models\User,phone_number', 'starts_with:0', 'digits_between:9,10'],
             'current_password' => ['sometimes', 'required', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
-            'new_password' => ['sometimes', 'required', 'min:8', 'confirmed', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
+            'new_password' => ['sometimes', 'required', 'min:8', 'confirmed', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', 'different:current_password'],
             'housenumber' => ['sometimes', 'required_with:street,commune,district,province', 'string'],
             'street' => ['sometimes', 'required_with:housenumber,commune,district,province', 'string'],
             'commune' => ['sometimes', 'required_with:housenumber,street,district,province', 'string'],
             'district' => ['sometimes', 'required_with:housenumber,street,commune,province', 'string'],
             'province' => ['sometimes', 'required_with:housenumber,street,commune,district', 'string'],
-            'idcard' => ['sometimes', 'required', 'image,mimes:jpg,png,jpeg,svg,webp', 'max:2048', 'dimensions:min_width=500,min_height=500'],
-            'profile' => ['sometimes', 'required', 'image,mimes:jpg,png,jpeg,svg,webp', 'max:2048', 'dimensions:min_width=500,min_height=500'],
+            'idcard' => ['sometimes', 'required', 'image', 'mimes:jpg,png,jpeg,svg,webp', 'max:2048', 'dimensions:min_width=500,min_height=500'],
+            'profile' => ['sometimes', 'required', 'image', 'mimes:jpg,png,jpeg,svg,webp', 'max:2048', 'dimensions:min_width=500,min_height=500'],
         ]);
 
         if ($request->firstname && $request->lastname) {
@@ -52,16 +53,48 @@ class UserController extends Controller
         }
 
         $request->email && $user->email = $request->email;
-        $request->username && $user->username = $request->username;
+
+        if ($request->username) {
+
+            $user->username = $request->username;
+            $user->save();
+
+            Auth::logout();
+            Auth::logoutOtherDevices($user->password);
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+
+            return redirect('/login')->with('success', 'Username has been changed, please relogin!');
+        }
+
         $request->dob && $user->dob = $request->dob;
         $request->phone && $user->phone_number = $request->phone;
 
         if ($request->current_password) {
+
             if (!Hash::check($request->current_password, $user->password)) {
+
                 throw ValidationException::withMessages(['current_password' => "Incorrect password!"]);
             }
 
-            $request->new_password && $user->password = Hash::make($request->new_password);
+            if ($request->new_password) {
+
+                Auth::logoutOtherDevices($request->current_password);
+
+                $user->password = Hash::make($request->new_password);
+                $user->save();
+
+                Auth::logout();
+
+                $request->session()->invalidate();
+
+                $request->session()->regenerateToken();
+
+                return redirect('/login')->with('success', 'Password has been changed, please relogin!');
+            }
+
         }
 
         if ($request->hasFile('idcard')) {

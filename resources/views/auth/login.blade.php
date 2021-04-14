@@ -21,6 +21,12 @@
     <div class="logo__md d-none d-md-block"></div>
     <div class="image__placeholder d-none d-md-block"></div>
     <div class="register-form p-3 p-md-5">
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show w-100 m-0" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     @if (session('error'))
         <div class="alert alert-danger alert-dismissible fade show w-100 m-0" role="alert">
         {{ session('error') }}
@@ -112,5 +118,14 @@
 <script src="/js/auth/app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+<script>
+const toast = document.querySelector(".toast");
+const init = new bootstrap.Toast(toast);
+//toast appear
+if (toast) {
+    init.show();
+}
+    
+</script>
 </body>
 </html>

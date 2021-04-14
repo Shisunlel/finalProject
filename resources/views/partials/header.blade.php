@@ -17,3 +17,7 @@
     <title>{{strtolower($view_name)}}</title>
 </head>
 <body>
+    <noscript>
+        This app require JavaScript enabled for it to work properly. Please
+        enable JavaScript and refresh the page to continue.
+    </noscript>
