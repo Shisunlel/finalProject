@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="/css/main.css" />
 @endsection 
 @section('content')
-{{-- {{$room}} --}}
 <div class="main">
     <main class="content">
         <div class="container-fluid bg-light p-4">

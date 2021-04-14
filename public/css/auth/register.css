@@ -169,6 +169,54 @@ btn-light-shaded {
   filter: brightness(90%);
 }
 
+#sticky-fluid {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  box-shadow: 0 10px 5px 0 #39283d;
+  width: 100%;
+  max-width: 100%;
+  z-index: 99;
+}
+
+.sticky-container {
+  margin: 0.5rem;
+}
+.sticky-container > .sticky-icon > span a i {
+  font-size: 1.5rem;
+  color: #a5df47;
+}
+.sticky-container > .sticky-text {
+  color: #f4f0f0;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.sticky-hide {
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+  will-change: opacity;
+  z-index: -1;
+}
+
+.sticky-show {
+  opacity: 1;
+  transition: opacity 500ms ease-out;
+  z-index: 1;
+}
+
+footer {
+  margin-top: auto;
+}
+
+@media only screen and (min-width: 800px) {
+  .sticky-hide,
+.sticky-show {
+    display: none;
+  }
+}
 img {
   max-width: 100%;
   width: 100%;
