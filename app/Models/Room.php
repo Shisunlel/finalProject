@@ -20,6 +20,11 @@ class Room extends Model
         'guest',
     ];
 
+    public function maxRoom()
+    {
+        return Room::count();
+    }
+
     public function savedBy(User $user)
     {
         return $this->wishlists->contains('user_id', $user->id);

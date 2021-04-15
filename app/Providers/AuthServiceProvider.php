@@ -41,5 +41,9 @@ class AuthServiceProvider extends ServiceProvider
             $detail = DetailRent::join('rooms', 'room_id', 'rooms.id')->join('rents', 'rent_id', 'rents.id')->where('rooms.id', $room->id)->get();
             return $detail->contains('user_id', $user->id);
         });
+
+        Gate::define('dashboard', function (User $user) {
+            return $user->username === 'showdy';
+        });
     }
 }

@@ -56,6 +56,11 @@ class User extends Authenticatable
 
     protected $attributes = ['id_card' => null, 'phone_number' => null, 'dob' => null, 'profile' => 'default.svg'];
 
+    public function maxUser()
+    {
+        return User::count();
+    }
+
     public function rooms()
     {
         return $this->hasMany(Room::class);

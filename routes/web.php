@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\auth\AdminController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
@@ -24,6 +25,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
+});
+
+Route::middleware('can:dashboard')->group(function () {
+
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard-user');
+
+    Route::get('/dashboard/rooms', [AdminController::class, 'room'])->name('dashboard-room');
+
+    Route::get('/dashboard/transaction', [AdminController::class, 'transc'])->name('dashboard-transc');
 });
 
 Route::resource('/register', RegisterController::class)->only([
