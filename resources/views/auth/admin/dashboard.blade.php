@@ -153,7 +153,7 @@ const data3 = {
   }]
 };
 const config3 = {
-  type: 'pie',
+  type: 'doughnut',
   data: data3,
 };
 var myChart3 = new Chart(
