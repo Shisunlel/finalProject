@@ -32,19 +32,21 @@ Route::middleware('can:dashboard')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     Route::get('/dashboard/user', [AdminController::class, 'user'])->name('dashboard-user');
+    Route::delete('/dashboard/user/{user}', [AdminController::class, 'userdestroy'])->name('dash.profile.destroy');
 
     Route::get('/dashboard/rooms', [AdminController::class, 'room'])->name('dashboard-room');
+    Route::delete('/dashboard/rooms/{room}', [AdminController::class, 'roomdestroy'])->name('dash.room.destroy');
 
     Route::get('/dashboard/transaction', [AdminController::class, 'transc'])->name('dashboard-transc');
+    Route::delete('/dashboard/transaction/{id}', [AdminController::class, 'reportdestroy'])->name('dash.report.destroy');
 });
 
 Route::resource('/register', RegisterController::class)->only([
     'index', 'store',
 ]);
 
-Route::resource('/login', LoginController::class)->only([
-    'index', 'store',
-]);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->name('login');
 
 Route::post('/logout', [LogoutController::class, 'index'])->name('logout');
 

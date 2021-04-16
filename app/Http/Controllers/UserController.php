@@ -128,6 +128,7 @@ class UserController extends Controller
         $user::findOrFail($user->id);
 
         if (!$user->id == auth()->user()->id) {
+            $this->removeDir($user);
             abort(403);
         }
 

@@ -92,7 +92,7 @@
                     {{-- LOGIN --}}
                     <p class="sticky-icon">
                         <span
-                            ><a href="{{ route('login.index') }}"
+                            ><a href="{{ route('login') }}"
                                 ><svg
                                     fill="skyblue"
                                     width="24"

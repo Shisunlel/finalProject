@@ -29,9 +29,33 @@
                   </span>
                 </td>
                 <td class="td-actions text-center">
-                    <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
+                    <button type="button" class="btn btn-danger btn-sm btn-icon" data-toggle="modal" data-target="#removeModal{{$user->id}}">
                         <i class="tim-icons icon-simple-remove"></i>
                     </button>
+                                        <!-- Modal -->
+                    <div class="modal fade" id="removeModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="removeModalLabel">Are you sure ?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="tim-icons icon-simple-remove"></i>
+                            </button>
+                            </div>
+                            <div class="modal-body text-warning">
+                            You cannot undo this action one confirmed !!
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <form id="removed{{$user->id}}" action="{{route('dash.profile.destroy', $user)}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                            <button type="button" class="btn btn-danger" onclick="document.getElementById('removed{{$user->id}}').submit();">Delete</button>
+                            </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             @endforeach

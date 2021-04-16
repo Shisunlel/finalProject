@@ -98,7 +98,7 @@
                                     @endauth @guest
                                     <li class="nav-item mt-2 mt-md-0">
                                         <a
-                                            href="{{ route('login.index') }}"
+                                            href="{{ route('login') }}"
                                             class="nav-link"
                                             >Login</a
                                         >

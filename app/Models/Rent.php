@@ -13,6 +13,11 @@ class Rent extends Model
         'user_id',
     ];
 
+    public function totalRent()
+    {
+        return Rent::count();
+    }
+
     public function users()
     {
         return $this->belongsTo(User::class);

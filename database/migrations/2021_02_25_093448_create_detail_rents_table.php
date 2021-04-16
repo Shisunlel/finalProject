@@ -15,8 +15,8 @@ class CreateDetailRentsTable extends Migration
     {
         Schema::create('detail_rent', function (Blueprint $table) {
             $table->primary('rent_id');
-            $table->foreignId('rent_id')->constrained();
-            $table->foreignId('room_id')->constrained();
+            $table->foreignId('rent_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('room_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedSmallInteger('duration');
             $table->string('housenumber')->nullable();
             $table->string('street')->nullable();

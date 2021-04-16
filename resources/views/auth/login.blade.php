@@ -40,7 +40,7 @@
             Login
         </h1>      
         <form
-            action="{{ route('login.store') }}"
+            action="{{ route('login') }}"
             id="login__form"
             method="POST"
         >

@@ -31,9 +31,33 @@
                 <td class="text-right">{{$transc->cost}}</td>
                 <td class="text-right">{{$transc->total}}</td>
                 <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
+                    <button type="button" class="btn btn-danger btn-sm btn-icon" data-toggle="modal" data-target="#removeModal{{$transc->rent_id}}">
                         <i class="tim-icons icon-simple-remove"></i>
                     </button>
+                                        <!-- Modal -->
+                    <div class="modal fade" id="removeModal{{$transc->rent_id}}" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="removeModalLabel">Are you sure ?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="tim-icons icon-simple-remove"></i>
+                            </button>
+                            </div>
+                            <div class="modal-body text-warning text-center">
+                            You cannot undo this action one confirmed !!
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <form id="removed{{$transc->rent_id}}" action="{{route('dash.report.destroy', $transc->rent_id)}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                            <button type="button" class="btn btn-danger" onclick="document.getElementById('removed{{$transc->rent_id}}').submit();">Delete</button>
+                            </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             @endforeach

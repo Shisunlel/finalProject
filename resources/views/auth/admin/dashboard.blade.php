@@ -2,7 +2,7 @@
 @section('content')
 @foreach ($transcs as $transc)
     @php
-        $count[] = $transc->record_count;
+        $total[] = $transc->total;
         $month[] = $transc->month;
     @endphp
 @endforeach
@@ -24,8 +24,10 @@
     <div class="card card-chart">
         <div class="card-header ">
         <h5 class="card-category">
-            Transaction
+            Sales Report
         </h5>
+        @inject('rent', 'App\Models\Rent')
+        <h3 class="card-title"><i class="tim-icons icon-paper text-primary"></i>{{$rent->totalRent()}}</h3>
         </div>
         <div class="card-body">
         <div>
@@ -41,7 +43,7 @@
         <div class="card-header">
         <h5 class="card-category">User</h5>
         @inject('maxusr', 'App\Models\User')
-        <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i> 
+        <h3 class="card-title"><i class="tim-icons icon-single-02 text-primary"></i> 
             {{$maxusr->maxUser()}} </h3>
         </div>
         <div class="card-body">
@@ -56,7 +58,7 @@
         <div class="card-header">
         <h5 class="card-category">Room</h5>
         @inject('maxroom', 'App\Models\Room')
-        <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i> {{$maxroom->maxRoom()}} </h3>
+        <h3 class="card-title"><i class="tim-icons icon-istanbul text-info"></i> {{$maxroom->maxRoom()}} </h3>
         </div>
         <div class="card-body">
         <div>
@@ -73,7 +75,7 @@
 <script>
 //transaction
 const month = {!! json_encode($month, JSON_HEX_TAG) !!};
-const count = {!! json_encode($count, JSON_HEX_TAG) !!};
+const total = {!! json_encode($total, JSON_HEX_TAG) !!};
 const labels = month;
 const data = {
   labels: labels,
@@ -81,7 +83,7 @@ const data = {
     label: 'Monthly report',
     backgroundColor: '#f3a4c5',
     borderColor: '#89ddff',
-    data: count,
+    data: total,
   }]
 };
 const config = {
@@ -160,5 +162,6 @@ var myChart3 = new Chart(
       document.getElementById('room-chart'),
       config3
 );
+new PerfectScrollbar('.wrapper');
   </script>
 @endsection

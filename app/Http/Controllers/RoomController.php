@@ -197,7 +197,9 @@ class RoomController extends Controller
             abort(403);
         }
 
-        $room->delete();
+        if ($room->delete()) {
+            $this->removeDir('', $room->id);
+        }
         return redirect()->route('view-home')->with('success', 'Room delete successfully');
     }
 

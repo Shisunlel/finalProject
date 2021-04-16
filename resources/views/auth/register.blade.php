@@ -150,7 +150,7 @@
                         @enderror
                     </div>
                     <div class="form-text text-end">
-                        <a id="login__link" href="{{ route('login.index') }}"
+                        <a id="login__link" href="{{ route('login') }}"
                             >Already a member?</a
                         >
                     </div>

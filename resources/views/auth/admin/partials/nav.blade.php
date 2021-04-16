@@ -71,7 +71,12 @@
               </p>
             </a>
             <ul class="dropdown-menu dropdown-navbar">
-              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+              <li class="nav-link">
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <a href="javascript:void(0)" class="nav-item dropdown-item" onclick="document.getElementById('logoutForm').submit();">
+                Logout
+              </a></form></li>
             </ul>
           </li>
         </ul>

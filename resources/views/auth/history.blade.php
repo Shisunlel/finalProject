@@ -10,6 +10,11 @@
 <div class="container-fluid">
     <div class="row mt-2">
         @include('/partials.side')
+        @if ($detail->empty())
+            <div class="col-10 d-flex justify-content-center align-items-center">
+              <p>Wew, such empty ! <a href="/s/rooms?location=&guest=1">click me</a></p>
+            </div>
+        @else    
         <div class="col-10 table-responsive" id="content">
             <table class="table table-dark table-striped table-hover">
                 <thead class="table-palenight">
@@ -34,6 +39,7 @@
                   </tbody>
             </table>
         </div>
+        @endif
     </div>
 </div>
 @endsection

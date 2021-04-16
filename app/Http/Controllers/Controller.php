@@ -37,4 +37,19 @@ class Controller extends BaseController
         $dir = 'img/user/' . auth()->id() . "/{$dir}";
         Storage::disk('public')->delete($dir . "/{$oldImage}");
     }
+
+    public function removeDir($userid = '', $roomid = '')
+    {
+        if ($userid) {
+            $dir = 'img/user/' . $userid;
+        }
+
+        if ($roomid) {
+            $dir = 'img/room/' . $roomid;
+        }
+
+        if (Storage::disk('public')->exists($dir)) {
+            Storage::disk('public')->deleteDirectory($dir);
+        }
+    }
 }

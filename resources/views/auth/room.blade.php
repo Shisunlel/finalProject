@@ -100,6 +100,7 @@
     </div>
 </div>
 {{ $rooms->links('pagination::bootstrap-4') }}
+</div>
 @endsection 
 @section('footer') 
 @section('script')
