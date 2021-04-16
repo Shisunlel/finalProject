@@ -30,22 +30,20 @@ class RegisterController extends Controller
             'password' => ['required', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
         ]);
 
-        if (User::create([
+        User::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-        ])) {
-            if (!Auth::attempt($request->only('email', 'password'))) {
-                return back()->with("error", "Unexpected error occur!!");
-            }
-
-            $request->session()->regenerate();
-            return redirect()->intended('/');
+        ]); 
+        
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return back()->with("error", "Unexpected error occur!!");
         }
-
-        return redirect()->back()->with('error', 'Error occured while creating!!');
+         
+        $request->session()->regenerate();
+        return redirect()->intended('/');
 
     }
 }
