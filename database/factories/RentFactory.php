@@ -23,6 +23,7 @@ class RentFactory extends Factory
     {
         return [
             'user_id' => rand(1, 5),
+            'created_at' => $this->faker->dateTimeThisYear(),
         ];
     }
 }
