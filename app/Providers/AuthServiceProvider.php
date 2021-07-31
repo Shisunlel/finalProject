@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('dashboard', function (User $user) {
-            return $user->username === 'showdy';
+            return $user->username === 'johnny';
         });
     }
 }

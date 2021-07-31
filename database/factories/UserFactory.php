@@ -40,6 +40,7 @@ class UserFactory extends Factory
             'dob' => $this->faker->date(),
             'profile' => $this->faker->imageUrl(500, 500, 'user', true),
             'remember_token' => Str::random(10),
+            'created_at' => $this->faker->dateTimeThisYear(),
         ];
     }
 

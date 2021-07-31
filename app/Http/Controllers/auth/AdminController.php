@@ -26,7 +26,7 @@ class AdminController extends Controller
 
     public function user()
     {
-        $user = User::get();
+        $user = User::paginate(20);
         return view('auth.admin.user')->with('users', $user);
     }
 
@@ -45,7 +45,7 @@ class AdminController extends Controller
 
     public function room()
     {
-        $room = Room::get();
+        $room = Room::paginate(20);
         return view('auth.admin.room')->with('rooms', $room);
     }
 
@@ -64,7 +64,7 @@ class AdminController extends Controller
 
     public function transc()
     {
-        $transc = DetailRent::get();
+        $transc = DetailRent::paginate(20);
         return view('auth.admin.transaction')->with('transcs', $transc);
     }
 

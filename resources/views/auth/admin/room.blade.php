@@ -59,5 +59,8 @@
             @endforeach
         </tbody>
     </table> 
+    <div class="d-flex justify-content-end">
+    {!! $rooms->links() !!}
+</div>
 </div>
 @endsection

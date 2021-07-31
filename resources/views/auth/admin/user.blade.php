@@ -61,5 +61,8 @@
             @endforeach
         </tbody>
     </table>    
+    <div class="d-flex justify-content-end">
+        {!! $users->links() !!}
+    </div>
 </div>
 @endsection

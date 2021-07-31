@@ -29,6 +29,7 @@ class RoomFactory extends Factory
             'price' => $this->faker->randomFloat(2, 15, 35),
             'guest' => $this->faker->numberBetween(1, 5),
             'user_id' => rand(1, 5),
+            'created_at' => $this->faker->dateTimeThisYear(),
         ];
     }
 }

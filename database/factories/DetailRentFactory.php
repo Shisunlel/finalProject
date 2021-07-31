@@ -32,6 +32,7 @@ class DetailRentFactory extends Factory
             'province' => $this->faker->randomElement(['Phnom Penh', 'Kampong Cham', 'Siem Reap', 'Kampong Thom', 'Koh Kong', 'Mondulkiri']),
             'cost' => $this->faker->randomFloat(2, 100, 900),
             'total' => $this->faker->randomFloat(2, 100, 900),
+            'created_at' => $this->faker->dateTimeThisYear(),
         ];
     }
 }
