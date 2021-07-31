@@ -41,9 +41,14 @@ class RegisterController extends Controller
         if (!Auth::attempt($request->only('email', 'password'))) {
             return back()->with("error", "Unexpected error occur!!");
         }
+<<<<<<< HEAD
 
         $request->session()->regenerate();
 
+=======
+         
+        $request->session()->regenerate();
+>>>>>>> c6776fe51753283fef05e62fbc9d427af7e220e2
         return redirect()->intended('/');
 
     }

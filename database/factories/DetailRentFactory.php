@@ -33,6 +33,10 @@ class DetailRentFactory extends Factory
             'cost' => $this->faker->randomFloat(2, 100, 900),
             'total' => $this->faker->randomFloat(2, 100, 900),
             'created_at' => $this->faker->dateTimeThisYear(),
+<<<<<<< HEAD
+=======
+
+>>>>>>> c6776fe51753283fef05e62fbc9d427af7e220e2
         ];
     }
 }
